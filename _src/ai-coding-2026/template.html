@@ -1,0 +1,1219 @@
+<title>AI 當工程師，我當主管</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --bg:#FAF9F8;
+  --surface:#FFFFFF;
+  --surface-2:#EFF1F3;
+  --ink:#0D1B2A;
+  --ink-2:#23344D;
+  --muted:#616E7C;
+  --line:#D9DDE1;
+  --line-strong:#A8B0B8;
+  --gold:#C9A15A;
+  --gold-soft:rgba(201,161,90,.16);
+  --gold-line:rgba(201,161,90,.45);
+  --accent-text:#0D1B2A;
+  --shadow:0 1px 2px rgba(13,27,42,.06), 0 8px 24px rgba(13,27,42,.06);
+  --term-bg:#0B1622;
+  --term-ink:#D8DEE6;
+  --term-dim:#7C8A9A;
+  --sidebar-w:280px;
+  --maxw:760px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1B2A;
+    --surface:#16273A;
+    --surface-2:#23344D;
+    --ink:#E6E8EB;
+    --ink-2:#C8D0D8;
+    --muted:#A8B0B8;
+    --line:#2A3E58;
+    --line-strong:#3A5273;
+    --gold-soft:rgba(201,161,90,.14);
+    --gold-line:rgba(201,161,90,.5);
+    --accent-text:#C9A15A;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1B2A;
+  --surface:#16273A;
+  --surface-2:#23344D;
+  --ink:#E6E8EB;
+  --ink-2:#C8D0D8;
+  --muted:#A8B0B8;
+  --line:#2A3E58;
+  --line-strong:#3A5273;
+  --gold-soft:rgba(201,161,90,.14);
+  --gold-line:rgba(201,161,90,.5);
+  --accent-text:#C9A15A;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Noto Serif TC",Georgia,"Songti TC",serif;text-wrap:balance;margin:0}
+a{color:inherit}
+.sec a[href^="http"]{color:var(--accent-text);text-underline-offset:3px;text-decoration-thickness:1px}
+strong{font-weight:700;color:var(--ink)}
+code{font-family:"JetBrains Mono","Noto Sans TC",ui-monospace,monospace;font-size:.9em;
+  background:var(--surface-2);border-radius:3px;padding:.1em .38em}
+
+/* ---------- layout ---------- */
+.shell{display:flex;align-items:flex-start}
+
+.sidebar{
+  position:sticky;top:0;flex:0 0 var(--sidebar-w);width:var(--sidebar-w);
+  height:100vh;display:flex;flex-direction:column;
+  border-right:1px solid var(--line);background:var(--surface);
+}
+.side-head{padding:26px 22px 16px;border-bottom:1px solid var(--line)}
+.side-head .t{font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;line-height:1.5}
+.side-head .s{margin-top:7px;font-size:13px;color:var(--muted)}
+.side-head .bar{margin-top:14px;width:44px;height:2px;background:var(--gold)}
+
+.progress{padding:14px 22px 10px}
+.progress-label{font-size:12px;color:var(--muted);letter-spacing:.06em;display:flex;justify-content:space-between}
+.progress-track{margin-top:7px;height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--gold);transition:width .18s linear}
+
+.toc{flex:1;overflow-y:auto;padding:4px 12px 28px}
+.toc-part{margin:18px 10px 6px;font-size:12px;letter-spacing:.12em;color:var(--muted)}
+.toc a{
+  display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:6px;
+  text-decoration:none;color:var(--ink-2);font-size:14.5px;line-height:1.55;
+}
+.toc a:hover{background:var(--surface-2)}
+.toc a .n{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);flex:none;width:17px}
+.toc a.on{background:var(--gold-soft);color:var(--ink);font-weight:500}
+.toc a.on .n{color:var(--accent-text)}
+
+.sidebar-foot{padding:12px 22px 18px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  font:inherit;font-size:13px;padding:6px 12px;border-radius:6px;cursor:pointer;
+  border:1px solid var(--line-strong);background:transparent;color:var(--ink-2);
+}
+.btn:hover{background:var(--surface-2)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.main{flex:1;min-width:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px;padding-block:0 96px}
+.topbar{display:none}
+
+/* ---------- hero ---------- */
+.hero{border-bottom:1px solid var(--line);margin-bottom:54px;padding-block:58px 42px}
+.kicker{font-size:13px;letter-spacing:.18em;color:var(--muted);margin-bottom:14px}
+.hero h1{font-size:clamp(32px,5.4vw,46px);line-height:1.32}
+.hero .lede{margin-top:20px;color:var(--ink-2);font-size:19px}
+.hero-meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14.5px;color:var(--muted)}
+.hero-meta b{color:var(--ink-2);font-weight:500}
+.rule-gold{height:2px;width:52px;background:var(--gold);margin-top:28px}
+
+/* ---------- sections ---------- */
+.sec{padding-block:46px 0;scroll-margin-top:24px}
+.sec-head{display:flex;gap:14px;align-items:baseline;margin-bottom:6px}
+.sec-num{font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--accent-text);flex:none}
+.sec h2{font-size:28px;line-height:1.4}
+.sec h3{font-size:20px;margin-top:38px}
+.sec h4{font-size:17px;margin-top:28px;color:var(--ink-2)}
+.sec p{margin:15px 0}
+.dek{color:var(--muted);font-size:16px;margin-top:2px !important}
+.part-break{
+  margin-top:74px;padding-block:32px;border-top:2px solid var(--ink);
+  display:flex;align-items:baseline;gap:16px;
+}
+.part-break .p-n{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.16em;color:var(--accent-text)}
+.part-break h2{font-size:32px}
+
+ul.list,ol.list{margin:16px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+ul.list>li{position:relative;padding-left:20px}
+ul.list>li::before{content:"";position:absolute;left:3px;top:.85em;width:5px;height:5px;
+  border-radius:50%;background:var(--gold)}
+ol.list{counter-reset:li}
+ol.list>li{position:relative;padding-left:30px;counter-increment:li}
+ol.list>li::before{content:counter(li);position:absolute;left:0;top:.08em;
+  font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--accent-text)}
+.list ul{margin:8px 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.list ul>li{position:relative;padding-left:16px;color:var(--ink-2);font-size:16.5px}
+.list ul>li::before{content:"";position:absolute;left:2px;top:.88em;width:5px;height:1.5px;background:var(--line-strong)}
+
+/* ---------- callout ---------- */
+.note{
+  margin:24px 0;padding:18px 20px;border-left:3px solid var(--gold);
+  background:var(--gold-soft);border-radius:0 7px 7px 0;
+}
+.note p{margin:0}
+.note p + p{margin-top:10px}
+.note .t{font-weight:700;display:block;margin-bottom:6px;font-size:16px}
+.quote{
+  margin:28px 0;padding:24px 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  font-family:"Noto Serif TC",serif;font-size:21px;line-height:1.75;text-wrap:balance;
+}
+
+/* ---------- cards ---------- */
+.cards{display:grid;gap:12px;margin:24px 0}
+.cards.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+details.card{border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden}
+details.card>summary{
+  list-style:none;cursor:pointer;padding:15px 17px;display:flex;gap:12px;align-items:center;
+  font-weight:500;font-size:17px;
+}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{
+  content:"＋";margin-left:auto;color:var(--muted);font-size:15px;flex:none;
+  font-family:"JetBrains Mono",monospace;
+}
+details.card[open]>summary::after{content:"−"}
+details.card[open]>summary{border-bottom:1px solid var(--line)}
+details.card>summary:hover{background:var(--surface-2)}
+.card-tag{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.05em;
+  padding:3px 8px;border-radius:4px;background:var(--surface-2);color:var(--muted);flex:none;
+}
+.card-body{padding:6px 19px 17px;font-size:16.5px;color:var(--ink-2)}
+.card-body>*:first-child{margin-top:12px}
+.card-body strong{color:var(--ink)}
+
+/* ---------- table ---------- */
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:9px}
+table{border-collapse:collapse;width:100%;font-size:16px;background:var(--surface)}
+th,td{padding:12px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{background:var(--surface-2);font-weight:700;font-size:14.5px;white-space:nowrap;color:var(--ink)}
+tbody tr:last-child td{border-bottom:none}
+td:first-child{color:var(--ink);font-weight:500}
+
+/* ---------- flow：編號時間軸 ---------- */
+.flow{margin:28px 0}
+.flow-cap{font-size:13px;letter-spacing:.1em;color:var(--muted);margin-bottom:14px}
+.steps{display:flex;flex-direction:column;gap:13px}
+.step{
+  position:relative;display:flex;gap:15px;align-items:flex-start;
+  padding:15px 18px;border:1px solid var(--line);border-radius:9px;background:var(--surface);
+}
+.step + .step::before{
+  content:"";position:absolute;left:36px;top:-13px;width:2px;height:13px;background:var(--gold-line);
+}
+.step-num{
+  width:38px;height:38px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:"JetBrains Mono",monospace;font-size:13.5px;font-weight:700;
+  color:var(--accent-text);background:var(--gold-soft);border:2px solid var(--gold-line);
+}
+.step-c{flex:1;min-width:0}
+.step-t{font-weight:700;font-size:17px;line-height:1.5}
+.step-t code{font-size:.88em}
+.step-d{font-size:15.5px;color:var(--muted);margin-top:4px;line-height:1.7}
+.step.key{border-color:var(--gold);background:var(--gold-soft)}
+.step.me .step-num{background:var(--gold);color:#0D1B2A;border-color:var(--gold)}
+.step.quiet{background:var(--bg);border-style:dashed}
+
+.fork{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:13px}
+.fork .step{margin:0}
+.fork .step::before{display:none}
+.fork-q{margin:18px 0 0;padding-left:53px;font-size:15px;color:var(--muted)}
+.flow-foot{margin-top:14px;padding-left:53px;font-size:15px;color:var(--muted);line-height:1.7}
+
+.map-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:13px}
+.map-cell{padding:14px 15px;border-radius:8px;font-size:15.5px;line-height:1.65;
+  border:1px solid var(--line);background:var(--surface)}
+.map-cell h5{margin:0 0 6px;font-family:"JetBrains Mono",monospace;font-size:11.5px;
+  letter-spacing:.08em;color:var(--muted);font-weight:400}
+.map-cell.fog{background:var(--surface-2);color:var(--muted);border-style:dashed}
+.map-cell.front{border-color:var(--gold);background:var(--gold-soft)}
+
+/* ---------- terminal ---------- */
+.term{margin:24px 0;border-radius:9px;overflow:hidden;background:var(--term-bg);border:1px solid #1E3047}
+.term-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid #1E3047}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:#2F4A68;display:block}
+.term-bar span{margin-left:6px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--term-dim)}
+.term pre{
+  margin:0;padding:16px 18px;overflow-x:auto;color:var(--term-ink);
+  font-family:"JetBrains Mono","Noto Sans TC",monospace;font-size:14px;line-height:1.8;
+}
+.term pre b{color:var(--gold);font-weight:400}
+.term pre i{color:var(--term-dim);font-style:normal}
+
+/* ---------- figures ---------- */
+figure{margin:28px 0}
+figure img{
+  display:block;width:100%;max-width:100%;height:auto;border-radius:9px;
+  border:1px solid var(--line);cursor:zoom-in;background:var(--surface);
+}
+figcaption{margin-top:10px;font-size:15px;color:var(--muted);line-height:1.75}
+.shot-pair{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.shot-pair figure{margin:0}
+.lightbox{
+  position:fixed;inset:0;z-index:50;background:rgba(8,16,26,.92);
+  display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out;
+}
+.lightbox img{max-width:100%;max-height:100%;border-radius:6px}
+
+/* ---------- footer ---------- */
+.foot{margin-top:80px;padding-top:28px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.src-list{margin-top:12px}
+.card-body .src-line{margin-top:11px;font-size:15.5px;opacity:.92}
+.src-list li{font-size:16.5px}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .shell{display:block}
+  .sidebar{
+    position:fixed;z-index:40;left:0;top:0;transform:translateX(-100%);
+    transition:transform .22s ease;box-shadow:var(--shadow);
+  }
+  .sidebar.open{transform:none}
+  .topbar{
+    display:flex;position:sticky;top:0;z-index:30;align-items:center;gap:12px;
+    padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--line);
+  }
+  .topbar .tb-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:15px}
+  .topbar .tb-prog{flex:1;height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+  .topbar .tb-prog i{display:block;height:100%;width:0;background:var(--gold)}
+  .wrap{padding-block:0 72px}
+  .hero{padding-block:34px 30px;margin-bottom:34px}
+  .fork-q,.flow-foot{padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+
+<div class="topbar">
+  <button class="btn" id="navBtn" aria-label="開啟章節目錄">☰ 目錄</button>
+  <span class="tb-title">AI 當工程師，我當主管</span>
+  <span class="tb-prog"><i id="tbFill"></i></span>
+</div>
+
+<div class="shell">
+<aside class="sidebar" id="sidebar">
+  <div class="side-head">
+    <div class="t">AI 當工程師<br>我當主管</div>
+    <div class="s">佳臨 · 分享教材</div>
+    <div class="bar"></div>
+  </div>
+
+  <div class="progress">
+    <div class="progress-label"><span>閱讀進度</span><span id="pctText">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="pctFill"></div></div>
+  </div>
+
+  <nav class="toc" id="toc">
+    <div class="toc-part">開場</div>
+    <a href="#top"><span class="n">00</span><span>這場分享要講什麼</span></a>
+    <div class="toc-part">第一部 · 三階段</div>
+    <a href="#s1"><span class="n">01</span><span>Vibe Coding 的問題</span></a>
+    <a href="#s2"><span class="n">02</span><span>接觸 SDD：openspec</span></a>
+    <a href="#s3"><span class="n">03</span><span>學習 Agentic Engineering</span></a>
+    <div class="toc-part">第二部 · 現在的流程</div>
+    <a href="#s4"><span class="n">04</span><span>Dev Skill 全景</span></a>
+    <a href="#s5"><span class="n">05</span><span>wayfinder 與 grill</span></a>
+    <a href="#s6"><span class="n">06</span><span>dev-kickoff</span></a>
+    <a href="#s7"><span class="n">07</span><span>dev-spec 與交叉審查</span></a>
+    <a href="#s8"><span class="n">08</span><span>dev-tickets 拆卡</span></a>
+    <a href="#s9"><span class="n">09</span><span>dev-verify-card 驗收</span></a>
+    <a href="#s10"><span class="n">10</span><span>git-commit</span></a>
+    <a href="#s11"><span class="n">11</span><span>dev-closeout</span></a>
+    <div class="toc-part">結尾</div>
+    <a href="#s12"><span class="n">12</span><span>什麼時候該用 vibe coding</span></a>
+    <a href="#s13"><span class="n">13</span><span>三個階段</span></a>
+    <a href="#s14"><span class="n">14</span><span>延伸閱讀</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <button class="btn" id="themeBtn">◐ 深／淺色</button>
+    <button class="btn" id="expandBtn">展開全部細節</button>
+  </div>
+</aside>
+
+<main class="main">
+<div class="wrap">
+
+<header class="hero" id="top">
+  <div class="kicker">AI 分享</div>
+  <h1>AI 當工程師，我當主管</h1>
+  <p class="lede">一個非工程師，如何把 Vibe Coding 變成可管理、可驗收的開發流程。</p>
+  <div class="hero-meta">
+    <span>分享人 <b>佳臨</b></span>
+    <span>身分 <b>製造業 &times; Vibe Coder</b></span>
+    <span>時間 <b>約 60 分鐘 ＋ Q&amp;A</b></span>
+  </div>
+  <div class="rule-gold"></div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="sec-head"><span class="sec-num">00</span><h2>這場分享要講什麼</h2></div>
+  <ul class="list">
+    <li><strong>第一部</strong>　我的 AI Coding 三階段：每一階段都是被前一階段的失敗推出來的</li>
+    <li><strong>第二部</strong>　我現在的開發流程</li>
+  </ul>
+  <div class="note">
+    <p>一個非工程師，如何把 Vibe Coding 變成<strong>可管理、可驗收</strong>的開發流程。</p>
+    <p>我看不懂大部分程式碼。這套流程不是讓我變強，是讓我像個主管：在看不懂細節的情況下，仍然能判斷<strong>「這件事做完了沒有」</strong>。</p>
+  </div>
+</section>
+
+<!-- ===================== PART 1 ===================== -->
+<div class="part-break">
+  <span class="p-n">PART 01</span>
+  <h2>我的 AI Coding 三階段</h2>
+</div>
+
+<section class="sec" id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Vibe Coding 的問題</h2></div>
+  <p class="dek">Fitness Expedition 運動 RPG · Codex · Python &times; Streamlit &times; Google Sheet</p>
+
+  <div class="shot-pair">
+    <figure>
+      <img src="{{IMG_RPG_STATUS}}" alt="活力遠征狀態總覽頁：玩家職業、等級、EXP、HP/MP、技能摘要、懲罰剩餘回合">
+    </figure>
+    <figure>
+      <img src="{{IMG_RPG_TURN}}" alt="活力遠征回合與抽卡頁：事件選擇、抽怪物、個人額外抽卡">
+    </figure>
+  </div>
+  <p class="dek" style="margin-top:8px">點圖可放大</p>
+
+  <ul class="list">
+    <li>只提供幾個規則說明的 md 檔，前端、後端、資料庫全由 AI 決定，資料庫接 Google Sheet</li>
+    <li>全程用自然語言提需求，<strong>沒有任何開發架構與流程</strong></li>
+    <li>結果：畫面粗糙、沒有響應式、功能不齊、錯誤修不完</li>
+  </ul>
+
+  <div class="flow">
+    <div class="flow-cap">沒有規格的時候</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-c">
+        <div class="step-t">只有初始的零散文件</div>
+        <div class="step-d">開頭寫的幾份說明，之後沒有再維護；需求的其餘部分只存在我腦中，每次對話都要重新描述一遍</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-c">
+        <div class="step-t">用自然語言講一次</div>
+        <div class="step-d">技術選型交給 AI，我沒有判斷依據，也就無法糾正</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-c">
+        <div class="step-t">AI 做出東西</div>
+        <div class="step-d">看起來能跑，但「做完了沒有」由它自己認定</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-c">
+        <div class="step-t">不是我要的，再講一次</div>
+        <div class="step-d">回到步驟 2。每一輪都在重新解釋，而不是累積</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-c">
+        <div class="step-t">超出上下文長度</div>
+        <div class="step-d">分段作業，做了後面就忘記前面的決定</div></div></div>
+      <div class="step key"><div class="step-num">6</div><div class="step-c">
+        <div class="step-t">錯誤修不完，專案停擺</div></div></div>
+    </div>
+  </div>
+
+  <h3>五個失敗原因</h3>
+  <p class="dek">排序有意義——最不重要的那個，正好是當時我以為最重要的那個</p>
+  <div class="cards">
+    <details class="card" open>
+      <summary><span class="card-tag">01</span>沒有規格</summary>
+      <div class="card-body">上下文長度有限，加上分段作業，每次新對話都在重新推測需求。規格真正的功能是<strong>跨對話的共同記憶</strong>。</div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">02</span>沒有明確驗收條件</summary>
+      <div class="card-body">「做完了」由誰認定？當時的答案是 AI 自己認定。</div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">03</span>技術選型交給 AI</summary>
+      <div class="card-body">不知道選項之間差在哪，就<strong>失去糾錯的能力</strong>。</div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">04</span>AI 還不夠聰明</summary>
+      <div class="card-body">這是事實，但它是五項裡<strong>最不重要</strong>的一項。模型能力提升之後，同樣的做法仍然會失敗。</div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">05</span>門外漢</summary>
+      <div class="card-body">看不懂程式碼不是關鍵，<strong>不知道該問什麼</strong>才是。</div>
+    </details>
+  </div>
+
+</section>
+
+<section class="sec" id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>接觸 SDD：openspec</h2></div>
+  <p class="dek">規格驅動開發 Spec-Driven Development</p>
+
+  <ul class="list">
+    <li><strong>什麼是 SDD</strong>：先把「要做什麼」寫清楚再動手——蓋房子先畫藍圖，不是拿起鐵鎚就開始敲</li>
+    <li><strong>AI 為什麼特別需要</strong>：上下文長度有限、分段作業，規格就是路線圖</li>
+    <li><strong>openspec</strong>：給 AI 用的 SDD 標準作業程序，<code>npm install -g</code> ＋ <code>openspec init</code></li>
+  </ul>
+
+  <div class="flow">
+    <div class="flow-cap">六個步驟，重複迭代、逐步加入新功能<br><span style="font-weight:400;opacity:.75">指令只有三個：<code>proposal</code> 開案、<code>apply</code> 施工、<code>archive</code> 收帳；中間三步是 proposal 產出的文件</span></div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-c">
+        <div class="step-t">提案　<code>/openspec:proposal</code></div><div class="step-d">這個功能要解決什麼問題？不做什麼？</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-c">
+        <div class="step-t">設計　<code>design.md</code></div><div class="step-d">劃定本次變更的邊界、重要決策與風險</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-c">
+        <div class="step-t">規格　<code>specs/</code></div><div class="step-d">用情境 Scenario 描述系統行為</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-c">
+        <div class="step-t">任務　<code>tasks.md</code></div><div class="step-d">按規格展開具體工作，讓 AI 照著做</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-c">
+        <div class="step-t">實作與驗證　<code>/openspec:apply</code></div><div class="step-d">AI 自己先檢查，再由人工檢查</div></div></div>
+      <div class="step key"><div class="step-num">6</div><div class="step-c">
+        <div class="step-t">歸檔　<code>/openspec:archive</code></div><div class="step-d">寫入這個專案的規格書，成為下一輪變更的起點</div></div></div>
+    </div>
+  </div>
+
+  <h3>案例：JJoy 家庭娛樂記帳 APP</h3>
+  <p class="dek">JJoy 家庭娛樂記帳 · openspec · Vue 3 &times; Supabase &times; Netlify</p>
+  <p class="dek">自家的娛樂費規則（月預算 ＋ 有運動加 300 元）· 規則明確、規模小 · 不到一天做出來</p>
+
+  <figure>
+    <img src="{{IMG_JJOY}}" alt="JJoy 記帳 APP 畫面：預算摘要、費用記錄、運動記錄">
+    <figcaption>功能：月份導覽、預算摘要、費用記錄、運動記錄、超支警示、跨年到期提醒。完整紀錄見 <a href="https://vocus.cc/article/69fff4bdfd897800013961d7" target="_blank" rel="noopener">打造家庭娛樂記帳 APP — Vibe Coding 從零到上線的實踐心得</a>。</figcaption>
+  </figure>
+
+  <div class="cards two">
+    <details class="card">
+      <summary><span class="card-tag">文件</span>兩份人機共管文件</summary>
+      <div class="card-body">
+        <p><code>execution-plan.md</code>　計劃書 → 進度追蹤清單（誰負責、打勾）</p>
+        <p><code>ToDoList.md</code>　途中的想法先寫下來，一段落再討論</p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">協作</span>先說明自己是新手</summary>
+      <div class="card-body">
+        <p>寫進 <code>CLAUDE.md</code>：技術決定要說明優缺點與取捨理由</p>
+        <p><code>dev_exp.md</code> 記三種：學到的概念、可遷移的決定、踩過的坑</p>
+      </div>
+    </details>
+  </div>
+
+  <figure>
+    <img src="{{IMG_PLAN}}" alt="execution-plan.md：分 Phase 的任務清單，標示負責人是 Claude 或使用者">
+    <figcaption>進度追蹤清單長這樣——每一項都標明<strong>由人還是 AI 負責</strong>。</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="t">這階段最重要的發現：AI 的計算也會出錯</span>
+    <p>資料庫表格設計不符合使用需求、費用結餘的計算方式有誤。後來寫成紅線第二條：<strong>寫成測試腳本後，一定要由人驗算一次</strong>。</p>
+  </div>
+
+  <p class="dek">但還有一個問題沒解決：規格寫得再細，仍有一整類問題是<strong>文字描述不出來</strong>的。</p>
+</section>
+
+<section class="sec" id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>學習 Agentic Engineering</h2></div>
+  <p class="dek">Google 5-Day AI Agents 課程　<a href="https://www.kaggle.com/competitions/5-day-ai-agents-intensive-vibecoding-course-with-google" target="_blank" rel="noopener">課程連結（免費，有興趣可以自己上）</a></p>
+
+  <div class="cards">
+    <details class="card" open>
+      <summary><span class="card-tag">DAY 1</span>關鍵不在模型，在 Context Engineering</summary>
+      <div class="card-body">
+        <p>Context 六類：指令、知識、記憶、範例、工具、護欄。</p>
+        <p><strong>靜態</strong>（CLAUDE.md，每次互動都載入，消耗 token）與<strong>動態</strong>（Skill、RAG，需要時才載入）要分開管理。</p>
+        <p class="src-line">→ <a href="https://vocus.cc/article/6a33f590fd89780001effd03" target="_blank" rel="noopener">Day 1　為什麼你的 AI 比較聰明？關鍵不在模型</a></p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">DAY 2</span>MCP 是 agent 的通用接口</summary>
+      <div class="card-body">
+        <p>選工具的原則是「夠用就好」——<strong>MCP 與 Skill 都不是安裝越多越好</strong>。</p>
+        <p class="src-line">→ <a href="https://vocus.cc/article/6a37347cfd897800016fa182" target="_blank" rel="noopener">Day 2　幫你的 AI Agent 裝上萬用插頭</a></p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">DAY 3</span>Agent Skills：把經驗變成資產</summary>
+      <div class="card-body">
+        <p><strong>context rot（上下文腐化）</strong>：靜態背景放太多，會稀釋掉真正重要的訊號。</p>
+        <p>Skill 的<strong>命名與 description 欄位</strong>決定它會不會在對的時機被觸發。</p>
+        <p class="src-line">→ <a href="https://vocus.cc/article/6a3d330efd8978000170bc7d" target="_blank" rel="noopener">Day 3　Prompt 的下一步：把經驗變成 Skill</a></p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">DAY 4</span>安全性與評估</summary>
+      <div class="card-body">
+        <p>沙盒、紅藍綠隊、Vibe Coding 特有的風險。核心提問：<strong>AI 做完了，但它做對了嗎？</strong></p>
+        <p class="src-line">→ <a href="https://vocus.cc/article/6a3fb021fd8978000121d167" target="_blank" rel="noopener">Day 4　Vibe Coding 的陰影：當 AI 開始自己寫程式</a></p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">DAY 5</span>規格驅動的正式環境開發</summary>
+      <div class="card-body">
+        <p>程式碼變便宜之後，什麼變貴了？同一個 AI 要戴不同的帽子。以及<strong>先寫一個會失敗的測試</strong>。</p>
+        <p class="src-line">→ <a href="https://vocus.cc/article/6a4a0666fd897800017d8984" target="_blank" rel="noopener">Day 5　Vibe Coding 不等於 Vibe 上線：AI 寫程式，要先寫規格</a></p>
+      </div>
+    </details>
+  </div>
+
+  <figure>
+    <img src="{{IMG_ASSET}}" alt="建立你的 Agent 資產庫：從每次空白開始，到把經驗累積進 Harness">
+    <figcaption>不是每次重新組裝，而是設計能持續生產價值的系統。</figcaption>
+  </figure>
+
+  <div class="quote">開發重點從「規格」，轉變成「<strong>規格 ＋ 測試</strong>」。規格說要做什麼，測試說做到了沒有。</div>
+
+  <h3>三段光譜：差別不在有沒有用 AI</h3>
+  <figure>
+    <img src="{{IMG_SPECTRUM}}" alt="Vibe Coding、Structured AI-Assisted Coding、Agentic Engineering 三段光譜對照">
+    <figcaption>差異不在是否使用 AI，而在<strong>如何驗證輸出結果</strong>。出自 <a href="https://vocus.cc/article/6a33f590fd89780001effd03" target="_blank" rel="noopener">為什麼你的 AI 比較聰明？關鍵不在模型</a>。</figcaption>
+  </figure>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>驗證方式</th><th>驗什麼</th><th>誰來驗</th></tr></thead>
+      <tbody>
+        <tr><td>測試 Tests</td><td><strong>確定性</strong>的部分：給定輸入就有對應輸出</td><td>程式碼</td></tr>
+        <tr><td>評估 Evals</td><td><strong>不確定性</strong>的部分：步驟軌跡、工具選擇、回應品質</td><td>標記資料集、評分量表、LM 裁判</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>管理 context window ＋ Matt Pocock 的 Skill</h3>
+  <ul class="list">
+    <li>對話變長之後，模型在後段的判斷品質會下降 → 工作單位要切到「一個全新對話裝得下」</li>
+    <li>命名會影響流程：決策卡與任務卡混用，整套流程會跟著偏掉</li>
+  </ul>
+
+  <p class="dek">我現在的 dev skill，骨架來自這幾個 skill（點開看說明）。順序不能顛倒：<strong>grill → to-spec → to-tickets</strong></p>
+  <div class="cards">
+    <details class="card" open>
+      <summary><span class="card-tag">SKILL</span>grill</summary>
+      <div class="card-body">
+        <p>Matt Pocock 最有名的一支。不是我寫需求給 AI，是<strong>讓 AI 當審稿人，在寫任何程式碼之前把我問到說清楚</strong>。</p>
+        <p>它解決的是門外漢最大的問題：我不知道自己漏了什麼。產出是需求決策清單，答案會沉澱成這個專案的共同術語。</p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">SKILL</span>to-spec</summary>
+      <div class="card-body">
+        <p>把<strong>已經談清楚的對話</strong>整合成正式的產品需求文件（PRD）。它不負責重新訪談，所以順序很重要：<strong>先 grill，再 to-spec</strong>。</p>
+        <p>PRD 要有：背景與目標、使用者角色與核心流程、功能與非功能需求、<strong>不做什麼（Out of Scope）</strong>、驗收標準。我的 <code>dev-spec</code> 就是從這個 skill 改出來的。</p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">SKILL</span>to-tickets</summary>
+      <div class="card-body">
+        <p>把龐大的功能需求或規格，拆成<strong>範圍明確、具備依賴關係</strong>的小單元。避免一次丟給 AI 過大的任務，導致脈絡混亂或改壞既有程式，讓 AI 沿著確認過的規格逐步執行。</p>
+        <p>核心原則是<strong>垂直切片，不是水平切片</strong>：每張卡從<strong>資料表 → 後端邏輯 → 畫面 → 測試</strong>切穿一條窄路，做完就能親手操作看到結果，而不是先把整個資料層做完再往上疊。我的 <code>dev-tickets</code> 沿用這個原則。</p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">SKILL</span>wayfinder</summary>
+      <div class="card-body">
+        <p>它防的是一件事：<strong>在你還沒決定的事情上先動手</strong>。大需求一次丟給 AI，它會照自己的假設做下去，錯了就是大返工。</p>
+        <p>做法是先命名<strong>終點</strong>（終點決定每張卡長什麼樣），再把「已經預感到、但還講不清楚的決策」畫成<strong>迷霧</strong>，把現在就能處理的卡放上<strong>前線</strong>。原則是 <strong>Plan, don't do</strong>：先解決決策，不急著產出東西。</p>
+        <p>卡分四種：研究（查外部事實，AI 自己跑）、原型（做粗的換回饋）、拷問（跟我對話釐清）、雜務（現實的前置作業）。地圖只是索引，決定留在各自的卡裡。</p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">SKILL</span>prototype</summary>
+      <div class="card-body">
+        <p>用在<strong>設計還不確定</strong>的時候。撰寫程式碼的成本已大幅下降，「該長什麼樣、操作順不順」用文字討論半天，不如直接做出來。</p>
+        <p>做一個<strong>可拋棄</strong>的版本，驗證完就淘汰——它的產出是判斷，不是程式碼。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== PART 2 ===================== -->
+<div class="part-break">
+  <span class="p-n">PART 02</span>
+  <h2>我現在的開發流程</h2>
+</div>
+
+<section class="sec" id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Dev Skill 全景</h2></div>
+  <p class="dek">把踩過的坑固化成標準作業程序</p>
+
+  <div class="flow">
+    <div class="flow-cap">一個功能，從想法到上線</div>
+    <div class="steps" style="margin-bottom:13px">
+      <div class="step key"><div class="step-num">0</div><div class="step-c">
+        <div class="step-t"><code>dev-kickoff</code></div>
+        <div class="step-d">專案層級，只跑一次：開案問卷、專案 CLAUDE.md 與六條紅線、規格骨架、品質工具。既有專案補制度也走這個 skill</div></div></div>
+    </div>
+    <p class="fork-q" style="margin-top:0">功能起點：方向定了嗎？</p>
+    <div class="fork">
+      <div class="step quiet"><div class="step-num">A</div><div class="step-c">
+        <div class="step-t"><code>dev-wayfinder</code></div>
+        <div class="step-d">大軟體、方向未定：畫地圖，一次結一張決策卡</div></div></div>
+      <div class="step quiet"><div class="step-num">B</div><div class="step-c">
+        <div class="step-t"><code>grill</code></div>
+        <div class="step-d">小軟體、方向清楚：訪談到可驗收的精確度</div></div></div>
+    </div>
+    <div class="steps" style="margin-top:13px">
+      <div class="step key"><div class="step-num">1</div><div class="step-c">
+        <div class="step-t"><code>dev-spec</code></div><div class="step-d">產出 SPEC.md 或 delta.md</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-c">
+        <div class="step-t"><code>codex-peer-review</code></div><div class="step-d">第二個 AI 交叉審查規格</div></div></div>
+      <div class="step me"><div class="step-num">✓</div><div class="step-c">
+        <div class="step-t">我核准</div><div class="step-d">沒有這一步，流程不往下走</div></div></div>
+      <div class="step key"><div class="step-num">3</div><div class="step-c">
+        <div class="step-t"><code>dev-tickets</code></div><div class="step-d">拆成垂直切片任務卡</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-c">
+        <div class="step-t">逐卡施工</div><div class="step-d">開新對話，一次一張卡</div></div></div>
+      <div class="step key"><div class="step-num">5</div><div class="step-c">
+        <div class="step-t"><code>dev-verify-card</code></div><div class="step-d">當場人工驗收，然後回到步驟 4 做下一張</div></div></div>
+      <div class="step key"><div class="step-num">6</div><div class="step-c">
+        <div class="step-t"><code>dev-verify-spec</code></div><div class="step-d">三問檢查、跨卡整合驗收、合併回規格總帳</div></div></div>
+      <div class="step key"><div class="step-num">7</div><div class="step-c">
+        <div class="step-t"><code>dev-closeout</code></div><div class="step-d">上線前六項檢查</div></div></div>
+      <div class="step me"><div class="step-num">✓</div><div class="step-c">
+        <div class="step-t">我用正式網址親手跑一次</div><div class="step-d">這一步沒有替代方案</div></div></div>
+    </div>
+    <div class="flow-foot">隨時可叫的：<code>git-commit</code>（版控）／<code>dev-test-plan</code>（寫測試）／<code>dev-debug</code>（診斷錯誤）／<code>dev-ci-setup</code>（自動檢查）</div>
+  </div>
+
+  <ul class="list">
+    <li><strong>每個階段都有核准關卡</strong>——AI 不能自己往下一關走</li>
+    <li><strong>工作單位是「一個全新對話裝得下」</strong>——避免中途遺失前面的決定</li>
+    <li>做成 Skill 而不是寫在提示詞裡：屬於<strong>動態 context</strong>，需要時才載入</li>
+  </ul>
+
+  <h3>為什麼從 openspec 換成自己這套</h3>
+  <ul class="list">
+    <li>openspec 的<strong>文件層數太多</strong>，小案子光是文件作業就佔掉半天</li>
+    <li>現在收成<strong>兩層</strong>：<code>SPEC.md</code> 一本總帳 ＋ <code>changes/{功能}/delta.md</code> 差異規格</li>
+    <li>入口也簡化：小軟體直接 grill 後開工；大軟體先用 wayfinder 釐清架構</li>
+  </ul>
+</section>
+
+<section class="sec" id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>wayfinder 與 grill</h2></div>
+  <p class="dek">動工之前，先把方向定下來，再把需求問清楚</p>
+
+  <h3>wayfinder：想法太大、方向未定的時候</h3>
+  <p class="dek">方向已經清楚、只差寫規格，就直接走 dev-spec。開一張沒必要的地圖只是增加流程成本</p>
+
+  <div class="flow">
+    <div class="flow-cap">MAP.md 只當索引，一個決定只住在它自己的卡裡</div>
+    <div class="map-grid">
+      <div class="map-cell"><h5>已定案</h5>每條只記一行摘要與連結</div>
+      <div class="map-cell front"><h5>前線 FRONTIER</h5>沒被擋住的卡，現在可以認領</div>
+      <div class="map-cell fog"><h5>迷霧區 FOG</h5>還講不清楚的，先不要切成卡</div>
+    </div>
+    <p class="fork-q" style="padding-left:0">一個對話只結一張卡。這張卡缺的是什麼？</p>
+    <div class="map-grid">
+      <div class="map-cell"><h5>RESEARCH</h5>缺事實 → 派 subagent 去查</div>
+      <div class="map-cell"><h5>PROTOTYPE</h5>缺高保真回饋 → 做一個預計丟棄的版本</div>
+      <div class="map-cell"><h5>GRILL</h5>缺人的取捨（預設型別）→ 跟我談</div>
+      <div class="map-cell"><h5>TASK</h5>缺一個不做就無法決定的動作</div>
+    </div>
+    <div class="flow-foot" style="padding-left:0">結卡 → 地圖加一行 → 迷霧散開就升級成新卡 → 回到前線。迷霧清空、沒有未決的卡，就交棒 <code>dev-spec</code>。</div>
+  </div>
+
+  <div class="note">
+    <span class="t">三條鐵律</span>
+    <p>只決策，不施工　｜　一個對話只結一張卡　｜　<strong>AI 不得代替我回答它自己提的問題</strong></p>
+  </div>
+
+  <p class="dek">霧散了、方向定了，接下來才是把細節問到可以驗收的精確度。</p>
+
+  <h3>grill：拷問模式</h3>
+  <p class="dek">不是我寫需求給 AI，是 AI 反過來把我問到說清楚——因為我不知道自己漏了什麼</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>六條訪談紀律</th><th>為什麼</th></tr></thead>
+      <tbody>
+        <tr><td>一次只問一題</td><td>一次給五題，我只會挑最容易回答的那題</td></tr>
+        <tr><td>附上建議答案</td><td>開放式問題我答不出來，選項我判斷得了</td></tr>
+        <tr><td>查得到的事實自己查</td><td>只問<strong>需要我決定</strong>的事</td></tr>
+        <tr><td>順著依賴走</td><td>先問會影響後續答案的上游決策</td></tr>
+        <tr><td>挑戰模糊語言</td><td>「使用者」指誰？「完成」的判準是什麼？</td></tr>
+        <tr><td>用具體情境施壓</td><td>「月底 31 號跨月呢？」在例子上做決定，不在抽象原則上表態</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="dek">結束方式：輸出<strong>共識清單</strong>（問題 → 決定 → 理由一句），我確認後才動工。小軟體到這裡就能開工。</p>
+
+  <figure>
+    <img src="{{IMG_GRILL7}}" alt="grill 第 7 題：登入狀態保持多久，四個選項各自附上代價">
+    <figcaption><strong>先給現場情境再提問</strong>；四個選項各自寫明代價，連不建議的那個都列出來——「列在這裡只是讓你確認不選它」。</figcaption>
+  </figure>
+  <figure>
+    <img src="{{IMG_GRILL9}}" alt="grill 第 9 題：密碼打錯幾次要鎖，先聲明哪些是實作決策">
+    <figcaption>「先講一個我<strong>已經替你查掉</strong>、不需要你決定的事」→「<strong>要你裁決的是政策</strong>」。事實自己查，決策才問人。</figcaption>
+  </figure>
+
+</section>
+
+<section class="sec" id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>dev-kickoff</h2></div>
+  <p class="dek">開案時一次把制度裝好</p>
+
+  <h3>dev-kickoff：八個步驟</h3>
+  <p class="dek">新專案走完整流程；既有專案補掛制度也走同一個 skill，只補缺的部分</p>
+
+  <div class="flow">
+    <div class="steps">
+      <div class="step"><div class="step-num">0</div><div class="step-c">
+        <div class="step-t">判斷模式</div>
+        <div class="step-d">空資料夾走完整流程；已有程式碼改走 brownfield 規則</div></div></div>
+      <div class="step key"><div class="step-num">1</div><div class="step-c">
+        <div class="step-t">一則訊息問完開案問卷</div>
+        <div class="step-d">專案名稱與一句話目標／Node.js 還是 Python／需不需要資料庫／部署平台。四題都有明確答案才往下走</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-c">
+        <div class="step-t">生成專案 CLAUDE.md</div>
+        <div class="step-d">從模板生成，全文貼給我看過一遍，確認六條紅線</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-c">
+        <div class="step-t">建立規格骨架</div>
+        <div class="step-d"><code>docs/specs/changes/</code> 與 <code>done/</code>。SPEC.md 本體不在這裡建，由第一次 dev-spec 從討論中生成</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-c">
+        <div class="step-t">建立 .gitignore</div>
+        <div class="step-d">依專案類型複製，並用白話說明每一項為什麼要忽略：<code>.env</code> 有金鑰、<code>node_modules/</code> 與 <code>dist/</code> 可以重建</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-c">
+        <div class="step-t">安裝品質工具</div>
+        <div class="step-d">Node.js：ESLint + Prettier + Husky；Python：先建 venv，再裝 Ruff + pre-commit。裝完各跑一次確認能動</div></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-c">
+        <div class="step-t">生成計劃與追蹤文件</div>
+        <div class="step-d"><code>專案計劃.md</code> 與 <code>專案進度追蹤.md</code></div></div></div>
+      <div class="step key"><div class="step-num">7</div><div class="step-c">
+        <div class="step-t">逐節討論專案計劃</div>
+        <div class="step-d">這一步是對話，不是模板填空：目標、MVP 功能清單、技術選型表（每項都要寫選擇理由）、<strong>不做的事</strong>、里程碑與完成判準</div></div></div>
+      <div class="step"><div class="step-num">8</div><div class="step-c">
+        <div class="step-t">首次 commit</div>
+        <div class="step-d">呼叫 <code>git-commit</code> skill，不直接下 git 指令</div></div></div>
+    </div>
+    <div class="flow-foot">部署平台的判斷：純前端搭 Supabase → Netlify；有自己的後端伺服器或 Docker → Zeabur；個人腳本、內部工具 → 暫不部署。</div>
+  </div>
+
+  <div class="note">
+    <span class="t">既有專案補制度的三條規則</span>
+    <p><strong>先盤點再動手</strong>：列出「已有什麼、缺什麼」給我看過，同意後只補缺的。<strong>不覆蓋既有檔案</strong>：已有 CLAUDE.md 或 .gitignore 就改用差異合併，逐條加入。<strong>不動既有程式碼</strong>：這個 skill 只裝制度，不重構也不改功能。</p>
+  </div>
+
+  <h4>專案 CLAUDE.md 的六條紅線</h4>
+  <p class="dek">違反任一條就停下來，先取得我的同意</p>
+  <div class="cards">
+    <details class="card"><summary><span class="card-tag">01</span>先討論再動手</summary><div class="card-body">新模組、新檔案、架構或選型變更，先提案並取得同意才實作。功能變更一律走 dev-spec → dev-tickets → dev-verify-spec。</div></details>
+    <details class="card"><summary><span class="card-tag">02</span>業務邏輯要使用者驗算</summary><div class="card-body">涉及金額、結餘、日期規則等計算，完成後<strong>必須用具體數字舉例請我驗算</strong>，不得自行宣告正確。</div></details>
+    <details class="card"><summary><span class="card-tag">03</span>危險操作用白話確認</summary><div class="card-body">執行 rm、資料庫 migration、改 git 歷史、權限變更之前，先用白話說明「這會做什麼、影響什麼、能不能復原」。</div></details>
+    <details class="card"><summary><span class="card-tag">04</span>資料庫預設 RLS</summary><div class="card-body">涉及資料庫的功能，設計階段就規劃 Row-Level Security；<strong>預設拒絕，明確寫政策才放行</strong>。</div></details>
+    <details class="card"><summary><span class="card-tag">05</span>git 一律走 git-commit skill</summary><div class="card-body">不直接下 git commit 或 push 指令。</div></details>
+    <details class="card"><summary><span class="card-tag">06</span>套件安裝先查證</summary><div class="card-body">安裝任何非主流套件前，先到 npm 或 PyPI 確認套件存在、下載量、維護狀態，回報後才安裝。</div></details>
+  </div>
+
+</section>
+
+<section class="sec" id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>dev-spec 與交叉審查</h2></div>
+  <p class="dek">規格只寫行為，而且要先被另一個 AI 審過一輪</p>
+
+  <div class="cards">
+    <details class="card"><summary><span class="card-tag">首次</span>SPEC.md v1</summary><div class="card-body">專案第一次寫規格，產出全量總帳。</div></details>
+    <details class="card"><summary><span class="card-tag">DELTA</span>changes/{功能}/delta.md</summary><div class="card-body">「修改」段每一條都<strong>必須引用 SPEC.md 現有條文並寫影響檢查</strong>——這是替我做的回歸影響檢查。</div></details>
+    <details class="card"><summary><span class="card-tag">輕量</span>小改動直接做</summary><div class="card-body">改文案、調樣式這種一目瞭然的小事走輕量通道。沒有這條，<strong>流程本身的成本會超過它防的風險</strong>。</div></details>
+  </div>
+
+  <p><strong>規格紀律</strong>：只寫行為，不寫實作。實作決策記在 delta 的 Implementation Decisions，那一節永遠不會併進 SPEC.md。</p>
+
+  <h3>codex-peer-review：為什麼要找第二個 AI</h3>
+  <ul class="list">
+    <li>規格自審，<strong>審不出源自自己假設的缺口</strong></li>
+    <li>規格的缺口會一字不漏變成程式碼的錯誤；在文字這層修正只花幾行字</li>
+    <li>Stop hook 硬性把關：規格檔沒蓋審查 marker 就<strong>不准收工</strong>——靠制度，不靠自律</li>
+  </ul>
+
+  <figure>
+    <img src="{{IMG_CODEX_RUN}}" alt="Codex 挑出 10 條 major issues，Claude 先跑指令驗證再逐條修">
+    <figcaption>不是照單全收，而是<strong>先驗證</strong>：用 <code>sed</code> 確認它指的行號屬實、用 <code>grep</code> 數出 81 處樣式混用。驗完才接受這 10 條，其中 2 條採用不同解法。</figcaption>
+  </figure>
+  <figure>
+    <img src="{{IMG_CODEX_SUM}}" alt="五輪審查後 APPROVED，21 條全部成立">
+    <figcaption>跑了 <strong>5 輪才 APPROVED</strong>，Codex 提的 21 條全部成立，一次都沒有被反駁。</figcaption>
+  </figure>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Codex 抓到的關鍵問題</th><th>為什麼嚴重</th><th>怎麼改</th></tr></thead>
+      <tbody>
+        <tr><td>健康檢查不會重啟</td><td>卡住的容器只會被標成 unhealthy 然後繼續掛著，User Story 4 完全落空</td><td>改成容器內監督程序</td></tr>
+        <tr><td>首次設定是一條無密碼登入捷徑</td><td>任何人都能替沒密碼的人設定密碼，並立刻用他的身分進入</td><td>加上「開放設定密碼」30 分鐘窗口</td></tr>
+        <tr><td>鎖定機制可被用來癱瘓全站</td><td>登入頁公開全部人名，連續輸錯就能把同事鎖在門外</td><td>鎖定改綁「人員 ＋ 來源電腦」</td></tr>
+        <tr><td>漏了 SPEC 四行沒處理</td><td>合併後總帳會同時存在兩套相反的行為</td><td>逐條補進修改段</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sec" id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>dev-tickets：拆成垂直切片</h2></div>
+
+  <ul class="list">
+    <li><strong>垂直切片</strong>：每張卡切穿資料 → 邏輯 → 介面 → 測試的<strong>一條窄路</strong>，不是先做完整個資料層</li>
+    <li>一個功能通常 <strong>2～8 張卡</strong>；超過 8 張表示規格太大，該回頭分期</li>
+    <li>拆完就停，<strong>不在同一個對話開始實作</strong></li>
+  </ul>
+
+  <figure>
+    <img src="{{IMG_TICKETS}}" alt="拆卡提案：8 張卡，標示卡名、Blocked by、做完能親手驗什麼">
+    <figcaption>三個欄位：<strong>卡名</strong>、<strong>Blocked by</strong>（誰先誰後、哪幾張能平行）、<strong>做完你能親手驗什麼</strong>。</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="t">最重要的是「做完你能親手驗什麼」</span>
+    <p>它<strong>用我的操作語言寫，不是用程式語言寫</strong>，而且連「這張卡<strong>還不會</strong>做到什麼」都寫明——此時系統還沒上鎖，那是 02 卡的範圍。</p>
+  </div>
+
+  <div class="quote">卡上的「驗證證據」要在<strong>施工完成的當下</strong>填寫，不留到驗收時回頭補。</div>
+</section>
+
+<section class="sec" id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>dev-verify-card：人工驗收</h2></div>
+  <p class="dek">每做完一張卡就當場驗，不累積到最後</p>
+
+  <ul class="list">
+    <li>驗收清單不寫成 md，產成 HTML：<code>docs/verify/index.html</code> ＋ <code>data.js</code> ＋ <code>results/</code></li>
+    <li>雙擊就能開、不用起伺服器、填寫自動存在瀏覽器、可分次完成、最後匯出 JSON</li>
+    <li>整個資料夾進版本控制，這是專案的<strong>驗收歷史帳</strong></li>
+  </ul>
+
+  <div class="shot-pair">
+    <figure>
+      <img src="{{IMG_HUB_EARLY}}" alt="驗收 Hub 早期：完成 1 張卡，共 14 項全部未測">
+      <figcaption>完成 <strong>1 張卡</strong>：14 項、全部未測。</figcaption>
+    </figure>
+    <figure>
+      <img src="{{IMG_HUB_LATE}}" alt="驗收 Hub 後期：完成 4 張卡，共 43 項，通過 5 項">
+      <figcaption>完成 <strong>4 張卡</strong>：43 項、通過 5。<strong>項目是累加的</strong>，先前填的結果不會被覆蓋。</figcaption>
+    </figure>
+  </div>
+  <p class="dek">四個篩選鈕：全部／只看未測／<strong>只看高風險、人工必測</strong>／只看不通過。逐卡驗收階段，結案鈕是鎖住的，跑完 dev-verify-spec 才解鎖。</p>
+
+  <div class="note">
+    <span class="t">一條驗收項 ＝ 一條走得完的操作路徑</span>
+    <p><strong>使用者的時間是整套流程裡最貴的資源。</strong>別項的前提不要再獨立列一項；一張卡超過 5～6 條，通常是拆太細了。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>欄位</th><th>規則</th></tr></thead>
+      <tbody>
+        <tr><td>coverage.auto</td><td>確實有自動化測試涵蓋，附上測試檔路徑與測試名稱</td></tr>
+        <tr><td>coverage.agent</td><td>AI 實際執行過，附上跑了什麼指令、看到什麼輸出</td></tr>
+        <tr><td>risk</td><td>高／中／低，加一句具體理由</td></tr>
+        <tr><td>manualOnly</td><td>畫面觀感、金額驗算、外部系統串接、需要真實時間流逝 → <strong>永遠排最前面</strong></td></tr>
+        <tr><td>crossEnv</td><td>只給行為確實會因環境而異的項目開啟</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="dek">找不到證據就填 false，<strong>不推測「應該有測過」</strong>——這一欄的用途是決定我把時間花在哪。</p>
+
+  <p><strong>人工必測｜風險高｜自動化測試 ✗｜AI 驗過 ✗｜跨環境</strong></p>
+  <div class="term">
+    <div class="term-bar"><i></i><i></i><i></i><span>這一項的題目</span></div>
+<pre>純看版面（<b>這一項 AI 完全驗不了</b>）。
+
+① 登入頁與「請設定你的密碼」頁：
+   欄位寬度、按鈕位置、字級看起來合不合理？把視窗拉窄會不會爆版？
+
+② 人員主檔的操作欄現在一列有四顆按鈕＋一行狀態文字，
+   <b>會不會太擠、擠到看不懂哪顆是哪顆</b>？
+
+<i>覺得哪裡不對就寫在備註裡，這種事只有你看得出來。</i></pre>
+  </div>
+
+  <h3>不通過：三選一</h3>
+  <ol class="list">
+    <li><strong>當場修</strong>：改動小、在這張卡的範圍內</li>
+    <li><strong>開新卡</strong>：牽涉範圍超出這張卡</li>
+    <li><strong>延後</strong>：對應的規格條文<strong>不得合併進 SPEC.md</strong></li>
+  </ol>
+  <div class="quote">不自行判定「這個不算問題」。<strong>使用者說不通過就是不通過</strong>，最多是討論怎麼處置。</div>
+
+  <div class="note">
+    <span class="t">回到第一部：人工驗收為什麼不能省</span>
+    <p>某次驗收時抓到——一個按鈕要把頁面上下捲動才能重複點選。這種操作上的問題，<strong>AI 自己測不出來</strong>。</p>
+  </div>
+
+  <h3>全部卡做完 → dev-verify-spec</h3>
+  <ul class="list">
+    <li><strong>三問檢查</strong>：漏做／多做（範圍擴張）／做錯</li>
+    <li><strong>跨卡整合驗收</strong>：單卡都通過，不代表串起來會正確——這是逐卡驗收唯一的結構性缺口</li>
+    <li>delta 合併回 SPEC.md（由我看 diff 核准）→ change 資料夾搬到 <code>done/</code> 封存</li>
+  </ul>
+</section>
+
+<section class="sec" id="s10">
+  <div class="sec-head"><span class="sec-num">10</span><h2>git-commit</h2></div>
+  <p class="dek">git 是唯一的還原機制，但指令沒人教</p>
+
+  <p>顯示目前變更 → <strong>安全掃描</strong> → 規劃 commit 計畫（判斷要不要拆）→ 逐筆 commit → <strong>確認後才 push</strong></p>
+
+  <figure>
+    <img src="{{IMG_COMMIT}}" alt="git-commit 的安全掃描報告與 commit 拆分建議">
+    <figcaption>安全掃描<strong>不是只回一句「通過」</strong>，而是逐項說明判定安全的依據。</figcaption>
+  </figure>
+
+  <div class="cards two">
+    <details class="card" open>
+      <summary><span class="card-tag">掃描</span>逐項說明判定依據</summary>
+      <div class="card-body">
+        <ul class="list">
+          <li><code>.env.example</code> 只新增說明與佔位字串，沒有真實金鑰</li>
+          <li>docker-compose 用的是變數引用，不含實際值</li>
+          <li>新檔案掃過，沒有寫死的密碼或 token</li>
+          <li>真正的 <code>.env</code> 沒有進變更清單，已被 <code>.gitignore</code> 擋住</li>
+        </ul>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">攔截</span>什麼情況會被強制擋下</summary>
+      <div class="card-body">
+        <p>檔名：<code>.env*</code>、<code>*.pem</code>、<code>*.key</code>、<code>id_rsa</code></p>
+        <p>內容：<code>password=</code>、<code>api_key=</code>、<code>secret=</code>、<code>token=</code></p>
+        <p>被攔下時會說明「這會造成什麼、建議怎麼處理」。</p>
+      </div>
+    </details>
+  </div>
+
+  <p><strong>37 個修改檔 ＋ 8 個新增檔，建議分成 3 筆。</strong>拆分邏輯是<strong>按性質分，不是按時間分</strong>。</p>
+
+  <p>commit 訊息照 <strong>Conventional Commits</strong> 寫：這是業界通用的規範，格式是 <code>type: 說明文字</code>。好處是讀歷史紀錄時，光看前綴就知道這筆在做什麼，工具也能據此自動產生版本紀錄。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>type</th><th>用途</th><th>範例</th></tr></thead>
+      <tbody>
+        <tr><td>feat</td><td>新功能</td><td>feat: 新增使用者登入頁面</td></tr>
+        <tr><td>fix</td><td>修正錯誤</td><td>fix: 修正送出表單後畫面空白的問題</td></tr>
+        <tr><td>docs</td><td>文件變更</td><td>docs: 更新 README 安裝說明</td></tr>
+        <tr><td>refactor</td><td>重構</td><td>refactor: 拆分登入邏輯為獨立模組</td></tr>
+        <tr><td>chore</td><td>雜項設定、依賴</td><td>chore: 新增 .gitignore</td></tr>
+        <tr><td>test</td><td>測試</td><td>test: 補充登入流程的單元測試</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="dek">繁體中文、動詞加受詞、30 字以內，說「做了什麼」而不是「為什麼」。</p>
+</section>
+
+<section class="sec" id="s11">
+  <div class="sec-head"><span class="sec-num">11</span><h2>dev-closeout</h2></div>
+  <p class="dek">上線前的六項收尾檢查</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>檢查項</th><th>做什麼</th></tr></thead>
+      <tbody>
+        <tr><td>一、程式碼清理</td><td>框架模板殘留檔（列清單，<strong>經同意才刪</strong>）、<code>&lt;title&gt;</code> 不是「Vite App」、<code>package.json</code> 的 name、favicon</td></tr>
+        <tr><td>二、文件</td><td>README 至少要有「專案是什麼、怎麼安裝執行、環境變數清單（只列名稱不列值）」；進度追蹤的「延後／技術債」逐項確認是接受還是要處理</td></tr>
+        <tr><td>三、規格收帳</td><td><code>changes/</code> 應該是空的；抽 2～3 條核心行為規則對照程式碼；SPEC.md 版本紀錄每個 change 都有一行</td></tr>
+        <tr><td>四、安全檢查</td><td>RLS 是否啟用、前端不得有 service key、<code>git ls-files</code> 確認 .env 不在追蹤中、npm audit 結果用白話回報</td></tr>
+        <tr><td>五、git 收尾</td><td>git status 乾淨、push 後確認部署平台自動重新部署成功</td></tr>
+        <tr><td>六、交還使用者</td><td>用<strong>正式網址</strong>親手跑一次完整流程：登入、操作核心功能、確認資料正確</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote">最後一步只能由使用者做。<strong>AI 不得替使用者宣告這一步完成</strong>——測試全數通過，不等於功能正確。</div>
+
+  <p class="dek">還有 change 沒收完怎麼辦：卡做完了就引導跑 <code>dev-verify-spec</code> 驗收合併；卡沒做完，就問我要完成還是放棄。放棄的 change 搬到 <code>done/</code> 並註明「未實作即關閉」，它的條文<strong>不得出現在 SPEC.md</strong>。</p>
+</section>
+
+<!-- ===================== 結尾 ===================== -->
+<div class="part-break">
+  <span class="p-n">CLOSING</span>
+  <h2>結尾</h2>
+</div>
+
+<section class="sec" id="s12">
+  <div class="sec-head"><span class="sec-num">12</span><h2>那我什麼時候該用 vibe coding？</h2></div>
+  <p><strong>不是二選一，是同一條光譜上的刻度。</strong>決定落在哪一端的，是「產出需要被驗證到什麼程度」。</p>
+
+  <h3>兩個問題就能決定</h3>
+  <ol class="list">
+    <li>這東西出錯，<strong>誰會受影響</strong>？</li>
+    <li>這東西<strong>會存在多久</strong>？</li>
+  </ol>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>Vibe Coding 那端</th><th>Agentic Engineering 那端</th></tr></thead>
+      <tbody>
+        <tr><td>例子</td><td>一次性腳本、資料清洗、個人小工具、探索性原型</td><td>同事或客戶每天在用的系統，牽涉金額、日期、權限</td></tr>
+        <tr><td>出錯代價</td><td>丟掉重做，成本接近零</td><td>要有人收拾，而且常常是上線之後才發現</td></tr>
+        <tr><td>需求哪裡來</td><td>做了才知道自己要什麼</td><td>動手前先問到<strong>可驗收的精確度</strong>：方向未定走 wayfinder，方向清楚走 grill</td></tr>
+        <tr><td>給 AI 的東西</td><td>幾句話</td><td>一整套 <strong>harness</strong>（見下）</td></tr>
+        <tr><td>工作單位</td><td>一個對話從頭做到尾</td><td>一張任務卡一個對話，每張卡切穿<strong>資料表 → 邏輯 → 畫面 → 測試</strong></td></tr>
+        <tr><td>誰說做完了</td><td>我自己看一眼，覺得可以就可以</td><td>規格說要做什麼，<strong>測試與人工驗收說做到了沒有</strong>；AI 不得自行宣告</td></tr>
+        <tr><td>出錯之後</td><td>重講一次，再生一版</td><td>git 還原 → 先寫會失敗的回歸測試 → 修 → 規格補一條</td></tr>
+        <tr><td>換人接手</td><td>只有我知道當初為什麼這樣做</td><td>規格是<strong>團隊的共同語言</strong>：任務卡可以分給不同人平行做，驗收紀錄與 commit 留下誰在什麼時候確認了什麼</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>右邊那欄的「harness」是什麼</h3>
+  <p class="dek">不是提示詞寫得更長，是把「這件事怎麼被做完」整個架起來。對照 Day 1 的 context 分類：靜態的每次都載入，動態的需要時才載入</p>
+  <div class="map-grid">
+    <div class="map-cell front"><h5>指令與護欄（靜態）</h5>專案 CLAUDE.md 的六條紅線，每次互動都在，違反就停下來等我同意</div>
+    <div class="map-cell"><h5>流程（動態）</h5>dev skill 這一整套，該用到才載入，避免 context 被稀釋</div>
+    <div class="map-cell"><h5>記憶</h5>SPEC.md 總帳與任務卡，是<strong>跨對話的共同記憶</strong>，不靠我每次重講</div>
+    <div class="map-cell"><h5>證據</h5>驗收 Hub 的打勾紀錄、測試結果、commit 歷史，用來回答「做完了沒有」</div>
+  </div>
+
+  <div class="note">
+    <span class="t">一個人是紀律，一群人就是制度</span>
+    <p>我是一個人在跑這套，所以每一關的核准人都是我。放到企業團隊裡，這些東西的名字其實你都認得：<strong>規格是需求規格書</strong>、<strong>任務卡是工單分派</strong>、<strong>紅線是作業規範</strong>、<strong>驗收紀錄是稽核軌跡</strong>。差別只在於，這次接單的是 AI。</p>
+    <p>人一多，harness 反而更不能省：多個人同時叫 AI 改同一套系統，沒有共同的規格與驗收紀錄，衝突會在上線那天才爆出來。</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-cap">怎麼判斷</div>
+    <p class="fork-q" style="margin-top:0">第一題：出錯了誰會受影響？</p>
+    <div class="fork">
+      <div class="step key"><div class="step-num">A</div><div class="step-c">
+        <div class="step-t">有人靠它工作，或牽涉金額、資料、權限</div>
+        <div class="step-d">走規格：grill → 規格 → 任務卡 → 驗收</div></div></div>
+      <div class="step"><div class="step-num">B</div><div class="step-c">
+        <div class="step-t">只有我自己</div>
+        <div class="step-d">進入第二題</div></div></div>
+    </div>
+    <p class="fork-q">第二題：這東西會存在多久？</p>
+    <div class="fork">
+      <div class="step quiet"><div class="step-num">B1</div><div class="step-c">
+        <div class="step-t">用完就丟</div>
+        <div class="step-d">直接 vibe，執行結果肉眼驗</div></div></div>
+      <div class="step"><div class="step-num">B2</div><div class="step-c">
+        <div class="step-t">之後還要回來改</div>
+        <div class="step-d">先做一個預計丟棄的原型，用它把規格談清楚，再照規格重做</div></div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="t">中間帶才是常態</span>
+    <p>大部分案子是<strong>先 vibe 再收斂</strong>。關鍵是<strong>事先說好這個版本要被丟掉</strong>——原型直接沿用成正式版，是最常見的失敗方式。</p>
+  </div>
+
+  <ul class="list">
+    <li><strong>小工具走完整流程</strong> → 流程本身的成本超過它防的風險（所以要有輕量通道，所以方向清楚就不開地圖）</li>
+    <li><strong>正式系統直接 vibe 上線</strong> → 就是第一部那個坑。<strong>Vibe Coding 不等於 Vibe 上線</strong></li>
+  </ul>
+</section>
+
+<section class="sec" id="s13">
+  <div class="sec-head"><span class="sec-num">13</span><h2>三個階段</h2></div>
+  <p>這套流程真正在管的，不是 AI 夠不夠聰明，而是<strong>「做完了」由誰認定</strong>。</p>
+
+  <div class="flow">
+    <div class="flow-cap">每一階段補的是上一階段沒補的那個缺口</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-c">
+        <div class="step-t">只有想法</div>
+        <div class="step-d">AI 照自己的理解做，做出來的不是我要的</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-c">
+        <div class="step-t">加上規格</div>
+        <div class="step-d">AI 知道要做什麼了，但「做到沒有」仍然由它認定</div></div></div>
+      <div class="step key"><div class="step-num">3</div><div class="step-c">
+        <div class="step-t">加上測試與人工驗收</div>
+        <div class="step-d">完成與否由我認定，AI 負責在過程中留下證據</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s14">
+  <div class="sec-head"><span class="sec-num">14</span><h2>延伸閱讀</h2></div>
+
+  <h3>我的文章</h3>
+  <ul class="src-list list">
+    <li><a href="https://vocus.cc/article/69fff4bdfd897800013961d7" target="_blank" rel="noopener">打造家庭娛樂記帳 APP — Vibe Coding 從零到上線的實踐心得</a></li>
+    <li><a href="https://vocus.cc/article/6a33f590fd89780001effd03" target="_blank" rel="noopener">Day 1　為什麼你的 AI 比較聰明？關鍵不在模型</a></li>
+    <li><a href="https://vocus.cc/article/6a37347cfd897800016fa182" target="_blank" rel="noopener">Day 2　幫你的 AI Agent 裝上萬用插頭</a></li>
+    <li><a href="https://vocus.cc/article/6a3d330efd8978000170bc7d" target="_blank" rel="noopener">Day 3　Prompt 的下一步：把經驗變成 Skill</a></li>
+    <li><a href="https://vocus.cc/article/6a3fb021fd8978000121d167" target="_blank" rel="noopener">Day 4　Vibe Coding 的陰影：當 AI 開始自己寫程式</a></li>
+    <li><a href="https://vocus.cc/article/6a4a0666fd897800017d8984" target="_blank" rel="noopener">Day 5　Vibe Coding 不等於 Vibe 上線：AI 寫程式，要先寫規格</a></li>
+    <li><a href="https://vocus.cc/article/6a524c06fd89780001c021c8" target="_blank" rel="noopener">Fable 5！來完善我的開發流程吧！</a></li>
+  </ul>
+
+  <h3>其他來源</h3>
+  <ul class="src-list list">
+    <li><a href="https://lushinshang.github.io/mattpocock_yt/guides/wayfinder-project-planning.html" target="_blank" rel="noopener">Wayfinder 真正管理的是「現在還不能決定的事」</a>（阿星導讀）</li>
+    <li><a href="https://lushinshang.github.io/mattpocock_yt/guides/prototype-not-specs.html" target="_blank" rel="noopener">別再把時間耗在規格書上，先做一個能丟掉的版本</a>（阿星導讀）</li>
+    <li><a href="https://kaochenlong.com/openspec" target="_blank" rel="noopener">OpenSpec 讓 SDD 變簡單的三個指令</a>（高見龍）</li>
+  </ul>
+
+  <div class="foot">
+    AI 分享教材　｜　佳臨
+  </div>
+</section>
+
+</div>
+</main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement;
+
+  var tBtn=document.getElementById("themeBtn");
+  function current(){
+    var set=root.getAttribute("data-theme");
+    if(set) return set;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+  }
+  tBtn.addEventListener("click",function(){
+    root.setAttribute("data-theme", current()==="dark"?"light":"dark");
+  });
+
+  var eBtn=document.getElementById("expandBtn");
+  eBtn.addEventListener("click",function(){
+    var all=document.querySelectorAll("details.card");
+    var anyClosed=false,i;
+    for(i=0;i<all.length;i++){ if(!all[i].open){anyClosed=true;break;} }
+    for(i=0;i<all.length;i++){ all[i].open=anyClosed; }
+    eBtn.textContent=anyClosed?"收合全部細節":"展開全部細節";
+  });
+
+  var sb=document.getElementById("sidebar"),nBtn=document.getElementById("navBtn");
+  if(nBtn){
+    nBtn.addEventListener("click",function(){ sb.classList.toggle("open"); });
+    document.getElementById("toc").addEventListener("click",function(e){
+      if(e.target.closest("a")) sb.classList.remove("open");
+    });
+  }
+
+  var links=[].slice.call(document.querySelectorAll("#toc a"));
+  var targets=links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); });
+  var fill=document.getElementById("pctFill"),pct=document.getElementById("pctText"),tb=document.getElementById("tbFill");
+  var ticking=false;
+  function update(){
+    ticking=false;
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    var p=h>0?Math.min(100,Math.max(0,Math.round(window.scrollY/h*100))):0;
+    fill.style.width=p+"%"; pct.textContent=p+"%"; if(tb) tb.style.width=p+"%";
+    var active=0;
+    for(var i=0;i<targets.length;i++){
+      if(targets[i] && targets[i].getBoundingClientRect().top<=140) active=i;
+    }
+    for(var j=0;j<links.length;j++){ links[j].classList.toggle("on", j===active); }
+  }
+  window.addEventListener("scroll",function(){
+    if(!ticking){ ticking=true; window.requestAnimationFrame(update); }
+  },{passive:true});
+  window.addEventListener("resize",update);
+  update();
+
+  document.addEventListener("click",function(e){
+    var img=e.target.closest("figure img");
+    if(!img) return;
+    var box=document.createElement("div");
+    box.className="lightbox";
+    var big=document.createElement("img");
+    big.src=img.src; big.alt=img.alt;
+    box.appendChild(big);
+    box.addEventListener("click",function(){ box.remove(); });
+    document.body.appendChild(box);
+  });
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"){
+      var b=document.querySelector(".lightbox"); if(b) b.remove();
+      if(sb) sb.classList.remove("open");
+    }
+  });
+})();
+</script>
