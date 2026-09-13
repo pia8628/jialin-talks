@@ -12,8 +12,7 @@
 jialin-talks/
 ├── index.html                  總索引頁（新增分享時要手動加一張卡片）
 ├── sitemap.xml                 給搜尋引擎，新增分享時加一筆
-├── robots.txt                  允許全站索引
-├── _redirects                  擋掉 /_src/* 不對外
+├── robots.txt                  允許索引，但排除 /_src/
 ├── ai-coding-2026/
 │   └── index.html              ← 部署出去的成品（完整 HTML，含 SEO meta）
 └── _src/
@@ -22,6 +21,8 @@ jialin-talks/
         ├── build.py            建置腳本
         └── artifact.html       給 Claude Artifact 用的片段版（非網站用）
 ```
+
+> `_src/` 不會被搜尋引擎索引（`robots.txt` 有 `Disallow`），但檔案本身仍可直接以網址存取。這裡沒有機密——`template.html` 的內容就是網頁本身。Cloudflare Pages 的靜態檔案優先於 `_redirects`，真要完全排除只能改用 build command 另建輸出目錄，為了這點好處不值得增加建置複雜度。
 
 ## 為什麼要有 `_src`
 
