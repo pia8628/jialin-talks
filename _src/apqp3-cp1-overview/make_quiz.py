@@ -1,0 +1,133 @@
+# -*- coding: utf-8 -*-
+"""產生第 19 節「課後測驗」HTML，題目與紙本測驗卷（APQP_CP/教材/課後測驗_紙本.html）逐題相同。
+改題目時：兩邊一起改。改完依序執行 python make_quiz.py、python build.py。
+以 <!--QUIZ--> ... <!--/QUIZ--> 區塊取代，可重複執行。"""
+import os
+import re
+
+BASE = os.path.dirname(os.path.abspath(__file__))
+TPL = os.path.join(BASE, "template.html")
+
+SEC = {
+    1: "哪些手冊改版", 3: "五個階段沒變", 4: "採購與高風險供應商", 5: "變更管理", 8: "透過貿易商接單時",
+    9: "獨立成冊與安全投產", 10: "反應計畫", 11: "抽樣頻率", 12: "防錯與全檢", 13: "外包製程與傳遞特性",
+    14: "家族管制計劃", 15: "管制計劃與 PFMEA 對齊", 17: "CP 找碴",
+}
+
+# (題目, 選項, 正解 index, 說明, 回看章節)
+MC = [
+    ("這次改版後，管制計劃的寫法要看哪一本手冊？",
+     ["APQP 第三版的第 6 章", "獨立的管制計劃第一版手冊", "PPAP 手冊", "MSA 手冊"], 1,
+     "管制計劃從 APQP 拆出來，獨立成第一版手冊。", [9]),
+    ("下列哪一本手冊這次「沒有」改版？",
+     ["APQP", "管制計劃", "PPAP", "SPC"], 2,
+     "PPAP 仍是第 4 版（2006）；APQP、管制計劃、SPC 都有新版。", [1]),
+    ("下列哪一家外包廠屬於「高風險供應商」？",
+     ["合作十年、沒有異常、有 IATF 16949 證書的熱處理廠", "剛開始合作、沒有 IATF 16949 證書的電鍍廠",
+      "有 ISO 9001 證書、過去三年沒有客訴的包材廠"], 1,
+     "新供應商、沒有 ISO 9001／IATF 16949 證書，都是高風險條件。", [4]),
+    ("沖床要搬到另一個廠房生產，應該怎麼做？",
+     ["機台一樣，直接搬過去生產", "搬完做首件，合格就好，不用通知客戶", "走變更管理：先評估、通知客戶，依客戶要求處理"], 2,
+     "生產地點改變屬於變更，要先評估並通知客戶。", [5]),
+    ("管制計劃上「反應計畫負責人」應該怎麼寫？",
+     ["品保課", "品保課長", "全體人員", "不用寫"], 1,
+     "寫單一職稱，不寫部門。新版表單在反應計畫底下新增「負責人」欄。", [10]),
+    ("巡檢每 2 小時一次。這次巡檢發現外徑超規，可疑品的範圍是？",
+     ["只有這次抽到的 5 件", "上次巡檢合格之後到現在生產的產品", "今天全部的產品都要報廢"], 1,
+     "可疑品追溯到上一次合格的檢驗點。所以頻率越低，出事時要圍堵的量越大。", [10, 11]),
+    ("新料號的「安全投產」什麼時候可以結束？",
+     ["量產第二天", "達到事先訂好的退出條件（依客戶要求）", "主管覺得可以就結束"], 1,
+     "手冊要求事先訂好結束的判斷準則，並由主管審查決定；客戶有準則或要求授權時，要先達成或取得授權。手冊沒有寫「90 天」。", [9]),
+    ("圖面上外包熱處理的硬度是 300～370 HV。管制計劃的規格欄應該寫？",
+     ["≥ 300 HV", "300～370 HV", "越硬越好", "依熱處理廠報告"], 1,
+     "上下限都要管；只管下限會漏掉過硬（過硬容易脆裂）。", [17]),
+    ("哪些平華司適合放在同一份「家族管制計劃」？",
+     ["同材質、同製程，只有尺寸不同", "有的鍍鋅、有的不鍍", "熱處理硬度規格不同"], 0,
+     "表面處理或熱處理規格不同，就要分開。", [14]),
+    ("PFMEA 修改了一個失效原因的預防控制。管制計劃應該？",
+     ["不用動，兩份文件各管各的", "同步檢查並更新對應的管制方法", "等兩年定期審查時再說"], 1,
+     "PFMEA 和管制計劃要一起更新。", [15]),
+]
+
+# (敘述, 是否正確, 說明, 回看章節)
+TF = [
+    ("APQP 第三版把五個階段的名稱都改了。", False, "五個階段的名稱和順序都沒變。", [3]),
+    ("我們的直接客戶是貿易商，依 IATF 的定義，貿易商也算「汽車顧客」。", True,
+     "IATF SI 29：汽車供應鏈中任何採購汽車產品的組織。", [8]),
+    ("人工目視全檢就是 100% 檢查，不需要再確認有沒有效。", False, "人工全檢會漏，要定期確效並使用界限樣品。", [12]),
+    ("電鍍膜厚只看電鍍廠的報告時，管制計劃要寫出「最後控制點」在哪裡。", True,
+     "這是傳遞特性，要寫出最後控制點和我們的確認方式。", [13]),
+    ("反應計畫只寫「通知主管」就足夠了。", False, "要寫停機、可疑品範圍、恢復條件和負責人。", [10]),
+]
+
+LETTERS = "ABCD"
+
+
+def back(secs):
+    return "　".join(f'<a class="q-back" href="#s{n}">回看 {n:02d} {SEC[n]}</a>' for n in secs)
+
+
+def build():
+    o = []
+    o.append('<p class="dek">題目和紙本測驗卷完全相同。寫完紙本後，大家一起看這裡逐題檢討：點選答案會顯示對錯和說明，'
+             '說明後面的連結可以跳回講義對應的段落。</p>')
+    o.append('<div class="quiz-bar"><button class="btn" id="quizReveal">檢討模式：全部顯示答案</button>'
+             '<button class="btn" id="quizReset">清除重來</button></div>')
+    o.append('<h3>一、選擇題（每題 6 分，共 60 分）</h3>')
+    o.append('<div class="quiz" id="quiz">')
+    for i, (t, opts, a, ex, secs) in enumerate(MC, 1):
+        o.append(f'    <div class="q" data-a="{a}" data-pt="6">')
+        o.append(f'      <div class="q-t"><span class="qn">{i:02d}</span>{t}</div>')
+        o.append('      <div class="q-opts">')
+        for j, op in enumerate(opts):
+            o.append(f'        <button class="q-opt"><span class="q-l">({LETTERS[j]})</span> {op}</button>')
+        o.append('      </div>')
+        o.append(f'      <div class="q-ex"><b>答案 ({LETTERS[a]})</b>　{ex}<br>{back(secs)}</div>')
+        o.append('    </div>')
+    o.append('</div>')
+    o.append('<h3>二、是非題（每題 4 分，共 20 分）</h3>')
+    o.append('<div class="quiz">')
+    for i, (t, ok, ex, secs) in enumerate(TF, 1):
+        a = 0 if ok else 1
+        o.append(f'    <div class="q" data-a="{a}" data-pt="4">')
+        o.append(f'      <div class="q-t"><span class="qn">{i:02d}</span>{t}</div>')
+        o.append('      <div class="q-opts q-tf">')
+        o.append('        <button class="q-opt">○ 對</button>')
+        o.append('        <button class="q-opt">× 錯</button>')
+        o.append('      </div>')
+        o.append(f'      <div class="q-ex"><b>答案 {"○" if ok else "×"}</b>　{ex}<br>{back(secs)}</div>')
+        o.append('    </div>')
+    o.append('</div>')
+    o.append('''<h3>三、實作題（20 分）</h3>
+<div class="q q-open">
+  <div class="q-t">下面是一行管制計劃。請改寫「頻率」和「反應計畫」，並寫出「負責人」。</div>
+  <div class="table-wrap"><table class="tight">
+    <thead><tr><th>編號</th><th>製程</th><th>特性</th><th>規格</th><th>量測</th><th>樣本數</th><th>頻率</th><th>管制方法</th><th>反應計畫</th></tr></thead>
+    <tbody><tr><td>30.2</td><td>沖壓</td><td>外徑</td><td>19.7～20.0</td><td>卡尺</td><td>5 件</td><td>不定期</td><td>巡檢</td><td>通知主管</td></tr></tbody>
+  </table></div>
+  <details class="card q-key">
+    <summary><span class="card-tag">參考答案</span>頻率、反應計畫、負責人怎麼寫</summary>
+    <div class="card-body">
+      <p><strong>1. 頻率（6 分）</strong>：寫出明確的數量或時機即可，例如「每 2,000 沖次」「每 1 小時」「每次架模後」。只寫「定期」「不定期」不給分。</p>
+      <p><strong>2. 反應計畫（10 分）</strong>：停機；隔離上次巡檢合格後的產品並全數篩選；調模；首件合格才復機。<br>
+      評分：停（停機）3 分、圍（隔離可疑品，說出範圍）4 分、復（恢復條件，例如首件合格）3 分。</p>
+      <p><strong>3. 負責人（4 分）</strong>：寫出單一職稱即給分，例如「沖壓組長」。寫部門名稱給 2 分。</p>
+      <p>''' + back([10, 11]) + '''</p>
+    </div>
+  </details>
+</div>''')
+    o.append('<div class="score" id="score">'
+             '<span>選擇＋是非：<b id="scoreN">0</b> / 80 分　（已作答 <span id="doneN">0</span> / 15 題）</span>'
+             '<span class="score-note">實作題 20 分由講師評分；滿分 100，70 分及格。</span></div>')
+    return "\n  ".join(o)
+
+
+s = open(TPL, encoding="utf-8").read()
+start = s.index('<section class="sec" id="s19">')
+end = s.index("</section>", start)
+sec = s[start:end]
+head_end = sec.index("</div>", sec.index('class="sec-head"')) + len("</div>")
+new_sec = sec[:head_end] + "\n\n  <!--QUIZ-->\n  " + build() + "\n  <!--/QUIZ-->\n"
+s = s[:start] + new_sec + s[end:]
+open(TPL, "w", encoding="utf-8").write(s)
+print("ok")
