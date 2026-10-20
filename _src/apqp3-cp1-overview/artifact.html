@@ -163,6 +163,21 @@ ol.list>li::before{content:counter(li);position:absolute;left:0;top:.08em;
   font-family:"Noto Serif TC",serif;font-size:21px;line-height:1.75;text-wrap:balance;
 }
 
+/* ---------- part recap ---------- */
+.recap{
+  margin:40px 0 8px;padding:22px 24px 24px;border-radius:10px;
+  background:var(--term-bg);color:var(--term-ink);border:1px solid var(--gold-line);
+  box-shadow:var(--shadow);
+}
+.recap-h{
+  display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid rgba(201,161,90,.35);font-weight:700;font-size:19px;color:#FFFFFF;
+}
+.recap-h .p-n{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.16em;color:var(--gold);font-weight:400}
+.recap p{margin:0;font-size:16.5px;line-height:1.75}
+.recap p + p{margin-top:8px}
+.recap strong{color:var(--gold)}
+
 /* ---------- cards ---------- */
 .cards{display:grid;gap:12px;margin:24px 0}
 .cards.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -186,6 +201,28 @@ details.card>summary:hover{background:var(--surface-2)}
 .card-body{padding:6px 19px 17px;font-size:16.5px;color:var(--ink-2)}
 .card-body>*:first-child{margin-top:12px}
 .card-body strong{color:var(--ink)}
+
+/* ---------- glossary pills ---------- */
+.gl-wrap{margin:-4px 0 24px}
+.gl-hint{font-size:14.5px;color:var(--muted);margin:0 0 9px}
+.gl-row{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+details.gl{flex:0 0 auto}
+details.gl[open]{flex-basis:100%}
+details.gl>summary{
+  list-style:none;cursor:pointer;display:inline-flex;align-items:baseline;gap:7px;
+  padding:5px 13px;border:1px solid var(--gold-line);border-radius:999px;
+  background:var(--surface);font-size:15px;font-weight:500;color:var(--ink);
+}
+details.gl>summary::-webkit-details-marker{display:none}
+details.gl>summary .en{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);font-weight:400}
+details.gl>summary:hover,details.gl[open]>summary{background:var(--gold-soft)}
+.gl-body{
+  margin-top:8px;padding:13px 16px;border:1px solid var(--line);border-radius:9px;
+  background:var(--surface);font-size:15.5px;color:var(--ink-2)
+}
+.gl-body p{margin:0}
+.gl-body p + p{margin-top:7px}
+.gl-body strong{color:var(--ink)}
 
 /* ---------- table ---------- */
 .table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:9px}
@@ -376,8 +413,6 @@ td.c,th.c{text-align:center}
 .q-tf{flex-direction:row}
 .q-tf .q-opt{flex:1;text-align:center}
 .q-back{display:inline-block;margin-top:6px;font-size:14.5px;color:var(--accent-text)}
-.q-open .table-wrap{margin:14px 0}
-.q-open .q-key{margin-top:4px}
 /* ---- 全螢幕檢視 ---- */
 .zoom-btn{margin:8px 0 0}
 dialog.zoom{width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;
@@ -409,6 +444,8 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
 .sv-gate-n{fill:#0D1B2A;font-size:12px;font-weight:700;font-family:"JetBrains Mono",monospace}
 .sv-new{fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.5}
 .sv-newt{fill:var(--accent-text)}
+.sv-tag{fill:var(--new-soft);stroke:var(--new);stroke-width:1}
+.sv-tagt{fill:var(--new)}
 .sv-box{fill:none;stroke:var(--line-strong)}
 .sv-dot{fill:var(--gold)}
 .sv-cell{fill:var(--surface);stroke:var(--line-strong);stroke-width:.8}
@@ -451,7 +488,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     <a href="#s7"><span class="n">07</span><span>其他新增項目</span></a>
     <a href="#s8"><span class="n">08</span><span>透過貿易商接單時</span></a>
     <div class="toc-part">三 · 管制計劃第一版</div>
-    <a href="#s9"><span class="n">09</span><span>獨立成冊與安全投產</span></a>
+    <a href="#s9"><span class="n">09</span><span>安全投產</span></a>
     <a href="#s10"><span class="n">10</span><span>反應計畫</span></a>
     <a href="#s11"><span class="n">11</span><span>抽樣頻率</span></a>
     <a href="#s12"><span class="n">12</span><span>防錯與全檢</span></a>
@@ -565,7 +602,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
       <ul>
         <li>管制計劃獨立成冊，寫得更細</li>
         <li>反應計畫要寫到負責人</li>
-        <li>抽樣頻率要能支持圍堵</li>
+        <li>抽樣頻率要能支持遏制</li>
         <li>「管理支持」改稱「領導支持」</li>
         <li>檢查表 A-1～A-8 → A-0～A-10</li>
       </ul>
@@ -666,6 +703,40 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     <li>沒有 ISO 9001 或 IATF 16949 證書</li>
   </ul>
 
+  <div class="gl-wrap">
+    <p class="gl-hint">名詞小膠囊：點開看解釋</p>
+    <div class="gl-row">
+      <details class="gl">
+        <summary>新建廠<span class="en">greenfield</span></summary>
+        <div class="gl-body">
+          <p>原意是「綠地」：在從沒蓋過工廠的空地上<strong>從零建廠</strong>。廠房、設備、人員、製程全是新的，沒有生產紀錄可以參考，問題還沒暴露出來。</p>
+          <p>例：電鍍廠到越南蓋新廠，把我們的件移過去做。</p>
+        </div>
+      </details>
+      <details class="gl">
+        <summary>改建廠<span class="en">brownfield</span></summary>
+        <div class="gl-body">
+          <p>原意是「褐地」：在<strong>既有的廠房或土地</strong>上改裝、擴建或重新規劃。建築是舊的，但產線和製程動過了，舊經驗不一定適用，也容易被誤以為「老廠沒問題」。</p>
+          <p>例：熱處理廠把舊倉庫改成新產線，或在廠內搬遷、重新配置產線。</p>
+        </div>
+      </details>
+      <details class="gl">
+        <summary>品質外流<span class="en">quality spill</span></summary>
+        <div class="gl-body">
+          <p>不良品沒被攔住，<strong>流到客戶端</strong>（客戶進料檢驗、產線發現或客訴）。和「品質不良」不同：外流代表檢驗和遏制也失效了，所以手冊單獨列一條。</p>
+          <p>例：墊圈電鍍層剝落，我們出貨檢驗沒攔到，被車廠產線發現。</p>
+        </div>
+      </details>
+      <details class="gl">
+        <summary>市場處置<span class="en">field action</span></summary>
+        <div class="gl-body">
+          <p>比品質外流更嚴重一級：零件已經裝上車、<strong>流到市場</strong>，車廠要對已售出的車輛採取行動，例如召回、服務活動、延長保固。手冊準則是「曾有一次以上」。</p>
+          <p>例：座椅固定螺絲強度不足，車廠召回已售車輛更換。</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
   <div class="note">
     <span class="t">對沖壓扣件廠的意義</span>
     <p>外包的熱處理、電鍍廠很多沒有 IATF 證書，換一家新的又符合「新供應商」——<strong>很容易落入高風險</strong>。這不代表不能用。手冊說應該優先選非高風險的供應商；如果因為客戶指定或沒有其他選擇，非用不可，就必須：</p>
@@ -678,6 +749,42 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
   </div>
 
   <div class="cards">
+    <details class="card">
+      <summary><span class="card-tag">清單</span>A-9 採購檢查表：24 題全文</summary>
+      <div class="card-body">
+        <p>手冊附錄 A-9（p122–123）。每題勾「是／否」，答「否」的要填<strong>意見／需要採取的措施、責任人、截止日期</strong>。前 11 題是採購面，第 12 題起是工程功能。用語依中文版改為台灣用語。</p>
+        <div class="table-wrap"><table class="tight">
+          <thead><tr><th>#</th><th>問題</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>供應商的設施產能計畫，是否滿足我們的品質和交貨要求（包括售後服務件）？</td></tr>
+            <tr><td>2</td><td>產能計畫是否考慮了你的供應鏈交期？</td></tr>
+            <tr><td>3</td><td>供應商是否回顧了以前或類似專案的經驗教訓？</td></tr>
+            <tr><td>4</td><td>供應商是否審查了 DFMEA 和 PFMEA（如適用）？</td></tr>
+            <tr><td>5</td><td>供應商是否掌握 PFMEA 中列出的嚴重度、特殊特性和傳遞特性？</td></tr>
+            <tr><td>6</td><td>供應商是否有可接受的恢復計畫？</td></tr>
+            <tr><td>7</td><td>供應商是否有評估和管理分階供應商（它的供應商）的流程和資源計畫？</td></tr>
+            <tr><td>8</td><td>供應商是否有證據，證明具備與新產品相關的產品經驗或技術專業？</td></tr>
+            <tr><td>9</td><td>供應商能否履行人力資源承諾，確保專案順利完成：具備執行必要工作所需的技能和訓練？</td></tr>
+            <tr><td>10</td><td>供應商能否驗證所用的特殊組裝技術、測試方法或遏制程序？</td></tr>
+            <tr><td>11</td><td>供應商是否符合所有採購要求，並提供客戶要求的所有文件？</td></tr>
+            <tr><td colspan="2"><strong>工程功能</strong></td></tr>
+            <tr><td>12</td><td>供應商目前是否供應汽車產業？</td></tr>
+            <tr><td>13</td><td>客戶和我們的規範訂閱是否為最新版？</td></tr>
+            <tr><td>14</td><td>供應商對這類商品有經驗嗎？有的話，在意見欄寫出多久。</td></tr>
+            <tr><td>15</td><td>供應商對圖面定義的材料等級／類型有經驗嗎（例如塑膠、鋼、橡膠）？</td></tr>
+            <tr><td>16</td><td>供應商對特定零件是否有可接受的設計能力？</td></tr>
+            <tr><td>17</td><td>供應商的繪圖和工程軟體系統，是否和客戶要求相容？</td></tr>
+            <tr><td>18</td><td>供應商能否以電子方式交換工程資料？</td></tr>
+            <tr><td>19</td><td>供應商是否有有效的變更管理流程，而且相關職能都有代表參與？</td></tr>
+            <tr><td>20</td><td>如果時程被壓縮，供應商是否有資源應對？</td></tr>
+            <tr><td>21</td><td>技術審查是否還有未解決的疑慮，例如可行性、時程？</td></tr>
+            <tr><td>22</td><td>供應商是否有系統和資源管理所有法規要求，例如安全、IMDS、REACH？</td></tr>
+            <tr><td>23</td><td>供應商是否依 APQP 2.11 節，對特殊特性使用防錯？</td></tr>
+            <tr><td>24</td><td>供應商對各項要求是否有任何例外？</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </details>
     <details class="card">
       <summary><span class="card-tag">做法</span>小廠可以怎麼評外包廠</summary>
       <div class="card-body">
@@ -696,8 +803,35 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
   <div class="sec-head"><span class="sec-num">05</span><h2>變更管理 <span class="b b-new">新增</span></h2></div>
   <p class="dek">1.15 節、檢查表 A-8</p>
 
-  <p>只要影響產品的<strong>外形、配合、功能</strong>（功能也包括外觀），就算「變更」。<strong>已經核准的特殊特性，沒有客戶同意不能改或刪除。</strong></p>
+  <p>只要影響產品的<strong>外形、配合、功能</strong>（form, fit, function；功能也包括外觀），就算「變更」。<strong>已經核准的特殊特性，沒有客戶同意不能改或刪除。</strong></p>
   <p>手冊 1.15 的定義更精確：APQP 的產出（例如管制計劃、PFMEA）經客戶同意之後，任何可能影響外形、配合、功能的修改都算變更。配合也包括包裝、治具、量具、容器；功能也包括外觀和次要功能。另外，<strong>每一份 APQP 產出文件都要有變更紀錄</strong>，至少寫明變更原因、提出人、核准人和日期。PPAP 核准之後的變更，改照 PPAP 手冊第 3 節通知客戶。</p>
+
+  <div class="gl-wrap">
+    <p class="gl-hint">名詞小膠囊：點開看解釋</p>
+    <div class="gl-row">
+      <details class="gl">
+        <summary>外形<span class="en">form</span></summary>
+        <div class="gl-body">
+          <p>零件<strong>看得到、量得到</strong>的樣子：尺寸、形狀、重量、表面狀態、顏色。</p>
+          <p>例：墊圈的外徑、內徑、厚度、平面度；電鍍的顏色和光澤。</p>
+        </div>
+      </details>
+      <details class="gl">
+        <summary>配合<span class="en">fit</span></summary>
+        <div class="gl-body">
+          <p>零件和其他零件、設備<strong>搭不搭得起來</strong>。手冊把包裝、治具、量具、容器也算進來。</p>
+          <p>例：墊圈內孔套不套得進螺栓；客戶的自動送料機能不能順利供料；包裝箱換尺寸，客戶產線的料架放不進去。</p>
+        </div>
+      </details>
+      <details class="gl">
+        <summary>功能<span class="en">function</span></summary>
+        <div class="gl-body">
+          <p>零件裝上去之後，<strong>能不能完成該做的事</strong>。手冊把外觀和次要功能也算進來。</p>
+          <p>例：墊圈鎖緊後不變形、不鬆脫；鍍層的防鏽時數；鍍層摩擦係數影響鎖附扭力換算出的夾緊力；看得到的部位有色差也算。</p>
+        </div>
+      </details>
+    </div>
+  </div>
 
   <div class="table-wrap">
   <table class="tight">
@@ -714,6 +848,25 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
   </div>
 
   <div class="cards">
+    <details class="card">
+      <summary><span class="card-tag">為什麼</span>電鍍結果都一樣，換電鍍廠為什麼還算變更？</summary>
+      <div class="card-body">
+        <p>關鍵在手冊寫的是「<strong>可能</strong>影響外形、配合、功能」，不是「已經影響」。「結果都一樣」是要證明的結論，不能當成前提。</p>
+        <ol>
+          <li><strong>換廠當下沒人知道結果一不一樣。</strong>電鍍是特殊製程，外觀和膜厚一樣，下面這些也可能不一樣，而且出貨檢驗量尺寸看不出來：
+            <ul>
+              <li>氫脆：高強度件電鍍後烘烤不足，裝上去幾天後才斷裂</li>
+              <li>防鏽時數：鈍化膜、封孔劑配方不同，鹽霧時數就不同</li>
+              <li>摩擦係數：同樣的鎖附扭力，夾緊力不同，客戶的鎖附參數可能失準</li>
+            </ul>
+          </li>
+          <li><strong>確認結果一樣，本身就是變更流程的內容。</strong>評估新廠、試作、測試，更新流程圖、PFMEA、管制計劃，依客戶要求重新提交 PPAP。驗證過了，才能說沒有影響。</li>
+          <li><strong>PPAP 手冊直接點名。</strong>第 3 節列出的客戶通知情境，包括更換零件、材料或服務（例如熱處理、電鍍）的來源。要不要重新送件由客戶決定，不是我們自己判斷。</li>
+          <li><strong>換料商同理。</strong>同一個材質規格，不同鋼廠的成分範圍、夾雜物、加工硬化特性仍可能不同，沖壓毛邊、熱處理後硬度都可能跟著變。</li>
+        </ol>
+        <p>一句話：<strong>變更管理管的不是「結果有沒有變」，而是「誰有資格說結果沒變」</strong>：要驗證過、客戶也知道，才算數。</p>
+      </div>
+    </details>
     <details class="card">
       <summary><span class="card-tag">細節</span>變更時要更新哪些東西</summary>
       <div class="card-body">
@@ -793,7 +946,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
   <div class="cards">
     <details class="card">
       <summary><span class="card-tag">新增</span>追溯性</summary>
-      <div class="card-body"><p>零件要能用批號追溯，細節跟客戶議定。對扣件廠來說，最基本的是<strong>成品批號 → 外包處理批 → 原料爐號</strong>能串起來。客訴時能縮小圍堵範圍，就是追溯性的價值。</p></div>
+      <div class="card-body"><p>零件要能用批號追溯，細節跟客戶議定。對扣件廠來說，最基本的是<strong>成品批號 → 外包處理批 → 原料爐號</strong>能串起來。客訴時能縮小遏制範圍，就是追溯性的價值。</p></div>
     </details>
     <details class="card">
       <summary><span class="card-tag">新增</span>專案指標與紅黃綠燈</summary>
@@ -855,8 +1008,8 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     <p>每個新料號都用一張「顧客需求確認表」逐項確認，請貿易商回覆。問不到的項目標記「顧客未提供」並寫日期——這是 APQP 第 1 階段的輸出，也是日後發生客訴時保護公司的證據。</p>
   </div>
 
-  <div class="note">
-    <span class="t">PART 02 重點回顧</span>
+  <div class="recap">
+    <div class="recap-h"><span class="p-n">PART 02</span>重點回顧</div>
     <p>① 五個階段沒變；新增的是前面的<strong>採購</strong>和後面的<strong>閘門</strong>。</p>
     <p>② 高風險供應商：我們會被評，我們也要評外包廠。</p>
     <p>③ 影響外形、配合、功能的改變都是<strong>變更</strong>，換外包廠、換原料、改模具都要先通知客戶。</p>
@@ -872,13 +1025,13 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
 </div>
 
 <section class="sec" id="s9">
-  <div class="sec-head"><span class="sec-num">09</span><h2>獨立成冊與安全投產</h2></div>
+  <div class="sec-head"><span class="sec-num">09</span><h2>安全投產</h2></div>
   <p class="dek">管制計劃的格式只小改，「怎麼寫才算寫好」講得更細</p>
 
   <p>舊版的管制計劃只是 APQP 手冊的第 6 章；新版獨立成冊，光是逐欄說明就寫了約 28 頁。AIAG 拆出來的理由是凸顯管制計劃的重要性，也方便以後單獨改版。</p>
 <!--FIG:form-->
 <figure class="fig">
-<div class="fig-scroll"><svg viewBox="0 0 760 312" role="img" aria-label="管制計劃表單 B-1 欄位結構" style="min-width:640px"><rect x="20" y="14" width="13" height="13" rx="2" class="sv-box" /><text x="39" y="25" class="sv-t" text-anchor="start" font-size="13">原型</text><rect x="110" y="14" width="13" height="13" rx="2" class="sv-box" /><text x="129" y="25" class="sv-t" text-anchor="start" font-size="13">試產</text><rect x="200" y="14" width="13" height="13" rx="2" class="sv-box" /><text x="219" y="25" class="sv-t" text-anchor="start" font-size="13">量產</text><rect x="290" y="14" width="13" height="13" rx="2" class="sv-new" /><text x="309" y="25" class="sv-newt" text-anchor="start" font-size="13">安全投產  新增</text><rect x="20" y="40" width="180" height="24" class="sv-cell"/><text x="26" y="56" class="sv-m" text-anchor="start" font-size="11.5">管制計劃編號</text><rect x="200" y="40" width="240" height="24" class="sv-cell"/><text x="206" y="56" class="sv-m" text-anchor="start" font-size="11.5">主要聯絡人／電話</text><rect x="440" y="40" width="150" height="24" class="sv-cell"/><text x="446" y="56" class="sv-m" text-anchor="start" font-size="11.5">日期（初版）</text><rect x="590" y="40" width="150" height="24" class="sv-cell"/><text x="596" y="56" class="sv-m" text-anchor="start" font-size="11.5">日期（修訂）</text><rect x="20" y="64" width="420" height="24" class="sv-cell"/><text x="26" y="80" class="sv-m" text-anchor="start" font-size="11.5">料號／最新變更等級</text><rect x="440" y="64" width="300" height="24" class="sv-cell"/><text x="446" y="80" class="sv-m" text-anchor="start" font-size="11.5">客戶工程核准／日期（如要求）</text><rect x="20" y="88" width="180" height="24" class="sv-cell"/><text x="26" y="104" class="sv-m" text-anchor="start" font-size="11.5">品名／描述</text><rect x="200" y="88" width="240" height="24" class="sv-cell"/><text x="206" y="104" class="sv-m" text-anchor="start" font-size="11.5">組織／工廠核准／日期</text><rect x="440" y="88" width="300" height="24" class="sv-cell"/><text x="446" y="104" class="sv-m" text-anchor="start" font-size="11.5">客戶品質核准／日期（如要求）</text><rect x="20" y="112" width="180" height="24" class="sv-cell"/><text x="26" y="128" class="sv-m" text-anchor="start" font-size="11.5">組織／工廠</text><rect x="200" y="112" width="240" height="24" class="sv-cell"/><text x="206" y="128" class="sv-m" text-anchor="start" font-size="11.5">組織代碼</text><rect x="440" y="112" width="300" height="24" class="sv-cell"/><text x="446" y="128" class="sv-m" text-anchor="start" font-size="11.5">其他核准／日期（如要求）</text><rect x="20" y="144" width="150" height="24" rx="4" class="sv-del"/><text x="95" y="160" class="sv-delt" text-anchor="middle" font-size="12">核心小組</text><line x1="50" y1="156" x2="140" y2="156" class="sv-strike"/><text x="182" y="160" class="sv-m" text-anchor="start" font-size="12">舊版表頭的「核心小組」欄，新版表單已經拿掉</text><rect x="20" y="184" width="40" height="84" class="sv-cellh"/><text x="40.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="40.0" dy="-14.4">零件／</tspan><tspan x="40.0" dy="14.4">製程</tspan><tspan x="40.0" dy="14.4">編號</tspan></text><rect x="60" y="184" width="70" height="84" class="sv-cellh"/><text x="95.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="95.0" dy="-14.4">製程名稱</tspan><tspan x="95.0" dy="14.4">／作業</tspan><tspan x="95.0" dy="14.4">說明</tspan></text><rect x="130" y="184" width="60" height="84" class="sv-cellh"/><text x="160.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="160.0" dy="-14.4">機器、</tspan><tspan x="160.0" dy="14.4">設備、</tspan><tspan x="160.0" dy="14.4">治工具</tspan></text><rect x="190" y="184" width="134" height="26" class="sv-cellh"/><text x="257.0" y="201" class="sv-t" text-anchor="middle" font-size="12.5" font-weight="700">特性</text><rect x="190" y="210" width="34" height="58" class="sv-cell" rx="0"/><text x="207.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">編號</text><rect x="224" y="210" width="50" height="58" class="sv-cell" rx="0"/><text x="249.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">產品</text><rect x="274" y="210" width="50" height="58" class="sv-cell" rx="0"/><text x="299.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">製程</text><rect x="324" y="184" width="46" height="84" class="sv-cellh"/><text x="347.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="347.0" dy="-14.4">特殊</tspan><tspan x="347.0" dy="14.4">特性</tspan><tspan x="347.0" dy="14.4">分類</tspan></text><rect x="370" y="184" width="258" height="26" class="sv-cellh"/><text x="499.0" y="201" class="sv-t" text-anchor="middle" font-size="12.5" font-weight="700">方法</text><rect x="370" y="210" width="66" height="58" class="sv-cell" rx="0"/><text x="403.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="403.0" dy="-14.4">產品／</tspan><tspan x="403.0" dy="14.4">製程規格</tspan><tspan x="403.0" dy="14.4">／公差</tspan></text><rect x="436" y="210" width="60" height="58" class="sv-cell" rx="0"/><text x="466.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="466.0" dy="-14.4">評估／</tspan><tspan x="466.0" dy="14.4">量測</tspan><tspan x="466.0" dy="14.4">技術</tspan></text><rect x="496" y="210" width="38" height="58" class="sv-cell" rx="0"/><text x="515.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="515.0" dy="-7.2">樣本</tspan><tspan x="515.0" dy="14.4">數</tspan></text><rect x="534" y="210" width="38" height="58" class="sv-cell" rx="0"/><text x="553.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">頻率</text><rect x="572" y="210" width="56" height="58" class="sv-cell" rx="0"/><text x="600.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="600.0" dy="-7.2">管制</tspan><tspan x="600.0" dy="14.4">方法</tspan></text><rect x="628" y="184" width="112" height="26" class="sv-cellh"/><text x="684.0" y="201" class="sv-t" text-anchor="middle" font-size="12.5" font-weight="700">反應計畫</text><rect x="628" y="210" width="56" height="58" class="sv-cell" rx="0"/><text x="656.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">措施</text><rect x="684" y="210" width="56" height="58" class="sv-new" rx="0"/><text x="712.0" y="243.0" class="sv-newt" text-anchor="middle" font-size="11.5" font-weight="700">負責人</text><path d="M207,270 V284" class="sv-lead"/><text x="197" y="298" class="sv-m" text-anchor="start" font-size="12">特性編號：保留</text><path d="M712,270 V284" class="sv-lead sv-lead-new"/><text x="732" y="298" class="sv-newt" text-anchor="end" font-size="12.5" font-weight="700">負責人：新增，是反應計畫的負責人，寫職稱</text></svg></div>
+<div class="fig-scroll"><svg viewBox="0 0 760 312" role="img" aria-label="管制計劃表單 B-1 欄位結構" style="min-width:640px"><rect x="20" y="14" width="13" height="13" rx="2" class="sv-box" /><text x="39" y="25" class="sv-t" text-anchor="start" font-size="13">原型</text><rect x="110" y="14" width="13" height="13" rx="2" class="sv-box" /><text x="129" y="25" class="sv-t" text-anchor="start" font-size="13">試產</text><rect x="200" y="14" width="13" height="13" rx="2" class="sv-box" /><text x="219" y="25" class="sv-t" text-anchor="start" font-size="13">量產</text><rect x="290" y="14" width="13" height="13" rx="2" class="sv-new" /><text x="309" y="25" class="sv-newt" text-anchor="start" font-size="13" font-weight="700">安全投產</text><rect x="375" y="11" width="40" height="19" rx="4" class="sv-tag" /><text x="395" y="25" class="sv-tagt" text-anchor="middle" font-size="11.5" font-weight="500">新增</text><rect x="20" y="40" width="180" height="24" class="sv-cell"/><text x="26" y="56" class="sv-m" text-anchor="start" font-size="11.5">管制計劃編號</text><rect x="200" y="40" width="240" height="24" class="sv-cell"/><text x="206" y="56" class="sv-m" text-anchor="start" font-size="11.5">主要聯絡人／電話</text><rect x="440" y="40" width="150" height="24" class="sv-cell"/><text x="446" y="56" class="sv-m" text-anchor="start" font-size="11.5">日期（初版）</text><rect x="590" y="40" width="150" height="24" class="sv-cell"/><text x="596" y="56" class="sv-m" text-anchor="start" font-size="11.5">日期（修訂）</text><rect x="20" y="64" width="420" height="24" class="sv-cell"/><text x="26" y="80" class="sv-m" text-anchor="start" font-size="11.5">料號／最新變更等級</text><rect x="440" y="64" width="300" height="24" class="sv-cell"/><text x="446" y="80" class="sv-m" text-anchor="start" font-size="11.5">客戶工程核准／日期（如要求）</text><rect x="20" y="88" width="180" height="24" class="sv-cell"/><text x="26" y="104" class="sv-m" text-anchor="start" font-size="11.5">品名／描述</text><rect x="200" y="88" width="240" height="24" class="sv-cell"/><text x="206" y="104" class="sv-m" text-anchor="start" font-size="11.5">組織／工廠核准／日期</text><rect x="440" y="88" width="300" height="24" class="sv-cell"/><text x="446" y="104" class="sv-m" text-anchor="start" font-size="11.5">客戶品質核准／日期（如要求）</text><rect x="20" y="112" width="180" height="24" class="sv-cell"/><text x="26" y="128" class="sv-m" text-anchor="start" font-size="11.5">組織／工廠</text><rect x="200" y="112" width="240" height="24" class="sv-cell"/><text x="206" y="128" class="sv-m" text-anchor="start" font-size="11.5">組織代碼</text><rect x="440" y="112" width="300" height="24" class="sv-cell"/><text x="446" y="128" class="sv-m" text-anchor="start" font-size="11.5">其他核准／日期（如要求）</text><rect x="20" y="144" width="150" height="24" rx="4" class="sv-del"/><text x="95" y="160" class="sv-delt" text-anchor="middle" font-size="12">核心小組</text><line x1="50" y1="156" x2="140" y2="156" class="sv-strike"/><text x="182" y="160" class="sv-m" text-anchor="start" font-size="12">舊版表頭的「核心小組」欄，新版表單已經拿掉</text><rect x="20" y="184" width="40" height="84" class="sv-cellh"/><text x="40.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="40.0" dy="-14.4">零件／</tspan><tspan x="40.0" dy="14.4">製程</tspan><tspan x="40.0" dy="14.4">編號</tspan></text><rect x="60" y="184" width="70" height="84" class="sv-cellh"/><text x="95.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="95.0" dy="-14.4">製程名稱</tspan><tspan x="95.0" dy="14.4">／作業</tspan><tspan x="95.0" dy="14.4">說明</tspan></text><rect x="130" y="184" width="60" height="84" class="sv-cellh"/><text x="160.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="160.0" dy="-14.4">機器、</tspan><tspan x="160.0" dy="14.4">設備、</tspan><tspan x="160.0" dy="14.4">治工具</tspan></text><rect x="190" y="184" width="134" height="26" class="sv-cellh"/><text x="257.0" y="201" class="sv-t" text-anchor="middle" font-size="12.5" font-weight="700">特性</text><rect x="190" y="210" width="34" height="58" class="sv-cell" rx="0"/><text x="207.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">編號</text><rect x="224" y="210" width="50" height="58" class="sv-cell" rx="0"/><text x="249.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">產品</text><rect x="274" y="210" width="50" height="58" class="sv-cell" rx="0"/><text x="299.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">製程</text><rect x="324" y="184" width="46" height="84" class="sv-cellh"/><text x="347.0" y="230.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="347.0" dy="-14.4">特殊</tspan><tspan x="347.0" dy="14.4">特性</tspan><tspan x="347.0" dy="14.4">分類</tspan></text><rect x="370" y="184" width="258" height="26" class="sv-cellh"/><text x="499.0" y="201" class="sv-t" text-anchor="middle" font-size="12.5" font-weight="700">方法</text><rect x="370" y="210" width="66" height="58" class="sv-cell" rx="0"/><text x="403.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="403.0" dy="-14.4">產品／</tspan><tspan x="403.0" dy="14.4">製程規格</tspan><tspan x="403.0" dy="14.4">／公差</tspan></text><rect x="436" y="210" width="60" height="58" class="sv-cell" rx="0"/><text x="466.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="466.0" dy="-14.4">評估／</tspan><tspan x="466.0" dy="14.4">量測</tspan><tspan x="466.0" dy="14.4">技術</tspan></text><rect x="496" y="210" width="38" height="58" class="sv-cell" rx="0"/><text x="515.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="515.0" dy="-7.2">樣本</tspan><tspan x="515.0" dy="14.4">數</tspan></text><rect x="534" y="210" width="38" height="58" class="sv-cell" rx="0"/><text x="553.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">頻率</text><rect x="572" y="210" width="56" height="58" class="sv-cell" rx="0"/><text x="600.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5"><tspan x="600.0" dy="-7.2">管制</tspan><tspan x="600.0" dy="14.4">方法</tspan></text><rect x="628" y="184" width="112" height="26" class="sv-cellh"/><text x="684.0" y="201" class="sv-t" text-anchor="middle" font-size="12.5" font-weight="700">反應計畫</text><rect x="628" y="210" width="56" height="58" class="sv-cell" rx="0"/><text x="656.0" y="243.0" class="sv-t" text-anchor="middle" font-size="11.5">措施</text><rect x="684" y="210" width="56" height="58" class="sv-new" rx="0"/><text x="712.0" y="243.0" class="sv-newt" text-anchor="middle" font-size="11.5" font-weight="700">負責人</text><path d="M207,270 V284" class="sv-lead"/><text x="197" y="298" class="sv-m" text-anchor="start" font-size="12">特性編號：保留</text><path d="M712,270 V284" class="sv-lead sv-lead-new"/><text x="732" y="298" class="sv-newt" text-anchor="end" font-size="12.5" font-weight="700">負責人：新增，是反應計畫的負責人，寫職稱</text></svg></div>
 <figcaption>新版管制計劃表單（附錄 B-1）的欄位結構。金色是新增：表頭多了「安全投產」勾選框，反應計畫分成「措施」和「負責人」兩欄。依 CP 手冊附錄 B-1 重畫、簡化，欄名用講義用語。</figcaption>
 </figure>
 <!--/FIG:form-->
@@ -888,23 +1041,30 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-c"><div class="step-t">原型（Prototype）<span class="b b-same">不變</span></div><div class="step-d">樣品階段。照客戶圖面生產的廠通常不需要</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-c"><div class="step-t">試產（Pre-Launch）<span class="b b-same">不變</span></div><div class="step-d">試產時的加強管制</div></div></div>
-      <div class="step key"><div class="step-num">+</div><div class="step-c"><div class="step-t">安全投產（Safe Launch）<span class="b b-new">新增</span></div><div class="step-d">量產初期的加嚴管制期：提高檢驗頻率、額外圍堵，用數據決定何時退出</div></div></div>
+      <div class="step key"><div class="step-num">+</div><div class="step-c"><div class="step-t">安全投產（Safe Launch）<span class="b b-new">新增</span></div><div class="step-d">量產初期的加嚴管制期：提高檢驗頻率、額外遏制，用數據決定何時退出</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-c"><div class="step-t">量產（Production）<span class="b b-same">不變</span></div><div class="step-d">正常量產的管制</div></div></div>
     </div>
   </div>
 <!--FIG:safelaunch-->
 <figure class="fig">
-<div class="fig-scroll"><svg viewBox="0 0 720 304" role="img" aria-label="安全投產在時程上的位置" style="min-width:600px"><line x1="150" y1="44" x2="150" y2="208" class="sv-ms"/><text x="150" y="20" class="sv-m" text-anchor="middle" font-size="12.5"><tspan x="150" dy="-7.8">設計模型</tspan><tspan x="150" dy="15.6">／原型樣品</tspan></text><line x1="360" y1="44" x2="360" y2="208" class="sv-ms"/><text x="360" y="20" class="sv-m" text-anchor="middle" font-size="12.5">試產</text><line x1="520" y1="44" x2="520" y2="208" class="sv-ms"/><text x="520" y="20" class="sv-m" text-anchor="middle" font-size="12.5">投產</text><rect x="80" y="56" width="200" height="30" rx="6" class="sv-bar" /><text x="180" y="76" class="sv-t" text-anchor="middle">原型管制計劃</text><rect x="280" y="96" width="240" height="30" rx="6" class="sv-bar" /><text x="400" y="116" class="sv-t" text-anchor="middle">試產管制計劃</text><rect x="400" y="136" width="230" height="30" rx="6" class="sv-new" stroke-dasharray="6 4"/><text x="515" y="156" class="sv-t" text-anchor="middle" font-weight="700">＋ 安全投產（加強期）</text><path d="M520,176 H680 L698,191 L680,206 H520 Z" class="sv-bar"/><text x="600" y="196" class="sv-t" text-anchor="middle">量產管制計劃</text><circle cx="44" cy="233.5" r="3.5" class="sv-dot"/><text x="56" y="238" class="sv-t" text-anchor="start" font-size="13">表單：試產或量產的框，加上「安全投產」框，兩個一起勾</text><circle cx="44" cy="257.5" r="3.5" class="sv-dot"/><text x="56" y="262" class="sv-t" text-anchor="start" font-size="13">做法：增加檢驗項目、提高頻率，或用更嚴的規格界限；寫成附件或「特別管制期」</text><circle cx="44" cy="281.5" r="3.5" class="sv-dot"/><text x="56" y="286" class="sv-t" text-anchor="start" font-size="13">結束：公司自訂判斷準則＋主管決策；客戶有準則或要授權，就要先達成／取得</text></svg></div>
+<div class="fig-scroll"><svg viewBox="0 0 720 304" role="img" aria-label="安全投產在時程上的位置" style="min-width:600px"><line x1="150" y1="44" x2="150" y2="208" class="sv-ms"/><text x="150" y="20" class="sv-m" text-anchor="middle" font-size="12.5"><tspan x="150" dy="-7.8">設計模型</tspan><tspan x="150" dy="15.6">／原型樣品</tspan></text><line x1="360" y1="44" x2="360" y2="208" class="sv-ms"/><text x="360" y="20" class="sv-m" text-anchor="middle" font-size="12.5">試產</text><line x1="520" y1="44" x2="520" y2="208" class="sv-ms"/><text x="520" y="20" class="sv-m" text-anchor="middle" font-size="12.5">投產</text><rect x="80" y="56" width="200" height="30" rx="6" class="sv-bar" /><text x="180" y="76" class="sv-t" text-anchor="middle">原型管制計劃</text><rect x="280" y="96" width="240" height="30" rx="6" class="sv-bar" /><text x="400" y="116" class="sv-t" text-anchor="middle">試產管制計劃</text><rect x="400" y="136" width="230" height="30" rx="6" class="sv-new" stroke-dasharray="6 4"/><text x="515" y="156" class="sv-t" text-anchor="middle" font-weight="700">＋ 安全投產（加強期）</text><path d="M520,176 H680 L698,191 L680,206 H520 Z" class="sv-bar"/><text x="600" y="196" class="sv-t" text-anchor="middle">量產管制計劃</text><circle cx="44" cy="233.5" r="3.5" class="sv-dot"/><text x="56" y="238" class="sv-t" text-anchor="start" font-size="13">表單：試產或量產的框，加上「安全投產」框，兩個一起勾</text><circle cx="44" cy="257.5" r="3.5" class="sv-dot"/><text x="56" y="262" class="sv-t" text-anchor="start" font-size="13">做法：增加檢驗項目、提高頻率，或用更嚴的規格界限；寫成附錄或「特別管制期」</text><circle cx="44" cy="281.5" r="3.5" class="sv-dot"/><text x="56" y="286" class="sv-t" text-anchor="start" font-size="13">結束：公司自訂判斷準則＋主管決策；客戶有準則或要授權，就要先達成／取得</text></svg></div>
 <figcaption>安全投產（虛線）夾在試產和量產之間、跨過投產這條線。它不是第四份獨立的管制計劃，而是加在試產或量產管制計劃上的加強期。依 CP 手冊第 3 章與表單 B-1 重畫、簡化。</figcaption>
 </figure>
 <!--/FIG:safelaunch-->
+
+  <h3>手冊怎麼說</h3>
+  <ul class="list">
+    <li><strong>客戶可能要求。</strong>某些情況下，客戶會要求實施安全投產。它可能從試產階段一路持續到量產階段，<strong>起點和終點都是彈性的</strong>。</li>
+    <li><strong>做法是加嚴。</strong>安全投產期間通常包括：增加檢驗項目、提高檢查頻率、更嚴格的公差控制。具體要求要<strong>詢問客戶</strong>。</li>
+    <li><strong>寫法有兩種。</strong>做成量產管制計劃的<strong>附錄</strong>，或在量產管制計劃中把加嚴的項目和頻率<strong>特別標示</strong>（特別管制期）。格式要用客戶核准的。</li>
+    <li><strong>一定要有結束準則。</strong>必須事先建立判斷準則，決定何時可以結束安全投產期。</li>
+  </ul>
 
   <div class="cards">
     <details class="card">
       <summary><span class="card-tag">注意</span>安全投產是「第四份管制計劃」嗎？</summary>
       <div class="card-body">
         <p><strong>不是。</strong>網路上有顧問把它畫成獨立的第四階段，但手冊的表單寫得很清楚：表頭有「安全投產」勾選框，<strong>安全投產包含在試產或量產管制計劃裡時，兩個框都勾</strong>。也就是說，安全投產是<strong>加在</strong>試產或量產管制計劃上的加強期。</p>
-        <p>手冊 3.3 說，安全投產通常是增加檢驗項目、提高檢查頻率，也可能用更嚴的規格界限。寫法有兩種：在量產管制計劃後面<strong>加附件</strong>，或把加嚴的項目和頻率標成<strong>「特別管制期」</strong>。格式要用客戶核准的。</p>
         <p>手冊<strong>沒有寫「90 天」</strong>。手冊要求公司自己訂<strong>結束的判斷準則</strong>，並由主管審查決定；客戶有準則或要求授權的，要先確認達到準則或拿到客戶授權才能結束。</p>
       </div>
     </details>
@@ -934,7 +1094,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     <div class="old"><span class="lb">常見的舊寫法</span>反應計畫欄只填代碼「(2)(3)」，表尾說明：(2) 矯正製程、再處理及再檢驗；(3) 調整模具。另註「參考各製程 SOP」。</div>
     <div class="new"><span class="lb">新版期望的寫法</span>
       <ol>
-        <li>停機，隔離「上次巡檢合格之後」生產的產品</li>
+        <li>作業員停機，把「上次巡檢合格之後」生產的產品標識、隔離</li>
         <li>通知沖壓組長</li>
         <li>組長判定調模或換模；可疑品全數篩選</li>
         <li>首件合格後才能復機</li>
@@ -943,13 +1103,24 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     </div>
   </div>
 
-  <h3>好的反應計畫要回答四個問題</h3>
+  <h3>手冊對反應計畫的要求</h3>
   <ul class="list">
-    <li><strong>停：</strong>製程要不要停？</li>
-    <li><strong>圍：</strong>可疑品的範圍到哪裡？通常追溯到上一次合格的檢驗點。</li>
-    <li><strong>復：</strong>製程怎麼恢復正常？恢復的條件是什麼？</li>
-    <li><strong>誰：</strong>誰負責判定和執行？寫<strong>職稱</strong>，不要寫部門。</li>
+    <li><strong>不能只寫「通知主管」。</strong>要連結到特定個人或單一職位，也要寫明主管怎麼處理可疑品、怎麼矯正。</li>
+    <li><strong>作業員的責任要寫清楚。</strong>（如適用）通知主管之前，作業員應負責處理不良品；作業員處理不良品要經過訓練，並留下<strong>訓練證據</strong>。</li>
+    <li><strong>必須有遏制步驟。</strong>把可疑品和不合格品控制住，避免繼續產生更多可疑品或不合格品。</li>
+    <li><strong>必須有重新開始生產的步驟。</strong>恢復生產前要做什麼、確認什麼。</li>
+    <li><strong>可疑品要標識、隔離。</strong>所有情況下，可疑品和不合格品都要清楚標識、隔離，由反應計畫指定的負責人判定處置（1.8 節）。</li>
   </ul>
+
+  <div class="note">
+    <span class="t">口訣：停、圍、復、誰</span>
+    <p>方便現場記住上面的要求：</p>
+    <ul class="list">
+      <li><strong>停、圍</strong>：遏制步驟。製程要不要停？可疑品追溯到哪裡（通常是上一次合格的檢驗點）？</li>
+      <li><strong>復</strong>：重新開始生產的步驟。恢復的條件是什麼？</li>
+      <li><strong>誰</strong>：特定個人或單一職位，寫<strong>職稱</strong>，不要寫部門；作業員先做的部分也要寫出來。</li>
+    </ul>
+  </div>
 
   <div class="cards">
     <details class="card">
@@ -961,7 +1132,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     </details>
     <details class="card">
       <summary><span class="card-tag">常見錯誤</span>「通知主管」為什麼不夠</summary>
-      <div class="card-body"><p>「通知主管」只交代了第一步。主管接到通知之後要做什麼、可疑品要不要隔離、隔離多少，都沒寫。現場人員看了也不知道該不該先停機。</p></div>
+      <div class="card-body"><p>「通知主管」只交代了第一步。主管接到通知之後要做什麼、可疑品要不要隔離、隔離多少、怎麼矯正、什麼條件才能復產，都沒寫。現場人員看了也不知道在主管趕到之前，自己該不該先停機、先隔離。</p><p>手冊明白要求：不能只寫通知主管，要連結到特定個人或單一職位，並寫出遏制步驟和重新開始生產的步驟。</p></div>
     </details>
   </div>
 </section>
@@ -972,17 +1143,36 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
 
   <div class="cmp">
     <div class="old"><span class="lb">不清楚的寫法</span>「item 項目」「不定期」「視需要」「定期」</div>
-    <div class="new"><span class="lb">清楚的寫法</span>「每次架模後」「每 2,000 沖次」「每捲料」「每批」「每班開始」</div>
+    <div class="new"><span class="lb">清楚的寫法</span>「每次架模後」「每 3,600 沖次」「每捲料」「每批」「每班開始」</div>
   </div>
 
-  <p>頻率決定了<strong>圍堵範圍</strong>。巡檢每 2 小時一次，發現異常時，可疑品就是最多 2 小時的產量。頻率要讓這個量是公司篩得完、承受得起的。</p>
+  <p>頻率決定了<strong>遏制範圍</strong>。巡檢每 1 小時一次，發現異常時，可疑品就是最多 1 小時的產量。頻率要讓這個量是公司篩得完、承受得起的。</p>
 
   <div class="cards">
     <details class="card">
       <summary><span class="card-tag">細節</span>手冊對頻率的說明</summary>
       <div class="card-body">
-        <p>手冊附錄 A-1 範例的說明寫得很直接：樣本數和頻率<strong>用批量（數量）為基準，不要用時間</strong>。範例寫的是「每 30 件」「每 10 件」「每班開始、換線、換模時」。例如「每 2 小時」改成「每 2,000 沖次」，停機或降速時才不會失真。</p>
+        <p>手冊附錄 A-1 範例的說明寫得很直接：樣本數和頻率<strong>用批量（數量）為基準，不要用時間</strong>。範例寫的是「每 30 件」「每 10 件」「每班開始、換線、換模時」。例如每分鐘 60 沖，「每 1 小時」改成「每 3,600 沖次」，停機或降速時才不會失真。</p>
         <p>樣本數如果有規則（例如「依模具一沖的件數」），要寫在管制計劃或指導書裡，不要只藏在 Excel 的儲存格註解。</p>
+      </div>
+    </details>
+    <details class="card">
+      <summary><span class="card-tag">公司做法</span>「每小時抽穴數 × 3」可以怎麼改寫</summary>
+      <div class="card-body">
+        <p>公司現行規定：<strong>每 1 小時，抽穴數 × 3 件</strong>。以 4 穴模、標準沖速每分鐘 60 沖為例：</p>
+        <div class="table-wrap"><table class="tight">
+          <thead><tr><th>項目</th><th>現行寫法</th><th>建議寫法</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>樣本數</td><td>沖數 × 3</td><td>每穴 3 件（4 穴共 12 件）</td><td><strong>保留</strong>。每一穴都抽得到，不會漏掉某一穴的偏移；寫「每穴」比「沖數」好懂</td></tr>
+            <tr><td>頻率</td><td>每 1 小時</td><td>每 3,600 沖次（60 沖／分 × 60 分）</td><td>改用數量當基準，停機或降速時，兩次抽樣之間的產量仍然固定</td></tr>
+          </tbody>
+        </table></div>
+        <p>改完再檢查兩件事：</p>
+        <ul>
+          <li><strong>遏制量承受得起嗎？</strong>發現異常時，可疑品追溯到上一次合格的巡檢：3,600 沖 × 4 穴 = 14,400 件，要篩得完。</li>
+          <li><strong>反映模具磨耗嗎？</strong>容易崩刃、磨耗快的模具，沖次間隔要縮短。</li>
+        </ul>
+        <p><em>（數字僅為示意，依各料號的沖速、穴數和模具狀況訂定）</em></p>
       </div>
     </details>
   </div>
@@ -992,7 +1182,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
   <div class="sec-head"><span class="sec-num">12</span><h2>防錯與全檢</h2></div>
 
   <h3>防錯：裝置要列，驗證也要列 <span class="b b-chg">改變</span></h3>
-  <p>防錯裝置必須列在管制計劃上，而且要寫<strong>怎麼驗證它還有效、多久驗證一次</strong>，例如每班開始時用不良樣品測試一次。驗證頻率怎麼訂？手冊的原則是：<strong>萬一這次驗證失敗，上次驗證合格後做的產品要能全部圍堵得住。</strong>手冊範例用的是「每班開始、換線、換模時」。</p>
+  <p>防錯裝置必須列在管制計劃上，而且要寫<strong>怎麼驗證它還有效、多久驗證一次</strong>，例如每班開始時用不良樣品測試一次。驗證頻率怎麼訂？手冊的原則是：<strong>萬一這次驗證失敗，上次驗證合格後做的產品要能全部遏制得住。</strong>手冊範例用的是「每班開始、換線、換模時」。</p>
 
   <div class="cmp">
     <div class="old"><span class="lb">不算防錯</span>「流程卡蓋合格章方可包裝（防錯）」——這是管理規定，靠人遵守。</div>
@@ -1035,10 +1225,23 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
 
   <div class="cmp">
     <div class="old"><span class="lb">常見的舊寫法</span>製程：電鍍（委外加工）<br>膜厚 8 µm min：依加工廠報告<br>控制方法：最終品質檢驗</div>
-    <div class="new"><span class="lb">新版期望的寫法</span>最後控制點：電鍍廠（每批 X 光測厚、每月鹽霧試驗）<br>我們的控制：每批審查測厚報告＋進料膜厚抽驗 5 件；電鍍廠每年提供 CQI-11 自我評估<br>負責人：品保課長</div>
+    <div class="new"><span class="lb">新版期望的寫法</span>最後控制點：電鍍廠（每批 X 光測厚、每月鹽霧試驗）<br>我們的控制：每批審查測厚報告（對批號、數值、日期）；每年送第三方實驗室驗證膜厚和鹽霧一次，和電鍍廠報告比對；電鍍廠每年提供 CQI-11 自我評估<br>負責人：品保課長</div>
   </div>
 
   <div class="cards">
+    <details class="card">
+      <summary><span class="card-tag">常見問題</span>我們不能測膜厚、鹽霧，只能看廠商報告，怎麼辦？</summary>
+      <div class="card-body">
+        <p><strong>依廠商報告可以</strong>，這正是「傳遞特性」的情況。手冊和 IATF 不要求我們自己測，要求的是：<strong>說得出電鍍廠怎麼管，而且有方法確認他們管得有效。</strong></p>
+        <ol>
+          <li><strong>管制計劃寫清楚。</strong>膜厚、鹽霧標成傳遞特性，最後控制點寫「電鍍廠」，並寫出電鍍廠的方法和頻率（例如每批 X 光測厚、每月鹽霧試驗）。最晚在試產管制計劃審查時，跟客戶確認並取得同意。</li>
+          <li><strong>每批認真審報告，不是收下就好。</strong>批號對得上我們的批號嗎？數值符合規格嗎？抽了幾件？測試日期合理嗎？連續幾批數值一模一樣，要懷疑是複製貼上。審查項目寫成檢查表，審查人簽名留紀錄。</li>
+          <li><strong>定期確認報告可信。</strong>例如每年抽一批送第三方實驗室驗膜厚和鹽霧，和電鍍廠的報告比對。這就是「確認供應商控制有效」的證據。</li>
+          <li><strong>管電鍍廠的製程。</strong>每年要求電鍍廠提供 CQI-11 自我評估；可以的話去現場稽核，看測厚儀校正、鹽霧箱紀錄、除氫烘烤紀錄。</li>
+          <li><strong>我們做得到的進料檢驗照做。</strong>外觀、色澤、鍍層剝落、批號標示。要不要另外買簡易膜厚計自己抽測，可以評估；小墊圈量測面積小，準確度可能有限。</li>
+        </ol>
+      </div>
+    </details>
     <details class="card">
       <summary><span class="card-tag">細節</span>IATF 對外包製程的要求（SI 7）</summary>
       <div class="card-body"><p>IATF 16949 的解釋 SI 7 說：外包製程要識別出來並決定管制程度；如果某個特性直接通過我們、沒有經過我們驗證，就必須<strong>確保製造端有管制</strong>。所以「依加工廠報告」不是不行，而是要能說明外包廠那邊怎麼管。</p></div>
@@ -1052,13 +1255,6 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
           <li><strong>CQI-11 電鍍</strong>（第 3 版，2019）：槽液、電流、膜厚，以及<strong>除氫烘烤</strong>的管制。</li>
         </ul>
         <p>很多車廠的 CSR 會要求供應鏈中的熱處理、電鍍廠做這些評估。</p>
-      </div>
-    </details>
-    <details class="card">
-      <summary><span class="card-tag">延伸</span>彈簧墊圈電鍍與氫脆</summary>
-      <div class="card-body">
-        <p>高硬度的鋼件電鍍時會吸入氫，組裝後幾小時到幾週才突然斷裂，出貨檢驗幾乎抓不到，這叫<strong>氫脆</strong>。彈簧墊圈壓平時承受拉應力，是高風險組合。</p>
-        <p>管制重點：硬度要管<strong>上下限</strong>（太硬風險更高）、電鍍後到烘烤的間隔時間、烘烤溫度和時間要有依據、批次可追溯。詳細條件依 ISO 4042 和客戶規範。這部分在後續課程細講。</p>
       </div>
     </details>
   </div>
@@ -1159,11 +1355,11 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
     </details>
   </div>
 
-  <div class="note">
-    <span class="t">PART 03 重點回顧</span>
+  <div class="recap">
+    <div class="recap-h"><span class="p-n">PART 03</span>重點回顧</div>
     <p>① 量產初期多了<strong>安全投產</strong>：加嚴管制，用數據決定何時退出，條件依客戶要求。</p>
-    <p>② 反應計畫要回答「停、圍、復、誰」，負責人寫<strong>職稱</strong>。</p>
-    <p>③ 抽樣頻率要明確，能算出漏抓時要圍堵多少。</p>
+    <p>② 反應計畫不能只寫「通知主管」：要有<strong>遏制</strong>和<strong>重新開始生產</strong>的步驟，負責人寫<strong>職稱</strong>（口訣：停、圍、復、誰）。</p>
+    <p>③ 抽樣頻率要明確，能算出漏抓時要遏制多少。</p>
     <p>④ 防錯要列驗證方法和頻率；人工全檢要定期確效、使用界限樣品。</p>
     <p>⑤ 外包做的特性是<strong>傳遞特性</strong>：寫出最後控制點和我們怎麼確認。</p>
     <p>⑥ 流程圖、PFMEA、管制計劃編號一致、內容對齊、一起更新。</p>
@@ -1235,9 +1431,9 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
       <tr><td>10.1</td><td>原料進料</td><td>—</td><td>材質</td><td></td><td></td><td>S45C 冷軋鋼帶</td><td>材質證明審查</td><td>1 份</td><td>每批</td><td>進料檢驗 (D)</td><td>隔離該批、標示待判，通知採購退換</td><td>品保檢驗員</td></tr>
       <tr><td>10.2</td><td>原料進料</td><td>—</td><td>板厚</td><td></td><td></td><td>2.00 ± 0.08</td><td>分厘卡</td><td>3 點</td><td>每捲</td><td>進料檢驗 (D)</td><td>同上</td><td>品保檢驗員</td></tr>
       <tr><td>20.1</td><td>架模</td><td>沖床 P-01／模具 D-101</td><td>全尺寸</td><td></td><td></td><td>依圖面</td><td>卡尺、投影機</td><td>5 件（一沖件數）</td><td>每次架模、修模後</td><td>首件檢驗 (D)</td><td>首件不合格不得生產；調模後重做首件</td><td>沖壓組長</td></tr>
-      <tr><td>30.1</td><td>沖壓</td><td>沖床 P-01／模具 D-101</td><td>內徑</td><td></td><td>◇</td><td>10.5～10.8</td><td>卡尺</td><td>5 件</td><td>每 2,000 沖次</td><td>巡檢＋Xbar-R 管制圖 (D)</td><td>停機；隔離上次巡檢合格後的產品並全數篩選；調模；首件合格才復機</td><td>沖壓組長</td></tr>
-      <tr><td>30.2</td><td>沖壓</td><td>同上</td><td>外徑</td><td></td><td></td><td>19.7～20.0</td><td>卡尺</td><td>5 件</td><td>每 2,000 沖次</td><td>巡檢 (D)</td><td>同 30.1</td><td>沖壓組長</td></tr>
-      <tr><td>30.3</td><td>沖壓</td><td>同上</td><td>毛邊高度</td><td></td><td></td><td>0.1 max</td><td>分厘卡</td><td>5 件</td><td>每 2,000 沖次＋末件</td><td>巡檢 (D)；末件留樣</td><td>同 30.1；毛邊超規時模具送研磨</td><td>沖壓組長</td></tr>
+      <tr><td>30.1</td><td>沖壓</td><td>沖床 P-01／模具 D-101</td><td>內徑</td><td></td><td>◇</td><td>10.5～10.8</td><td>卡尺</td><td>每穴 3 件（4 穴共 12 件）</td><td>每 3,600 沖次</td><td>巡檢＋Xbar-R 管制圖 (D)</td><td>作業員停機，把上次巡檢合格後的產品標識、隔離；通知沖壓組長；組長判定調模，可疑品全數篩選；首件合格才重新開始生產</td><td>沖壓組長</td></tr>
+      <tr><td>30.2</td><td>沖壓</td><td>同上</td><td>外徑</td><td></td><td></td><td>19.7～20.0</td><td>卡尺</td><td>每穴 3 件（4 穴共 12 件）</td><td>每 3,600 沖次</td><td>巡檢 (D)</td><td>同 30.1</td><td>沖壓組長</td></tr>
+      <tr><td>30.3</td><td>沖壓</td><td>同上</td><td>毛邊高度</td><td></td><td></td><td>0.1 max</td><td>分厘卡</td><td>每穴 3 件（4 穴共 12 件）</td><td>每 3,600 沖次＋末件</td><td>巡檢 (D)；末件留樣</td><td>同 30.1；毛邊超規時模具送研磨</td><td>沖壓組長</td></tr>
       <tr><td>30.4</td><td>沖壓</td><td>模具 D-101</td><td></td><td>模具沖次</td><td></td><td>每 50,000 沖研磨</td><td>沖次計數器</td><td>—</td><td>每班記錄</td><td>模具保養計畫 (P)</td><td>到期停機送研磨；研磨後做首件</td><td>模具技術員</td></tr>
       <tr><td>30.5</td><td>沖壓</td><td>送料感測器</td><td></td><td>送料不到位自動停機</td><td></td><td>感測器作動</td><td>人為送料異常測試</td><td>1 次</td><td>每班開始</td><td>防錯驗證 (P)</td><td>驗證失敗：停機修復；上次驗證後的產品隔離篩選</td><td>沖壓組長</td></tr>
       <tr><td>40.1</td><td>去毛邊</td><td>振動研磨機 V-01</td><td></td><td>研磨時間</td><td></td><td>30 ± 5 分</td><td>計時器</td><td>—</td><td>每批</td><td>作業記錄 (P)</td><td>時間不足：補研磨後重檢</td><td>生產作業員</td></tr>
@@ -1267,7 +1463,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
       <summary><span class="card-tag">對照</span>這份範例改了哪些地方</summary>
       <div class="card-body">
         <ul>
-          <li><strong>頻率</strong>全部改成明確的數量或時機（每次架模、每 2,000 沖次、每班）。</li>
+          <li><strong>頻率</strong>全部改成明確的數量或時機（每次架模、每 3,600 沖次、每班）。</li>
           <li><strong>反應計畫</strong>寫出停機、可疑品範圍、恢復條件，並新增<strong>負責人</strong>欄。</li>
           <li><strong>硬度</strong>改用上下限範圍，並列為特殊特性。</li>
           <li><strong>外包製程</strong>分成產品特性和製程紀錄兩列，傳遞特性寫出最後控制點。</li>
@@ -1319,9 +1515,9 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
   <!--QUIZ-->
   <p class="dek">題目和紙本測驗卷完全相同。寫完紙本後，大家一起看這裡逐題檢討：點選答案會顯示對錯和說明，說明後面的連結可以跳回講義對應的段落。</p>
   <div class="quiz-bar"><button class="btn" id="quizReveal">檢討模式：全部顯示答案</button><button class="btn" id="quizReset">清除重來</button></div>
-  <h3>一、選擇題（每題 6 分，共 60 分）</h3>
+  <h3>一、選擇題（每題 7 分，共 70 分）</h3>
   <div class="quiz" id="quiz">
-      <div class="q" data-a="1" data-pt="6">
+      <div class="q" data-a="1" data-pt="7">
         <div class="q-t"><span class="qn">01</span>這次改版後，管制計劃的寫法要看哪一本手冊？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> APQP 第三版的第 6 章</button>
@@ -1329,9 +1525,9 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
           <button class="q-opt"><span class="q-l">(C)</span> PPAP 手冊</button>
           <button class="q-opt"><span class="q-l">(D)</span> MSA 手冊</button>
         </div>
-        <div class="q-ex"><b>答案 (B)</b>　管制計劃從 APQP 拆出來，獨立成第一版手冊。<br><a class="q-back" href="#s9">回看 09 獨立成冊與安全投產</a></div>
+        <div class="q-ex"><b>答案 (B)</b>　管制計劃從 APQP 拆出來，獨立成第一版手冊。<br><a class="q-back" href="#s9">回看 09 安全投產</a></div>
       </div>
-      <div class="q" data-a="2" data-pt="6">
+      <div class="q" data-a="2" data-pt="7">
         <div class="q-t"><span class="qn">02</span>下列哪一本手冊這次「沒有」改版？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> APQP</button>
@@ -1341,7 +1537,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 (C)</b>　PPAP 仍是第 4 版（2006）；APQP、管制計劃、SPC 都有新版。<br><a class="q-back" href="#s1">回看 01 哪些手冊改版</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="6">
+      <div class="q" data-a="1" data-pt="7">
         <div class="q-t"><span class="qn">03</span>下列哪一家外包廠屬於「高風險供應商」？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 合作十年、沒有異常、有 IATF 16949 證書的熱處理廠</button>
@@ -1350,7 +1546,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 (B)</b>　新供應商、沒有 ISO 9001／IATF 16949 證書，都是高風險條件。<br><a class="q-back" href="#s4">回看 04 採購與高風險供應商</a></div>
       </div>
-      <div class="q" data-a="2" data-pt="6">
+      <div class="q" data-a="2" data-pt="7">
         <div class="q-t"><span class="qn">04</span>沖床要搬到另一個廠房生產，應該怎麼做？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 機台一樣，直接搬過去生產</button>
@@ -1359,7 +1555,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 (C)</b>　生產地點改變屬於變更，要先評估並通知客戶。<br><a class="q-back" href="#s5">回看 05 變更管理</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="6">
+      <div class="q" data-a="1" data-pt="7">
         <div class="q-t"><span class="qn">05</span>管制計劃上「反應計畫負責人」應該怎麼寫？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 品保課</button>
@@ -1369,35 +1565,35 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 (B)</b>　寫單一職稱，不寫部門。新版表單在反應計畫底下新增「負責人」欄。<br><a class="q-back" href="#s10">回看 10 反應計畫</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="6">
+      <div class="q" data-a="1" data-pt="7">
         <div class="q-t"><span class="qn">06</span>巡檢每 2 小時一次。這次巡檢發現外徑超規，可疑品的範圍是？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 只有這次抽到的 5 件</button>
           <button class="q-opt"><span class="q-l">(B)</span> 上次巡檢合格之後到現在生產的產品</button>
           <button class="q-opt"><span class="q-l">(C)</span> 今天全部的產品都要報廢</button>
         </div>
-        <div class="q-ex"><b>答案 (B)</b>　可疑品追溯到上一次合格的檢驗點。所以頻率越低，出事時要圍堵的量越大。<br><a class="q-back" href="#s10">回看 10 反應計畫</a>　<a class="q-back" href="#s11">回看 11 抽樣頻率</a></div>
+        <div class="q-ex"><b>答案 (B)</b>　可疑品追溯到上一次合格的檢驗點。所以頻率越低，出事時要遏制的量越大。<br><a class="q-back" href="#s10">回看 10 反應計畫</a>　<a class="q-back" href="#s11">回看 11 抽樣頻率</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="6">
+      <div class="q" data-a="1" data-pt="7">
         <div class="q-t"><span class="qn">07</span>新料號的「安全投產」什麼時候可以結束？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 量產第二天</button>
           <button class="q-opt"><span class="q-l">(B)</span> 達到事先訂好的退出條件（依客戶要求）</button>
           <button class="q-opt"><span class="q-l">(C)</span> 主管覺得可以就結束</button>
         </div>
-        <div class="q-ex"><b>答案 (B)</b>　手冊要求事先訂好結束的判斷準則，並由主管審查決定；客戶有準則或要求授權時，要先達成或取得授權。手冊沒有寫「90 天」。<br><a class="q-back" href="#s9">回看 09 獨立成冊與安全投產</a></div>
+        <div class="q-ex"><b>答案 (B)</b>　手冊要求事先訂好結束的判斷準則，並由主管審查決定；客戶有準則或要求授權時，要先達成或取得授權。手冊沒有寫「90 天」。<br><a class="q-back" href="#s9">回看 09 安全投產</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="6">
-        <div class="q-t"><span class="qn">08</span>圖面上外包熱處理的硬度是 300～370 HV。管制計劃的規格欄應該寫？</div>
+      <div class="q" data-a="2" data-pt="7">
+        <div class="q-t"><span class="qn">08</span>依手冊建議，管制計劃的「頻率」欄最好怎麼寫？</div>
         <div class="q-opts">
-          <button class="q-opt"><span class="q-l">(A)</span> ≥ 300 HV</button>
-          <button class="q-opt"><span class="q-l">(B)</span> 300～370 HV</button>
-          <button class="q-opt"><span class="q-l">(C)</span> 越硬越好</button>
-          <button class="q-opt"><span class="q-l">(D)</span> 依熱處理廠報告</button>
+          <button class="q-opt"><span class="q-l">(A)</span> 每小時</button>
+          <button class="q-opt"><span class="q-l">(B)</span> 不定期</button>
+          <button class="q-opt"><span class="q-l">(C)</span> 每 3,600 沖次</button>
+          <button class="q-opt"><span class="q-l">(D)</span> 視需要</button>
         </div>
-        <div class="q-ex"><b>答案 (B)</b>　上下限都要管；只管下限會漏掉過硬（過硬容易脆裂）。<br><a class="q-back" href="#s17">回看 17 CP 找碴</a></div>
+        <div class="q-ex"><b>答案 (C)</b>　頻率要寫明確的數量或時機；手冊建議用數量為基準，不要用時間，所以「每 3,600 沖次」比「每小時」好。<br><a class="q-back" href="#s11">回看 11 抽樣頻率</a></div>
       </div>
-      <div class="q" data-a="0" data-pt="6">
+      <div class="q" data-a="0" data-pt="7">
         <div class="q-t"><span class="qn">09</span>哪些平華司適合放在同一份「家族管制計劃」？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 同材質、同製程，只有尺寸不同</button>
@@ -1406,7 +1602,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 (A)</b>　表面處理或熱處理規格不同，就要分開。<br><a class="q-back" href="#s14">回看 14 家族管制計劃</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="6">
+      <div class="q" data-a="1" data-pt="7">
         <div class="q-t"><span class="qn">10</span>PFMEA 修改了一個失效原因的預防控制。管制計劃應該？</div>
         <div class="q-opts">
           <button class="q-opt"><span class="q-l">(A)</span> 不用動，兩份文件各管各的</button>
@@ -1416,9 +1612,9 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         <div class="q-ex"><b>答案 (B)</b>　PFMEA 和管制計劃要一起更新。<br><a class="q-back" href="#s15">回看 15 管制計劃與 PFMEA 對齊</a></div>
       </div>
   </div>
-  <h3>二、是非題（每題 4 分，共 20 分）</h3>
+  <h3>二、是非題（每題 6 分，共 30 分）</h3>
   <div class="quiz">
-      <div class="q" data-a="1" data-pt="4">
+      <div class="q" data-a="1" data-pt="6">
         <div class="q-t"><span class="qn">01</span>APQP 第三版把五個階段的名稱都改了。</div>
         <div class="q-opts q-tf">
           <button class="q-opt">○ 對</button>
@@ -1426,7 +1622,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 ×</b>　五個階段的名稱和順序都沒變。<br><a class="q-back" href="#s3">回看 03 五個階段沒變</a></div>
       </div>
-      <div class="q" data-a="0" data-pt="4">
+      <div class="q" data-a="0" data-pt="6">
         <div class="q-t"><span class="qn">02</span>我們的直接客戶是貿易商，依 IATF 的定義，貿易商也算「汽車顧客」。</div>
         <div class="q-opts q-tf">
           <button class="q-opt">○ 對</button>
@@ -1434,7 +1630,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 ○</b>　IATF SI 29：汽車供應鏈中任何採購汽車產品的組織。<br><a class="q-back" href="#s8">回看 08 透過貿易商接單時</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="4">
+      <div class="q" data-a="1" data-pt="6">
         <div class="q-t"><span class="qn">03</span>人工目視全檢就是 100% 檢查，不需要再確認有沒有效。</div>
         <div class="q-opts q-tf">
           <button class="q-opt">○ 對</button>
@@ -1442,7 +1638,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 ×</b>　人工全檢會漏，要定期確效並使用界限樣品。<br><a class="q-back" href="#s12">回看 12 防錯與全檢</a></div>
       </div>
-      <div class="q" data-a="0" data-pt="4">
+      <div class="q" data-a="0" data-pt="6">
         <div class="q-t"><span class="qn">04</span>電鍍膜厚只看電鍍廠的報告時，管制計劃要寫出「最後控制點」在哪裡。</div>
         <div class="q-opts q-tf">
           <button class="q-opt">○ 對</button>
@@ -1450,34 +1646,16 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
         </div>
         <div class="q-ex"><b>答案 ○</b>　這是傳遞特性，要寫出最後控制點和我們的確認方式。<br><a class="q-back" href="#s13">回看 13 外包製程與傳遞特性</a></div>
       </div>
-      <div class="q" data-a="1" data-pt="4">
+      <div class="q" data-a="1" data-pt="6">
         <div class="q-t"><span class="qn">05</span>反應計畫只寫「通知主管」就足夠了。</div>
         <div class="q-opts q-tf">
           <button class="q-opt">○ 對</button>
           <button class="q-opt">× 錯</button>
         </div>
-        <div class="q-ex"><b>答案 ×</b>　要寫停機、可疑品範圍、恢復條件和負責人。<br><a class="q-back" href="#s10">回看 10 反應計畫</a></div>
+        <div class="q-ex"><b>答案 ×</b>　不能只寫「通知主管」：要連結到特定職位，並寫出遏制步驟、可疑品處置與矯正、重新開始生產的步驟。<br><a class="q-back" href="#s10">回看 10 反應計畫</a></div>
       </div>
   </div>
-  <h3>三、實作題（20 分）</h3>
-<div class="q q-open">
-  <div class="q-t">下面是一行管制計劃。請改寫「頻率」和「反應計畫」，並寫出「負責人」。</div>
-  <div class="table-wrap"><table class="tight">
-    <thead><tr><th>編號</th><th>製程</th><th>特性</th><th>規格</th><th>量測</th><th>樣本數</th><th>頻率</th><th>管制方法</th><th>反應計畫</th></tr></thead>
-    <tbody><tr><td>30.2</td><td>沖壓</td><td>外徑</td><td>19.7～20.0</td><td>卡尺</td><td>5 件</td><td>不定期</td><td>巡檢</td><td>通知主管</td></tr></tbody>
-  </table></div>
-  <details class="card q-key">
-    <summary><span class="card-tag">參考答案</span>頻率、反應計畫、負責人怎麼寫</summary>
-    <div class="card-body">
-      <p><strong>1. 頻率（6 分）</strong>：寫出明確的數量或時機即可，例如「每 2,000 沖次」「每 1 小時」「每次架模後」。只寫「定期」「不定期」不給分。</p>
-      <p><strong>2. 反應計畫（10 分）</strong>：停機；隔離上次巡檢合格後的產品並全數篩選；調模；首件合格才復機。<br>
-      評分：停（停機）3 分、圍（隔離可疑品，說出範圍）4 分、復（恢復條件，例如首件合格）3 分。</p>
-      <p><strong>3. 負責人（4 分）</strong>：寫出單一職稱即給分，例如「沖壓組長」。寫部門名稱給 2 分。</p>
-      <p><a class="q-back" href="#s10">回看 10 反應計畫</a>　<a class="q-back" href="#s11">回看 11 抽樣頻率</a></p>
-    </div>
-  </details>
-</div>
-  <div class="score" id="score"><span>選擇＋是非：<b id="scoreN">0</b> / 80 分　（已作答 <span id="doneN">0</span> / 15 題）</span><span class="score-note">實作題 20 分由講師評分；滿分 100，70 分及格。</span></div>
+  <div class="score" id="score"><span>得分：<b id="scoreN">0</b> / 100 分　（已作答 <span id="doneN">0</span> / 15 題）</span><span class="score-note">滿分 100，70 分及格。</span></div>
   <!--/QUIZ-->
 </section>
 
@@ -1597,7 +1775,7 @@ dialog.zoom::backdrop{background:rgba(13,27,42,.6)}
 <script>
 (function(){
   "use strict";
-  /* 課後測驗：選擇題 6 分、是非題 4 分（data-pt），實作題由講師評分 */
+  /* 課後測驗：選擇題 7 分、是非題 6 分（data-pt） */
   var qs=[].slice.call(document.querySelectorAll(".quiz .q[data-a]"));
   var nEl=document.getElementById("scoreN"),dEl=document.getElementById("doneN");
   function tally(){

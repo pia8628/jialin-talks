@@ -101,7 +101,7 @@ def fig_safe_launch():
     # 說明
     notes = [
         (40, 238, "表單：試產或量產的框，加上「安全投產」框，兩個一起勾"),
-        (40, 262, "做法：增加檢驗項目、提高頻率，或用更嚴的規格界限；寫成附件或「特別管制期」"),
+        (40, 262, "做法：增加檢驗項目、提高頻率，或用更嚴的規格界限；寫成附錄或「特別管制期」"),
         (40, 286, "結束：公司自訂判斷準則＋主管決策；客戶有準則或要授權，就要先達成／取得"),
     ]
     for x, y, s in notes:
@@ -122,7 +122,12 @@ def fig_form():
     x = x0
     for lab, new in boxes:
         b.append(rect(x, 14, 13, 13, "sv-new" if new else "sv-box", rx=2))
-        b.append(text(x + 19, 25, lab + ("  新增" if new else ""), "sv-newt" if new else "sv-t", anchor="start", size=13))
+        b.append(text(x + 19, 25, lab, "sv-newt" if new else "sv-t", anchor="start", size=13, weight="700" if new else None))
+        if new:
+            # 「新增」是標註，不是欄位文字：拉開距離、用綠色標籤，和表單上的字區隔
+            tx = x + 19 + len(lab) * 13 + 14
+            b.append(rect(tx, 11, 40, 19, "sv-tag", rx=4))
+            b.append(text(tx + 20, 25, "新增", "sv-tagt", size=11.5, weight="500"))
         x += 90 if not new else 0
     # 表頭（簡化）
     hy = 40
@@ -209,6 +214,8 @@ CSS = """
 .sv-gate-n{fill:#0D1B2A;font-size:12px;font-weight:700;font-family:"JetBrains Mono",monospace}
 .sv-new{fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.5}
 .sv-newt{fill:var(--accent-text)}
+.sv-tag{fill:var(--new-soft);stroke:var(--new);stroke-width:1}
+.sv-tagt{fill:var(--new)}
 .sv-box{fill:none;stroke:var(--line-strong)}
 .sv-dot{fill:var(--gold)}
 .sv-cell{fill:var(--surface);stroke:var(--line-strong);stroke-width:.8}
