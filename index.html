@@ -3,122 +3,384 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>佳臨的分享教材</title>
-<meta name="description" content="佳臨的公開分享教材：AI 協作開發、製造業生產管理、個人知識管理。">
+<title>IterLab Talks｜製造業 × Vibe Coder</title>
+<meta name="description" content="佳臨的公開分享教材：AI 協作開發、製造業生產品質管理、個人知識管理、AI應用導入。">
 <meta name="author" content="佳臨">
 <link rel="canonical" href="https://talks.iterlab.dev/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="佳臨的分享教材">
-<meta property="og:description" content="佳臨的公開分享教材：AI 協作開發、製造業生產管理、個人知識管理。">
+<meta property="og:title" content="IterLab Talks｜製造業 × Vibe Coder">
+<meta property="og:description" content="佳臨的公開分享教材：AI 協作開發、製造業生產品質管理、個人知識管理、AI應用導入。">
 <meta property="og:url" content="https://talks.iterlab.dev/">
+<meta property="og:image" content="https://talks.iterlab.dev/assets/talks/ai-coding-2026/01.webp">
 <meta property="og:locale" content="zh_TW">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
 <style>
+/* 換色只改這一段 */
 :root{
-  --bg:#FAF9F8; --surface:#FFFFFF; --ink:#0D1B2A; --ink-2:#23344D;
-  --muted:#616E7C; --line:#D9DDE1; --gold:#C9A15A; --gold-soft:rgba(201,161,90,.16);
-  --shadow:0 1px 2px rgba(13,27,42,.06), 0 8px 24px rgba(13,27,42,.06);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0D1B2A; --surface:#16273A; --ink:#E6E8EB; --ink-2:#C8D0D8;
-    --muted:#A8B0B8; --line:#2A3E58; --gold-soft:rgba(201,161,90,.14);
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0D1B2A; --surface:#16273A; --ink:#E6E8EB; --ink-2:#C8D0D8;
-  --muted:#A8B0B8; --line:#2A3E58; --gold-soft:rgba(201,161,90,.14);
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
+  --cover:#474C55;          /* 活頁夾封面 */
+  --cover-ink:#EBECF3;      /* 封面上的字 */
+  --paper:#FFFFFF;          /* 內頁 */
+  --ink:#16181B;            /* 內頁的字 */
+  --ink-2:#4A4F57;
+  --topic-quality:#E2583E;  --on-quality:#16181B;   /* 品質管理 */
+  --topic-ai:#3A6FD8;       --on-ai:#FFFFFF;        /* AI 協作開發 */
+  --marker:#F7E26B;         /* 螢光筆 */
+  --hole:#1E2024;
+  --card:#F8F9FC;           /* 名牌卡紙（與插袋素材同色） */
+  --graphite:#2E333D;       /* 輪播圓鈕、按鈕 hover */
+  --dot:#C3C6CC;            /* 輪播圓點（未選） */
+  --rule:#D5D8DC;           /* 目錄分隔線 */
+  --toc-num:#B8432C;        /* 目錄編號（品質管理色加深，白底對比 5:1 以上） */
+  --cover-muted:#C5C8D0;    /* 封面上的次要字 */
+  --on-dim:#FFFFFF;         /* 退後變暗的分頁籤字色 */
 }
 *{box-sizing:border-box}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  font-size:18px; line-height:1.9; -webkit-font-smoothing:antialiased;
-}
-h1,h2,h3{font-family:"Noto Serif TC",Georgia,serif;margin:0;text-wrap:balance}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--cover) url(assets/plates/cover-texture.webp) 0 0/512px 512px repeat;color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
+::selection{background:var(--marker);color:var(--ink)}
 a{color:inherit}
-.wrap{max-width:760px;margin:0 auto;padding-inline:24px;padding-block:0 96px}
+:focus-visible{outline:3px solid var(--marker);outline-offset:3px}
+.nb{white-space:nowrap}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
 
-header{border-bottom:1px solid var(--line);padding-block:64px 40px;margin-bottom:48px}
-.kicker{font-size:13px;letter-spacing:.18em;color:var(--muted);margin-bottom:14px}
-h1{font-size:clamp(30px,5vw,42px);line-height:1.34}
-.lede{margin-top:18px;color:var(--ink-2);font-size:19px}
-.rule{height:2px;width:52px;background:var(--gold);margin-top:26px}
+/* ---------- 第一屏：一本活頁夾（位置與字級都以 .frame 寬度為準） ---------- */
+/* 活頁夾約佔螢幕 74% 寬、置中，四周露出封面底色；整頁內容都依它等比例縮放 */
+.frame{position:relative;width:max(960px,74vw);max-width:min(1280px,100%);margin:clamp(24px,3vw,48px) auto 0;aspect-ratio:1536/1024;container-type:inline-size}
+.sheet{position:absolute;z-index:2;left:1.43%;top:31.25%;width:98.57%;height:68.75%;background:var(--paper);
+  box-shadow:0 -.25cqw .7cqw rgba(0,0,0,.28),-.25cqw .35cqw .9cqw rgba(0,0,0,.18)}
+.rings{position:absolute;left:0;top:31.84%;width:2.86%;height:68.16%;object-fit:cover;z-index:3}
+.holes{position:absolute;left:1.58%;top:7.10%;width:2.37%;height:72.44%;
+  background:radial-gradient(circle closest-side,var(--hole) 0 70%,transparent 74%) 50% 0/100% 20% repeat-y}
 
-h2{font-size:20px;margin-top:8px}
-.year{
-  margin:40px 0 16px;font-family:"JetBrains Mono",monospace;font-size:12px;
-  letter-spacing:.14em;color:var(--muted);
-}
-.talks{display:flex;flex-direction:column;gap:14px}
-.talk{
-  display:block;text-decoration:none;padding:22px 24px;border-radius:10px;
-  border:1px solid var(--line);background:var(--surface);transition:box-shadow .18s ease;
-}
-.talk:hover{box-shadow:var(--shadow)}
-.talk:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.talk .t{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;line-height:1.45}
-.talk .d{margin-top:8px;color:var(--ink-2);font-size:16.5px;line-height:1.75}
-.talk .m{
-  margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 18px;
-  font-size:13.5px;color:var(--muted);font-family:"JetBrains Mono",monospace;
-}
-.tag{background:var(--gold-soft);color:var(--ink-2);padding:2px 9px;border-radius:4px;
-  font-family:inherit;font-size:12.5px}
+/* 名牌插袋：透明塑膠框是素材，字由程式排 */
+.sleeve{position:absolute;left:4.17%;top:3.91%;width:38.54%;height:17.38%;
+  border:solid transparent;border-width:1.23cqw 4.1cqw;
+  border-image:url(assets/plates/label-holder.webp) 30 100 fill / 1.23cqw 4.1cqw stretch;
+  background:var(--card) padding-box;filter:drop-shadow(0 .1cqw .15cqw rgba(0,0,0,.35))}
+.site-title{position:absolute;left:1.13cqw;top:.62cqw;margin:0;white-space:nowrap;font-size:3.45cqw;font-weight:700;line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+.site-sub{position:absolute;left:1.4cqw;top:4.9cqw;margin:0;white-space:nowrap;font-size:1.9cqw;font-weight:600;line-height:1.2;letter-spacing:.02em;color:var(--ink)}
+.site-sub .who{margin-right:.5em}
+.site-sub .who::after{content:"";display:inline-block;width:1px;height:.9em;margin-left:.5em;vertical-align:-.08em;background:currentColor;opacity:.5}
+.site-sub .times{font-size:.78em;margin:0 .5em;font-weight:500;position:relative;top:-.14em}
+.site-sub .latin{font-size:1.085em;letter-spacing:.005em}
+.lede{position:absolute;left:47.4%;top:8.3%;width:22.4%;margin:0;font-size:1.56cqw;font-weight:500;line-height:1.46;color:var(--cover-ink);letter-spacing:.04em}
+.btn{position:absolute;top:8.4%;width:11.72%;height:6.05%;display:grid;place-items:center;text-decoration:none;
+  border:2px solid var(--cover-ink);border-radius:4px;color:var(--cover-ink);font-size:1.43cqw;font-weight:500;letter-spacing:.06em;
+  transition:background-color .2s ease,color .2s ease}
+.btn:hover{background:var(--cover-ink);color:var(--cover)}
+.btn--follow{left:72.14%}.btn--invite{left:85.03%}
 
-footer{margin-top:72px;padding-top:26px;border-top:1px solid var(--line);
-  font-size:14.5px;color:var(--muted)}
-footer a{text-underline-offset:3px}
-@media (max-width:600px){
-  header{padding-block:40px 30px;margin-bottom:32px}
-  body{font-size:17px}
+/* 分頁籤：沿封面底緣自動排列，加場次不用重算位置 */
+.tabs{position:absolute;left:7.36%;right:7.04%;top:22.7%;height:8.2%;display:flex;align-items:flex-end}
+.tab{--bg:var(--topic-quality);--on:var(--on-quality);
+  position:relative;flex:1 1 0;min-width:0;height:100%;border:0;margin:0 0 0 -.4cqw;padding:.6cqw 3.6cqw 0;cursor:pointer;
+  background:none;color:var(--on);font:inherit;text-align:left;isolation:isolate;
+  z-index:1;transform:translateY(.7cqw);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.tab:first-child{margin-left:0}
+.tab::before{content:"";position:absolute;inset:-6% 0 -1.6cqw;z-index:-1;background:var(--bg);border-radius:.9cqw .9cqw 0 0;
+  transform:perspective(19cqw) rotateX(20deg);transform-origin:50% 100%;
+  box-shadow:inset 0 .12cqw 0 rgba(255,255,255,.28),inset 0 -.5cqw .6cqw -.3cqw rgba(0,0,0,.22);filter:brightness(.82) saturate(.9)}
+.tab--ai{--bg:var(--topic-ai);--on:var(--on-ai)}
+.tab:hover{transform:translateY(.45cqw)}
+.tab[aria-selected="false"]{color:var(--on-dim)}  /* 退後變暗的籤：白字才夠對比 */
+.tab[aria-selected="true"]{z-index:3;transform:none}
+.tab[aria-selected="true"]::before{filter:none;box-shadow:inset 0 .12cqw 0 rgba(255,255,255,.32)}
+.tab:focus-visible{outline:3px solid var(--marker);outline-offset:-.5cqw}
+.tab__title{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.22;font-size:1.37cqw;font-weight:500;letter-spacing:.04em}
+.tab__meta{display:block;margin-top:.3cqw;line-height:1.2;font-size:max(12px,1.12cqw);letter-spacing:.06em;white-space:nowrap}
+
+/* 內頁：一場分享 */
+.panel{position:absolute;inset:0}
+.panel[hidden]{display:none}
+.carousel{position:absolute;left:7.07%;top:11.51%;width:48.02%;height:65.76%}
+.track{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;display:block}
+.nav{position:absolute;top:41.5%;width:7.15%;aspect-ratio:1;border:0;border-radius:50%;padding:0;cursor:pointer;
+  display:grid;place-items:center;background:var(--graphite);color:#fff;transition:background-color .2s ease}
+.nav:hover{background:var(--ink)}
+.nav svg{width:58%;height:58%}
+.nav--prev{left:1.38%}.nav--next{left:91.47%}
+.dots{position:absolute;left:39.75%;top:103.2%;width:20.4%;display:flex;justify-content:space-between;align-items:center}
+.dots button{width:11%;aspect-ratio:1;border:0;padding:0;border-radius:50%;background:var(--dot);cursor:pointer}
+.dots button[aria-current="true"]{background:var(--ink)}
+
+.talk-title{position:absolute;left:57.86%;top:12.29%;width:34.49%;margin:0;font-size:3.19cqw;font-weight:800;line-height:1.32;letter-spacing:.01em}
+.chip{position:absolute;left:57.99%;top:34.10%;height:7.10%;padding:0 1.2cqw;display:flex;align-items:center;border-radius:999px;
+  font-size:1.43cqw;font-weight:600;letter-spacing:.04em;text-decoration:none}
+.chip--ai{background:var(--topic-ai);color:var(--on-ai)}
+.chip--quality{background:var(--topic-quality);color:var(--on-quality)}
+.talk-meta{position:absolute;left:57.99%;top:45.59%;margin:0;font-size:1.76cqw;letter-spacing:.1em;color:var(--ink)}
+.talk-meta span+span{margin-left:2.4cqw}
+.hl{position:absolute;left:57.86%;top:55.20%;margin:0;font-size:1.82cqw;font-weight:600;letter-spacing:.1em;line-height:1.5}
+.hl mark{color:inherit;padding:0 .5cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(176deg,transparent 14%,var(--marker) 16%,var(--marker) 88%,transparent 90%) 0 0/100% 100% no-repeat}
+.open{position:absolute;left:58.52%;top:71.5%;display:flex;align-items:center;gap:1.4cqw;font-size:1.7cqw;font-weight:700;
+  letter-spacing:.11em;text-decoration:none}
+.open span{text-decoration:underline;text-decoration-color:var(--ink);text-decoration-thickness:.2cqw;text-underline-offset:.28em}
+.open svg{width:1.85cqw;height:1.4cqw;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.open:hover svg{transform:translateX(.5cqw)}
+
+/* 沒照片的分享：文字移到左欄，右欄放講義目錄 */
+.panel--text .talk-title{left:7.07%;width:56.81%}
+.panel--text .chip{left:7.20%}
+.panel--text .talk-meta{left:7.20%}
+.panel--text .hl{left:7.07%}
+.panel--text .desc{position:absolute;left:7.20%;top:63.93%;width:46.67%;margin:0;font-size:1.37cqw;line-height:1.75;color:var(--ink-2)}
+.panel--text .open{left:7.54%;top:77.31%}
+.panel--text .toc{position:absolute;left:62%;top:12.29%;width:30%;padding-top:1cqw;border-top:3px solid var(--ink)}
+.toc h3{margin:0 0 .8cqw;font-size:max(12px,1.1cqw);font-weight:700;letter-spacing:.12em;color:var(--ink-2)}
+.toc ol{margin:0;padding:0;list-style:none}
+.toc li{display:flex;gap:1.2cqw;align-items:baseline;padding:1cqw 0;border-bottom:1px solid var(--rule);font-size:1.43cqw;font-weight:600;line-height:1.4}
+.toc li .mono{font-size:max(12px,1.1cqw);font-weight:500;color:var(--toc-num);flex:none}
+
+/* 翻頁：只在點分頁籤時播放 */
+.panel.is-entering{animation:flip-in .42s cubic-bezier(.2,.8,.2,1) both}
+.panel.is-entering .hl mark{animation:swipe .55s .28s cubic-bezier(.3,.7,.2,1) both}
+@keyframes flip-in{from{clip-path:inset(0 0 100% 0);transform:translateY(-1.2cqw)}to{clip-path:inset(0 0 0 0);transform:none}}
+@keyframes swipe{from{background-size:0 100%}to{background-size:100% 100%}}
+
+/* ---------- 封底：邀約與署名 ---------- */
+.back{border-top:1px solid rgba(0,0,0,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.back__in{width:max(960px,74vw);max-width:min(1280px,100%);margin:0 auto;padding:clamp(48px,3.85vw,65px) 4.17% clamp(28px,2.22vw,36px);color:var(--cover-ink);
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(32px,2.96vw,53px);align-items:center}
+.invite{border:solid transparent;border-width:clamp(14px,1.04vw,16px) clamp(22px,1.78vw,28px);
+  border-image:url(assets/plates/label-holder-plain.webp) 30 100 fill / clamp(14px,1.04vw,16px) clamp(22px,1.78vw,28px) stretch;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.invite__card{background:var(--card);padding:clamp(18px,1.48vw,24px) clamp(16px,1.18vw,21px);color:var(--ink)}
+.invite h2{margin:0;font-size:clamp(24px,1.85vw,30px);font-weight:800;letter-spacing:.02em;line-height:1.25}
+.invite p{word-break:keep-all;margin:clamp(10px,0.74vw,12px) 0 0;font-size:clamp(15px,0.93vw,15px);line-height:1.8;color:var(--ink-2)}
+.invite p + p{margin-top:2px}
+.invite p.wrap{word-break:normal}
+.mail{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px clamp(10px,0.74vw,12px);margin-top:clamp(18px,1.33vw,21px);
+  padding:clamp(12px,0.74vw,12px) clamp(16px,1.18vw,18px);border-radius:4px;
+  background:var(--ink);color:#fff;text-decoration:none;font-size:clamp(15px,0.96vw,15px);font-weight:600;letter-spacing:.04em;
+  transition:background-color .2s ease}
+.mail:hover{background:var(--graphite)}
+.mail svg{width:clamp(18px,1.11vw,18px);height:clamp(18px,1.11vw,18px);flex:none}
+.mail .addr{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:500;letter-spacing:0}
+.about h2{margin:0;font-size:clamp(24px,1.85vw,30px);font-weight:800;letter-spacing:.02em;line-height:1.25;color:var(--cover-ink)}
+.about p{text-wrap:pretty;margin:clamp(10px,0.74vw,10px) 0 0;font-size:clamp(16px,1.07vw,16px);line-height:1.85;font-weight:500;max-width:30em}
+.about .topics{display:flex;flex-wrap:wrap;gap:10px;margin:clamp(18px,1.18vw,19px) 0 0;padding:0;list-style:none}
+.about .topics a{position:static;height:auto;display:inline-flex;padding:6px 14px;font-size:clamp(13px,0.78vw,13px)}
+.about .topics a:hover{filter:brightness(1.08)}
+.sign{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 24px;margin:clamp(8px,0.74vw,12px) 0 0;font-size:clamp(13px,0.74vw,13px);letter-spacing:.06em;color:var(--cover-muted)}
+.sign a{text-underline-offset:.3em}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---------- 窄螢幕（平板、手機）：活頁夾改直式 ---------- */
+@media (max-width:999px){
+  .frame{width:100%;max-width:none;margin-top:0;aspect-ratio:auto;display:flex;flex-direction:column;container-type:normal}
+  .rings{display:none}
+  header{display:flex;flex-flow:row wrap;gap:0 10px;align-items:flex-start;padding:28px 16px 0}
+  .sleeve{position:relative;left:auto;top:auto;width:100%;max-width:420px;height:auto;
+    border-width:12px 34px;border-image-width:12px 34px}
+  .site-title,.site-sub{position:static;white-space:normal}
+  .site-title{padding:6px 4px 0;font-size:clamp(28px,7.4vw,40px)}
+  .site-sub{padding:4px 4px 8px;font-size:clamp(15px,4vw,20px)}
+  .lede{position:static;flex:0 0 100%;width:auto;margin-top:24px;font-size:16px;line-height:1.7;letter-spacing:.02em}
+  .btn{position:static;width:auto;height:44px;margin-top:18px;padding:0 18px;font-size:15px}
+
+  .tabs{position:relative;left:auto;right:auto;top:auto;height:auto;margin-top:30px;padding:0 16px;
+    overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;align-items:stretch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 calc(50% - 3px);height:auto;min-height:76px;margin-left:6px;padding:12px 16px;scroll-snap-align:start;transform:translateY(6px)}
+  .tab::before{inset:-6% 0 -10px}
+  .sheet{z-index:2}
+  .tab:first-child{margin-left:0}
+  .tab:hover{transform:translateY(3px)}
+  .tab[aria-selected="true"]{transform:none}
+  .tab::before{border-radius:8px 8px 0 0;transform:perspective(220px) rotateX(14deg)}
+  .tab:focus-visible{outline-offset:-5px}
+  .tab__title{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:13.5px;line-height:1.45}
+  .tab__meta{margin-top:4px;font-size:12px}
+
+  .sheet{position:relative;left:auto;top:auto;width:auto;height:auto;margin:0 10px;padding:28px 18px 36px 40px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+  .holes{left:10px;top:28px;width:16px;height:calc(100% - 56px);background-size:100% 64px}
+  .panel{position:static}
+  .panel > *{position:static!important;left:auto!important;top:auto!important;width:auto!important}
+  .carousel{position:relative!important;aspect-ratio:16/10;height:auto}
+  .nav{width:40px}
+  .nav--prev{left:8px}.nav--next{left:auto;right:8px}
+  .dots{position:static;width:auto!important;justify-content:center;gap:10px;margin-top:12px}
+  .dots button{width:10px}
+  .talk-title{margin-top:26px!important;font-size:clamp(24px,6.2vw,34px);line-height:1.35}
+  .chip{display:inline-flex;height:30px;margin-top:14px;padding:0 12px;font-size:14px}
+  .talk-meta{margin-top:12px;font-size:15px}
+  .talk-meta span+span{margin-left:18px}
+  .hl{margin-top:16px;font-size:17px;line-height:1.75;word-break:keep-all}
+  .hl mark{padding:0 6px}
+  .panel--text .desc{margin-top:14px;font-size:15px}
+  .toc{margin-top:24px;padding-top:12px}
+  .toc h3{font-size:13px;margin-bottom:6px}
+  .toc li{gap:12px;padding:10px 0;font-size:15px}
+  .toc li .mono{font-size:13px}
+  .open{display:flex;margin-top:22px;gap:12px;font-size:17px}
+  .open svg{width:22px;height:17px}
+  @keyframes flip-in{from{clip-path:inset(0 0 100% 0);transform:translateY(-10px)}to{clip-path:inset(0 0 0 0);transform:none}}
+
+  .back__in{width:auto;grid-template-columns:1fr;padding:40px 16px 28px;gap:28px}
+  .about{order:-1}
+  .sign{margin-top:0}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<main class="frame">
+  <img class="rings" src="assets/plates/binder-rings.png" alt="" aria-hidden="true">
 
-<header>
-  <div class="kicker">TALKS &amp; TEACHING MATERIALS</div>
-  <h1>佳臨的分享教材</h1>
-  <p class="lede">製造業生產管理者，用 AI 把不會寫的程式寫出來、把不好管的流程管起來。這裡放公開分享用的完整教材，講完就留在這裡，不會下架。</p>
-  <div class="rule"></div>
-</header>
-
-<div class="year">2026</div>
-<div class="talks">
-
-  <a class="talk" href="/apqp3-cp1-overview/">
-    <div class="t">APQP 第三版 &amp; 管制計劃第一版：改版總覽</div>
-    <div class="d">給已經會舊版的跨功能小組：APQP 3rd 與 Control Plan 1st 改了什麼、對沖壓扣件廠的影響、接下來要做什麼。</div>
-    <div class="m">
-      <span class="tag">品質管理</span>
-      <span>2026-10</span>
-      <span>約 2 小時</span>
+  <header>
+    <div class="sleeve">
+      <h1 class="site-title">IterLab Talks</h1>
+      <p class="site-sub"><span class="who">佳臨</span>製造業<span class="times">×</span><span class="latin">Vibe Coder</span></p>
     </div>
-  </a>
+    <p class="lede">把經驗變成方法，<br>把想法做成工具。</p>
+    <a class="btn btn--follow" href="https://vocus.cc/salon/jialin" target="_blank" rel="noopener">追蹤方格子</a>
+    <a class="btn btn--invite" href="#invite">邀請我分享</a>
+  </header>
 
-  <a class="talk" href="/ai-coding-2026/">
-    <div class="t">AI 當工程師，我當主管</div>
-    <div class="d">一個非工程師，如何把 Vibe Coding 變成可管理、可驗收的開發流程。從三次踩坑講到現在這套 dev skill 全流程。</div>
-    <div class="m">
-      <span class="tag">AI 協作開發</span>
-      <span>2026-09</span>
-      <span>約 60 分鐘</span>
+  <div class="tabs" role="tablist" aria-label="分享場次">
+    <button class="tab tab--quality" role="tab" id="tab-apqp" aria-controls="p-apqp3-cp1-overview" aria-selected="false" tabindex="-1">
+      <span class="tab__title">品質管理｜APQP 第三版 &amp; 管制計劃第一版：改版總覽</span>
+      <span class="tab__meta mono">2026-10&emsp;約 2 小時</span>
+    </button>
+    <button class="tab tab--ai" role="tab" id="tab-ai" aria-controls="p-ai-coding-2026" aria-selected="true">
+      <span class="tab__title">AI 協作開發｜AI 當工程師，我當主管</span>
+      <span class="tab__meta mono">2026-09&emsp;約 60 分鐘</span>
+    </button>
+  </div>
+
+  <div class="sheet">
+  <div class="holes" aria-hidden="true"></div>
+  <section class="panel" id="p-ai-coding-2026" role="tabpanel" aria-labelledby="tab-ai">
+    <div class="carousel" aria-roledescription="輪播" aria-label="上課照片">
+      <div class="track" tabindex="0">
+        <img src="assets/talks/ai-coding-2026/01.webp" alt="佳臨在 GOAI 小聚講台上分享「AI 當工程師，我當主管」" width="1200" height="750">
+        <img src="assets/talks/ai-coding-2026/02.webp" alt="活動海報：高雄 GOAI 小聚第七場 AI Agent 小聚" width="1200" height="750" loading="lazy">
+        <img src="assets/talks/ai-coding-2026/03.webp" alt="講義首頁畫面" width="1200" height="750" loading="lazy">
+      </div>
+      <button class="nav nav--prev" type="button" aria-label="上一張"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button>
+      <button class="nav nav--next" type="button" aria-label="下一張"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button>
+      <div class="dots"></div>
     </div>
-  </a>
+    <h2 class="talk-title">AI 協作開發｜<br>AI 當工程師，我當主管</h2>
+    <span class="chip chip--ai">AI 協作開發</span>
+    <p class="talk-meta mono"><span>2026-09</span><span>約 60 分鐘</span></p>
+    <p class="hl"><mark>看不懂程式碼，<span class="nb">也能判斷 AI 做完了沒</span></mark></p>
+    <a class="open" href="/ai-coding-2026/"><span>翻開講義</span><svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h27M22 5l7 7-7 7"/></svg></a>
+  </section>
 
-</div>
+  <section class="panel panel--text" id="p-apqp3-cp1-overview" role="tabpanel" aria-labelledby="tab-apqp" hidden>
+    <h2 class="talk-title">APQP 第三版 &amp; 管制計劃第一版：<br>改版總覽</h2>
+    <span class="chip chip--quality">品質管理</span>
+    <p class="talk-meta mono"><span>2026-10</span><span>約 2 小時</span></p>
+    <p class="hl"><mark>不用為了改版而全部重寫。</mark></p>
+    <p class="desc">給已經會舊版的跨功能小組：APQP 3rd 與 Control Plan 1st 改了什麼、對沖壓扣件廠的影響、接下來要做什麼。</p>
+    <div class="toc">
+      <h3>講義目錄</h3>
+      <ol>
+        <li><span class="mono">01</span>版本地圖</li>
+        <li><span class="mono">02</span>APQP 第三版改了什麼</li>
+        <li><span class="mono">03</span>管制計劃第一版改了什麼</li>
+        <li><span class="mono">04</span>練習</li>
+      </ol>
+    </div>
+    <a class="open" href="/apqp3-cp1-overview/"><span>翻開講義</span><svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h27M22 5l7 7-7 7"/></svg></a>
+  </section>
+  </div>
+</main>
 
-<footer>
-  <p>佳臨 ｜ 製造業 &times; Vibe Coder ｜ <a href="https://vocus.cc/salon/jialin" target="_blank" rel="noopener">方格子</a></p>
+<footer class="back" id="invite">
+  <div class="back__in">
+    <div class="invite">
+      <div class="invite__card">
+        <h2>邀請我分享</h2>
+        <p class="wrap">歡迎邀請我分享 <span class="nb">AI 協作實作</span>或<span class="nb">製造業品質管理</span>。</p>
+        <p>來信請簡述活動主題、預計日期、參與對象與人數。</p>
+        <a class="mail" href="mailto:iterlab8628@gmail.com?subject=%E5%88%86%E4%BA%AB%E9%82%80%E7%B4%84">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+          寫信聊聊<span class="addr">iterlab8628@gmail.com</span>
+        </a>
+      </div>
+    </div>
+    <div class="about">
+      <h2>關於 IterLab Talks</h2>
+      <p>我是佳臨，有十多年製造業實務經驗，專長是生產管理、品質系統與流程改善，也用 AI 把想法做成工具。這裡收錄分享教材、實作案例與延伸資源，讓你在活動後仍能回來查閱、參考運用。</p>
+      <ul class="topics">
+        <li><a class="chip chip--ai" href="#ai-coding-2026">AI 協作開發</a></li>
+        <li><a class="chip chip--quality" href="#apqp3-cp1-overview">品質管理</a></li>
+      </ul>
+    </div>
+    <p class="sign"><span>佳臨｜製造業 × Vibe Coder</span><a href="https://vocus.cc/salon/jialin" target="_blank" rel="noopener">方格子</a></p>
+  </div>
 </footer>
 
-</div>
+<script>
+// 分頁籤：點擊、左右鍵、網址 #slug 直接翻到那一場
+(() => {
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const slug = t => t.getAttribute('aria-controls').slice(2);
+  const select = (tab, animate) => {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute('aria-controls'));
+      const wasHidden = panel.hidden;
+      panel.hidden = !on;
+      if (on && wasHidden && animate) {
+        panel.classList.remove('is-entering'); void panel.offsetWidth; panel.classList.add('is-entering');
+      }
+    });
+    // 窄螢幕的分頁籤是橫向捲動列：把選中的那張捲進畫面
+    const list = tab.parentElement;
+    if (list.scrollWidth > list.clientWidth) list.scrollLeft = tab.offsetLeft - 16;
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => { select(t, true); history.replaceState(null, '', '#' + slug(t)); });
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      const next = tabs[(i + d + tabs.length) % tabs.length];
+      next.click(); next.focus();
+    });
+  });
+  // 封底的主題連結也走這裡：翻到那一場並回到頂端
+  const fromHash = animate => {
+    const t = tabs.find(t => '#' + slug(t) === location.hash);
+    if (!t) return false;
+    select(t, animate);
+    if (animate) window.scrollTo({ top: 0 });
+    return true;
+  };
+  window.addEventListener('hashchange', () => fromHash(true));
+  if (!fromHash(false)) select(tabs.find(t => t.getAttribute('aria-selected') === 'true'), false);
+})();
+
+// 照片輪播：左右按鈕、圓點，滑動時同步
+document.querySelectorAll('.carousel').forEach(c => {
+  const track = c.querySelector('.track');
+  const imgs = [...track.children];
+  const dots = c.querySelector('.dots');
+  if (imgs.length < 2) { c.querySelectorAll('.nav').forEach(b => b.remove()); dots.remove(); return; }
+  const go = i => track.scrollTo({ left: track.clientWidth * i });
+  const btns = imgs.map((img, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', `第 ${i + 1} 張`);
+    b.addEventListener('click', () => go(i));
+    dots.append(b); return b;
+  });
+  const current = () => Math.round(track.scrollLeft / track.clientWidth);
+  const sync = () => btns.forEach((b, i) => b.setAttribute('aria-current', i === current()));
+  c.querySelector('.nav--prev').addEventListener('click', () => go((current() - 1 + imgs.length) % imgs.length));
+  c.querySelector('.nav--next').addEventListener('click', () => go((current() + 1) % imgs.length));
+  track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+  sync();
+});
+</script>
 </body>
 </html>

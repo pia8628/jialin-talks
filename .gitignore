@@ -9,3 +9,24 @@ __pycache__/
 # 編輯器
 .vscode/
 .idea/
+
+# 索引頁輪播原圖（只提交轉好的 assets/talks/*.webp）
+_src/_index/photos/
+
+# Playwright 截圖紀錄
+.playwright-mcp/
+
+# 各機器自己的設定（impeccable hook 寫在這裡）
+.claude/settings.local.json
+.impeccable/config.local.json
+.impeccable/hook.cache.json
+
+# impeccable 設計過程的中間產物（設計稿、量測、截圖，約 70MB，且網站會公開整個 repo）
+.impeccable/build/
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/questions/
+
+# impeccable 閘門用的 PNG 原檔（上線用的是同名 .webp）
+assets/plates/cover-texture.png
+assets/plates/photo.png
