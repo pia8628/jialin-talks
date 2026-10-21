@@ -49,7 +49,7 @@ talks.iterlab.dev 是佳臨的公開分享教材網站：一場分享對應一�
 ## Brand Commitments
 
 - 署名「佳臨」（SEO author 是「陳佳臨」）。對外身分：「製造業 × Vibe Coder」。
-- 對外連結：方格子 <https://vocus.cc/salon/jialin>。
+- 對外連結：方格子 <https://vocus.cc/salon/KBPclub>。
 - 語言：繁體中文（台灣用語）。
 
 ## Evidence on Hand
