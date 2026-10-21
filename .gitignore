@@ -30,3 +30,6 @@ _src/_index/photos/
 # impeccable 閘門用的 PNG 原檔（上線用的是同名 .webp）
 assets/plates/cover-texture.png
 assets/plates/photo.png
+
+# AI 工作日誌：只留本機（整個 repo 會原樣公開發佈）
+_ai_log/
