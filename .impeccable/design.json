@@ -1,0 +1,523 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T03:32:22+00:00",
+  "title": "Design System: IterLab Talks",
+  "extensions": {
+    "colorMeta": {
+      "cover": {
+        "role": "neutral",
+        "displayName": "鐵灰封面",
+        "canonical": "#474C55",
+        "tonalRamp": [
+          "oklch(15% 0.010 262.3)",
+          "oklch(25% 0.012 262.3)",
+          "oklch(35% 0.015 262.3)",
+          "oklch(45% 0.016 262.3)",
+          "oklch(55% 0.013 262.3)",
+          "oklch(65% 0.011 262.3)",
+          "oklch(80% 0.008 262.3)",
+          "oklch(95% 0.005 262.3)"
+        ]
+      },
+      "cover-ink": {
+        "role": "neutral",
+        "displayName": "封面字白",
+        "canonical": "#EBECF3",
+        "tonalRamp": [
+          "oklch(15% 0.001 279.7)",
+          "oklch(25% 0.002 279.7)",
+          "oklch(35% 0.002 279.7)",
+          "oklch(45% 0.003 279.7)",
+          "oklch(55% 0.004 279.7)",
+          "oklch(65% 0.006 279.7)",
+          "oklch(80% 0.007 279.7)",
+          "oklch(95% 0.009 279.7)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "內頁白",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(25% 0.000 89.9)",
+          "oklch(35% 0.000 89.9)",
+          "oklch(45% 0.000 89.9)",
+          "oklch(55% 0.000 89.9)",
+          "oklch(65% 0.000 89.9)",
+          "oklch(80% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "墨黑",
+        "canonical": "#16181B",
+        "tonalRamp": [
+          "oklch(15% 0.006 258.4)",
+          "oklch(25% 0.006 258.4)",
+          "oklch(35% 0.005 258.4)",
+          "oklch(45% 0.004 258.4)",
+          "oklch(55% 0.004 258.4)",
+          "oklch(65% 0.003 258.4)",
+          "oklch(80% 0.002 258.4)",
+          "oklch(95% 0.001 258.4)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "次要墨灰",
+        "canonical": "#4A4F57",
+        "tonalRamp": [
+          "oklch(15% 0.009 259.8)",
+          "oklch(25% 0.011 259.8)",
+          "oklch(35% 0.013 259.8)",
+          "oklch(45% 0.014 259.8)",
+          "oklch(55% 0.012 259.8)",
+          "oklch(65% 0.010 259.8)",
+          "oklch(80% 0.007 259.8)",
+          "oklch(95% 0.005 259.8)"
+        ]
+      },
+      "topic-quality": {
+        "role": "primary",
+        "displayName": "主題橘・品質管理",
+        "canonical": "#E2583E",
+        "tonalRamp": [
+          "oklch(15% 0.065 32.7)",
+          "oklch(25% 0.085 32.7)",
+          "oklch(35% 0.107 32.7)",
+          "oklch(45% 0.130 32.7)",
+          "oklch(55% 0.155 32.7)",
+          "oklch(65% 0.174 32.7)",
+          "oklch(80% 0.136 32.7)",
+          "oklch(95% 0.101 32.7)"
+        ]
+      },
+      "on-quality": {
+        "role": "neutral",
+        "displayName": "品質管理籤上的字",
+        "canonical": "#16181B",
+        "tonalRamp": [
+          "oklch(15% 0.006 258.4)",
+          "oklch(25% 0.006 258.4)",
+          "oklch(35% 0.005 258.4)",
+          "oklch(45% 0.004 258.4)",
+          "oklch(55% 0.004 258.4)",
+          "oklch(65% 0.003 258.4)",
+          "oklch(80% 0.002 258.4)",
+          "oklch(95% 0.001 258.4)"
+        ]
+      },
+      "topic-ai": {
+        "role": "primary",
+        "displayName": "主題藍・AI 協作開發",
+        "canonical": "#3A6FD8",
+        "tonalRamp": [
+          "oklch(15% 0.077 262.2)",
+          "oklch(25% 0.098 262.2)",
+          "oklch(35% 0.120 262.2)",
+          "oklch(45% 0.143 262.2)",
+          "oklch(55% 0.168 262.2)",
+          "oklch(65% 0.149 262.2)",
+          "oklch(80% 0.114 262.2)",
+          "oklch(95% 0.082 262.2)"
+        ]
+      },
+      "on-ai": {
+        "role": "neutral",
+        "displayName": "AI 協作開發籤上的字",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(25% 0.000 89.9)",
+          "oklch(35% 0.000 89.9)",
+          "oklch(45% 0.000 89.9)",
+          "oklch(55% 0.000 89.9)",
+          "oklch(65% 0.000 89.9)",
+          "oklch(80% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "marker": {
+        "role": "secondary",
+        "displayName": "螢光筆黃",
+        "canonical": "#F7E26B",
+        "tonalRamp": [
+          "oklch(15% 0.017 99.4)",
+          "oklch(25% 0.028 99.4)",
+          "oklch(35% 0.041 99.4)",
+          "oklch(45% 0.056 99.4)",
+          "oklch(55% 0.072 99.4)",
+          "oklch(65% 0.090 99.4)",
+          "oklch(80% 0.119 99.4)",
+          "oklch(95% 0.132 99.4)"
+        ]
+      },
+      "hole": {
+        "role": "neutral",
+        "displayName": "打孔黑",
+        "canonical": "#1E2024",
+        "tonalRamp": [
+          "oklch(15% 0.007 264.4)",
+          "oklch(25% 0.008 264.4)",
+          "oklch(35% 0.007 264.4)",
+          "oklch(45% 0.006 264.4)",
+          "oklch(55% 0.005 264.4)",
+          "oklch(65% 0.004 264.4)",
+          "oklch(80% 0.002 264.4)",
+          "oklch(95% 0.001 264.4)"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "名牌卡紙",
+        "canonical": "#F8F9FC",
+        "tonalRamp": [
+          "oklch(15% 0.000 271.4)",
+          "oklch(25% 0.001 271.4)",
+          "oklch(35% 0.001 271.4)",
+          "oklch(45% 0.001 271.4)",
+          "oklch(55% 0.002 271.4)",
+          "oklch(65% 0.002 271.4)",
+          "oklch(80% 0.003 271.4)",
+          "oklch(95% 0.004 271.4)"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "石墨灰",
+        "canonical": "#2E333D",
+        "tonalRamp": [
+          "oklch(15% 0.014 264.3)",
+          "oklch(25% 0.017 264.3)",
+          "oklch(35% 0.018 264.3)",
+          "oklch(45% 0.016 264.3)",
+          "oklch(55% 0.013 264.3)",
+          "oklch(65% 0.011 264.3)",
+          "oklch(80% 0.007 264.3)",
+          "oklch(95% 0.004 264.3)"
+        ]
+      },
+      "dot": {
+        "role": "neutral",
+        "displayName": "圓點灰",
+        "canonical": "#C3C6CC",
+        "tonalRamp": [
+          "oklch(15% 0.004 264.5)",
+          "oklch(25% 0.006 264.5)",
+          "oklch(35% 0.007 264.5)",
+          "oklch(45% 0.008 264.5)",
+          "oklch(55% 0.009 264.5)",
+          "oklch(65% 0.008 264.5)",
+          "oklch(80% 0.006 264.5)",
+          "oklch(95% 0.004 264.5)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "分隔線灰",
+        "canonical": "#D5D8DC",
+        "tonalRamp": [
+          "oklch(15% 0.003 255.5)",
+          "oklch(25% 0.004 255.5)",
+          "oklch(35% 0.005 255.5)",
+          "oklch(45% 0.006 255.5)",
+          "oklch(55% 0.006 255.5)",
+          "oklch(65% 0.006 255.5)",
+          "oklch(80% 0.004 255.5)",
+          "oklch(95% 0.003 255.5)"
+        ]
+      },
+      "toc-num": {
+        "role": "accent",
+        "displayName": "目錄編號紅",
+        "canonical": "#B8432C",
+        "tonalRamp": [
+          "oklch(15% 0.078 33.1)",
+          "oklch(25% 0.098 33.1)",
+          "oklch(35% 0.117 33.1)",
+          "oklch(45% 0.137 33.1)",
+          "oklch(55% 0.156 33.1)",
+          "oklch(65% 0.137 33.1)",
+          "oklch(80% 0.107 33.1)",
+          "oklch(95% 0.078 33.1)"
+        ]
+      },
+      "cover-muted": {
+        "role": "neutral",
+        "displayName": "封面次要字",
+        "canonical": "#C5C8D0",
+        "tonalRamp": [
+          "oklch(15% 0.006 269.5)",
+          "oklch(25% 0.007 269.5)",
+          "oklch(35% 0.009 269.5)",
+          "oklch(45% 0.010 269.5)",
+          "oklch(55% 0.012 269.5)",
+          "oklch(65% 0.010 269.5)",
+          "oklch(80% 0.008 269.5)",
+          "oklch(95% 0.006 269.5)"
+        ]
+      },
+      "on-dim": {
+        "role": "neutral",
+        "displayName": "退後籤字色",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(25% 0.000 89.9)",
+          "oklch(35% 0.000 89.9)",
+          "oklch(45% 0.000 89.9)",
+          "oklch(55% 0.000 89.9)",
+          "oklch(65% 0.000 89.9)",
+          "oklch(80% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "sleeve-title": {
+        "displayName": "名牌站名",
+        "purpose": "名牌插袋裡的站名 IterLab Talks。"
+      },
+      "sleeve-sub": {
+        "displayName": "名牌副行",
+        "purpose": "名牌第二行：佳臨｜製造業 × Vibe Coder。"
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "內頁的分享標題，整頁最重的字。"
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "封底區塊標題。"
+      },
+      "highlight": {
+        "displayName": "螢光筆句",
+        "purpose": "每場分享唯一一句螢光筆重點。"
+      },
+      "lede": {
+        "displayName": "封面標語",
+        "purpose": "封面中央兩行標語。"
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "封底介紹段落，最寬 30em。"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "主題標籤、外框按鈕。"
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "只排日期與時間長度。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet-contact",
+        "value": "0 -.25cqw .7cqw rgba(0,0,0,.28), -.25cqw .35cqw .9cqw rgba(0,0,0,.18)",
+        "purpose": "白色內頁壓在封面上；手機版為 0 2px 8px rgba(0,0,0,.2)。"
+      },
+      {
+        "name": "sleeve-drop",
+        "value": "drop-shadow(0 .1cqw .15cqw rgba(0,0,0,.35))",
+        "purpose": "名牌插袋貼在封面上的落影（filter）；封底插袋為 drop-shadow(0 1px 2px rgba(0,0,0,.35))。"
+      },
+      {
+        "name": "tab-thickness",
+        "value": "inset 0 .12cqw 0 rgba(255,255,255,.28), inset 0 -.5cqw .6cqw -.3cqw rgba(0,0,0,.22)",
+        "purpose": "分頁籤上緣反光與下緣暗部；選中時只留 inset 0 .12cqw 0 rgba(255,255,255,.32)。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(.2,.8,.2,1)",
+        "purpose": "分頁籤升降、翻頁、箭頭位移。"
+      },
+      {
+        "name": "tab-move",
+        "value": "0.25s",
+        "purpose": "分頁籤 hover 與選中的位移。"
+      },
+      {
+        "name": "page-flip",
+        "value": "0.42s",
+        "purpose": "點籤時內頁由上往下展開（clip-path），只在點籤時播放。"
+      },
+      {
+        "name": "marker-swipe",
+        "value": "0.55s delay 0.28s cubic-bezier(.3,.7,.2,1)",
+        "purpose": "翻頁後螢光筆從左劃過。"
+      },
+      {
+        "name": "color-fade",
+        "value": "0.2s ease",
+        "purpose": "按鈕、輪播鈕的底色過場。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "關閉所有 transition 與 animation；輪播本來就不自動播放。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stacked",
+        "value": "max-width: 999px"
+      },
+      {
+        "name": "frame-max",
+        "value": "1280px"
+      }
+    ],
+    "rasters": [
+      {
+        "path": "assets/plates/cover-texture.webp",
+        "use": "封面壓紋，512px 平鋪"
+      },
+      {
+        "path": "assets/plates/label-holder.webp",
+        "use": "名牌插袋（border-image 30 100 fill）"
+      },
+      {
+        "path": "assets/plates/label-holder-plain.webp",
+        "use": "封底邀約插袋"
+      },
+      {
+        "path": "assets/plates/binder-rings.png",
+        "use": "內頁左緣金屬活頁環"
+      },
+      {
+        "path": "assets/talks/<slug>/0N.webp",
+        "use": "真實上課照片，1200x750"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "封面外框按鈕",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "封面右上的「追蹤方格子」「邀請我分享」，鐵灰底上的白色外框按鈕。",
+      "html": "<div class=\"ds-cover\"><a class=\"ds-btn-outline\" href=\"#\">追蹤方格子</a></div>",
+      "css": ".ds-cover{background:var(--cover,#474C55);padding:24px} .ds-btn-outline{display:inline-grid;place-items:center;padding:12px 22px;text-decoration:none;border:2px solid var(--cover-ink,#EBECF3);border-radius:4px;color:var(--cover-ink,#EBECF3);font-family:'Noto Sans TC',sans-serif;font-size:17px;font-weight:500;letter-spacing:.06em;transition:background-color .2s ease,color .2s ease} .ds-btn-outline:hover{background:var(--cover-ink,#EBECF3);color:var(--cover,#474C55)} .ds-btn-outline:focus-visible{outline:3px solid var(--marker,#F7E26B);outline-offset:3px}"
+    },
+    {
+      "name": "寄信按鈕",
+      "kind": "button",
+      "refersTo": "button-mail",
+      "description": "封底邀約插袋裡的實心墨黑按鈕，信箱以等寬字排。",
+      "html": "<a class=\"ds-btn-mail\" href=\"#\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"1.5\"/><path d=\"M3.5 6.5L12 13l8.5-6.5\"/></svg>寫信給我<span class=\"ds-addr\">name@example.com</span></a>",
+      "css": ".ds-btn-mail{display:inline-flex;align-items:center;gap:12px;padding:14px 20px;border-radius:4px;background:var(--ink,#16181B);color:#fff;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:17px;font-weight:600;letter-spacing:.04em;transition:background-color .2s ease} .ds-btn-mail svg{width:20px;height:20px} .ds-btn-mail .ds-addr{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;letter-spacing:0} .ds-btn-mail:hover{background:#2E333D} .ds-btn-mail:focus-visible{outline:3px solid var(--marker,#F7E26B);outline-offset:3px}"
+    },
+    {
+      "name": "分頁籤",
+      "kind": "nav",
+      "refersTo": "tab-ai",
+      "description": "沿封面下緣排列的梯形主題籤；選中的站到前面，未選中的下沉、壓暗、用白字。",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab ds-tab--quality\" role=\"tab\" aria-selected=\"false\"><span class=\"ds-tab__t\">品質管理｜APQP 第三版改版總覽</span><span class=\"ds-tab__m\">2026-10　約 2 小時</span></button><button class=\"ds-tab ds-tab--ai\" role=\"tab\" aria-selected=\"true\"><span class=\"ds-tab__t\">AI 協作開發｜AI 當工程師，我當主管</span><span class=\"ds-tab__m\">2026-09　約 60 分鐘</span></button></div><div class=\"ds-tabs-sheet\"></div>",
+      "css": ".ds-tabs{display:flex;align-items:flex-end;padding:28px 24px 0;background:var(--cover,#474C55)} .ds-tab{--bg:var(--topic-quality,#E2583E);--on:var(--on-quality,#16181B);position:relative;flex:1 1 0;min-width:0;height:64px;margin-left:-6px;padding:10px 40px 0;border:0;background:none;color:var(--on);font-family:'Noto Sans TC',sans-serif;text-align:left;cursor:pointer;isolation:isolate;z-index:1;transform:translateY(10px);transition:transform .25s cubic-bezier(.2,.8,.2,1)} .ds-tab:first-child{margin-left:0} .ds-tab::before{content:'';position:absolute;inset:-6% 0 -20px;z-index:-1;background:var(--bg);border-radius:12px 12px 0 0;transform:perspective(260px) rotateX(20deg);transform-origin:50% 100%;box-shadow:inset 0 2px 0 rgba(255,255,255,.28),inset 0 -7px 8px -4px rgba(0,0,0,.22);filter:brightness(.82) saturate(.9)} .ds-tab--ai{--bg:var(--topic-ai,#3A6FD8);--on:var(--on-ai,#fff)} .ds-tab[aria-selected=false]{color:#fff} .ds-tab:hover{transform:translateY(6px)} .ds-tab[aria-selected=true]{z-index:3;transform:none} .ds-tab[aria-selected=true]::before{filter:none;box-shadow:inset 0 2px 0 rgba(255,255,255,.32)} .ds-tab:focus-visible{outline:3px solid var(--marker,#F7E26B);outline-offset:-6px} .ds-tab__t{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px;font-weight:500;letter-spacing:.04em} .ds-tab__m{display:block;margin-top:4px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;letter-spacing:.06em} .ds-tabs-sheet{position:relative;z-index:2;height:40px;background:var(--paper,#fff);box-shadow:0 -3px 9px rgba(0,0,0,.28)}"
+    },
+    {
+      "name": "主題標籤",
+      "kind": "chip",
+      "refersTo": "chip-ai",
+      "description": "主題色膠囊，只表示分享所屬主題。",
+      "html": "<span class=\"ds-chip ds-chip--ai\">AI 協作開發</span> <a href=\"#\" class=\"ds-chip ds-chip--quality\">品質管理</a>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:600;letter-spacing:.04em;text-decoration:none} .ds-chip--ai{background:var(--topic-ai,#3A6FD8);color:var(--on-ai,#fff)} .ds-chip--quality{background:var(--topic-quality,#E2583E);color:var(--on-quality,#16181B)} a.ds-chip:hover{filter:brightness(1.08)} a.ds-chip:focus-visible{outline:3px solid var(--marker,#F7E26B);outline-offset:3px}"
+    },
+    {
+      "name": "名牌插袋",
+      "kind": "card",
+      "refersTo": "name-sleeve",
+      "description": "封面左上的透明名牌插袋，卡紙上排站名與身分。插袋本體是素材圖（assets/plates/label-holder.webp），此處以邊框近似。",
+      "html": "<div class=\"ds-cover\"><div class=\"ds-sleeve\"><h1 class=\"ds-sleeve__t\">IterLab Talks</h1><p class=\"ds-sleeve__s\">佳臨｜製造業 × Vibe Coder</p></div></div>",
+      "css": ".ds-cover{background:var(--cover,#474C55);padding:24px} .ds-sleeve{display:inline-block;padding:12px 34px;border:6px solid rgba(255,255,255,.55);border-radius:6px;background:var(--card,#F8F9FC);filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))} .ds-sleeve__t{margin:0;font-family:'Noto Sans TC',sans-serif;font-size:36px;font-weight:700;line-height:1.1;letter-spacing:-.01em;color:var(--ink,#16181B)} .ds-sleeve__s{margin:6px 0 0;font-family:'Noto Sans TC',sans-serif;font-size:19px;font-weight:600;letter-spacing:.02em;color:var(--ink,#16181B)}"
+    },
+    {
+      "name": "螢光筆重點",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "每場分享唯一的一句重點，黃色螢光筆微斜劃過。",
+      "html": "<p class=\"ds-hl\"><mark>看不懂程式碼，也能判斷 AI 做完了沒</mark></p>",
+      "css": ".ds-hl{margin:0;padding:16px;background:var(--paper,#fff);font-family:'Noto Sans TC',sans-serif;font-size:20px;font-weight:600;letter-spacing:.1em;line-height:1.5;color:var(--ink,#16181B)} .ds-hl mark{color:inherit;padding:0 6px;-webkit-box-decoration-break:clone;box-decoration-break:clone;background:linear-gradient(176deg,transparent 14%,var(--marker,#F7E26B) 16%,var(--marker,#F7E26B) 88%,transparent 90%) 0 0/100% 100% no-repeat}"
+    },
+    {
+      "name": "翻開講義連結",
+      "kind": "custom",
+      "refersTo": "link-open",
+      "description": "每場分享的主要行動：粗底線文字加箭頭，hover 時箭頭右移。",
+      "html": "<a class=\"ds-open\" href=\"#\"><span>翻開講義</span><svg viewBox=\"0 0 32 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 12h27M22 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-open{display:inline-flex;align-items:center;gap:14px;color:var(--ink,#16181B);font-family:'Noto Sans TC',sans-serif;font-size:19px;font-weight:700;letter-spacing:.11em;text-decoration:none} .ds-open span{text-decoration:underline;text-decoration-color:var(--ink,#16181B);text-decoration-thickness:3px;text-underline-offset:.28em} .ds-open svg{width:24px;height:18px;transition:transform .25s cubic-bezier(.2,.8,.2,1)} .ds-open:hover svg{transform:translateX(6px)} .ds-open:focus-visible{outline:3px solid var(--marker,#F7E26B);outline-offset:3px}"
+    },
+    {
+      "name": "輪播圓鈕",
+      "kind": "button",
+      "refersTo": "carousel-nav",
+      "description": "照片輪播的左右深色圓鈕。",
+      "html": "<button class=\"ds-nav\" type=\"button\" aria-label=\"下一張\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.5 5.5L16 12l-6.5 6.5\"/></svg></button>",
+      "css": ".ds-nav{width:48px;height:48px;border:0;border-radius:50%;padding:0;display:grid;place-items:center;background:#2E333D;color:#fff;cursor:pointer;transition:background-color .2s ease} .ds-nav svg{width:58%;height:58%} .ds-nav:hover{background:var(--ink,#16181B)} .ds-nav:focus-visible{outline:3px solid var(--marker,#F7E26B);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "永遠不上架的訓練活頁夾",
+    "overview": "整個首頁就是一本攤在桌上的訓練用活頁夾：鐵灰色壓紋 PP 封面（`assets/plates/cover-texture.webp` 平鋪）、左上角一個透明名牌插袋寫著站名、封面下緣立著每場分享一張的彩色分頁籤，選中的那張站到最前面，下面是打了孔的純白內頁，左緣露出金屬活頁環。訪客點一張籤，內頁就「翻」到那一場：真實上課照片、標題、日期與長度、一句用螢光筆劃過的重點，以及「翻開講義 →」。\n\n它刻意拒絕講者網站的預設樣板（大頭照首屏加卡片網格）。可信度來自實物感與真實素材：插袋、活頁環、封面紋理都是素材圖，但字一律由程式排，照片只用真的上課照片。版面密度偏低、字重偏重，像一本正在用的工作講義，不像作品集。\n\n第一屏以 `.frame` 為容器（寬度為螢幕的 74%、最小 960px、最大 1280px、置中，比例 1536:1024），所有位置與字級用 `cqw` 綁在框寬上，所以整本活頁夾在任何桌機寬度都等比縮放；999px 以下改成直式堆疊。",
+    "keyCharacteristics": [
+      "鐵灰壓紋封面＋純白打孔內頁，兩種材質就是全部的底。",
+      "每場分享一張分頁籤，顏色只表示主題（品質管理橘、AI 協作開發藍）。",
+      "每場分享只有一道黃色螢光筆。",
+      "素材圖負責材質（插袋、活頁環、紋理），文字永遠是活的 HTML。",
+      "顏色全部集中在 `:root` 自訂屬性，方便日後整套換色。"
+    ],
+    "rules": [
+      {
+        "name": "換色只改一處規則",
+        "body": "主題色、封面、內頁、墨色、螢光筆一律以 `:root` 自訂屬性存在（業主決定，日後要整套換皮）；新元件只能引用 `var(--…)`，不新增寫死的色碼。",
+        "section": "colors"
+      },
+      {
+        "name": "主題色只當籤規則",
+        "body": "`topic-*` 只出現在分頁籤與主題標籤（chip）上，不拿來當按鈕、連結或大面積底色。",
+        "section": "colors"
+      },
+      {
+        "name": "退後的籤用白字規則",
+        "body": "未選中的分頁籤會被壓暗（`brightness(.82) saturate(.9)`），一律改白字：深色字在壓暗的橘上只有 3.29:1，白字是 5.41:1（業主實測後決定）。選中的品質管理籤維持深色字，AI 協作開發籤維持白字。",
+        "section": "colors"
+      },
+      {
+        "name": "等寬只排資料規則",
+        "body": "JetBrains Mono 只用在日期、時間長度這類資料欄位，不用在標題或內文。",
+        "section": "typography"
+      },
+      {
+        "name": "第一屏字級跟著框走規則",
+        "body": "999px 以上，第一屏所有字級用 `cqw`；需要最小可讀值的小字用 `max(12px, …cqw)` 托底。999px 以下改回 px／clamp。",
+        "section": "typography"
+      },
+      {
+        "name": "選中的籤站到前面規則",
+        "body": "選中與否用前後層次與明暗表達：未選中的籤下沉 0.7cqw 並壓暗，選中的籤歸位、全亮、蓋在其他籤前面。不用底線或外框表示選中。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** 新增場次時只加一張分頁籤與一個 panel，讓 flex 自動排籤位置。",
+      "**Do** 沒有照片的分享用純文字版面（`.panel--text`），右欄放該講義真實的目錄。",
+      "**Do** 每場分享只放一句螢光筆重點，而且必須是講義裡真的那句話。",
+      "**Do** 所有顏色經由 `:root` 自訂屬性引用，主題籤依主題選 `--topic-*` 與 `--on-*` 成對使用。",
+      "**Do** 第一屏的新元素用百分比定位、`cqw` 字級，放在 `.frame`（74vw，960–1280px）裡；999px 以下另寫直式規則。",
+      "**Do** 所有動態包在 `prefers-reduced-motion: reduce` 底下可關閉，輪播不自動播放。"
+    ],
+    "donts": [
+      "**Don't** 用大頭照首屏加卡片網格的講者網站樣板。",
+      "**Don't** 做精選大卡或讓某一場分享比其他場大；每張籤一樣寬。",
+      "**Don't** 拿示意照片冒充上課現場；沒有真實照片時預設維持純文字（要不要生成封面，先問業主）。",
+      "**Don't** 把站名、標題等文字烙進素材圖；素材只負責材質。",
+      "**Don't** 在未選中（壓暗）的分頁籤上用深色字。",
+      "**Don't** 把主題色用在按鈕、連結或大面積底色上。"
+    ]
+  }
+}

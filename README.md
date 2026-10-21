@@ -10,7 +10,11 @@
 
 ```
 jialin-talks/
-├── index.html                  總索引頁（新增分享時要手動加一張卡片）
+├── index.html                  總索引頁（活頁夾設計，新增分享時加一張分頁籤＋一頁，見下方「首頁」）
+├── PRODUCT.md / DESIGN.md      impeccable 的產品脈絡與設計系統（改首頁前先讀）
+├── assets/
+│   ├── plates/                 首頁設計素材（封面紋理、名牌插袋、活頁環），.json 是生成紀錄
+│   └── talks/<分享>/0N.webp    首頁輪播照片（由 _src/_index/make_covers.py 產生）
 ├── sitemap.xml                 給搜尋引擎，新增分享時加一筆
 ├── robots.txt                  允許索引，但排除 /_src/
 ├── ai-coding-2026/
@@ -48,12 +52,20 @@ python build.py --site ../../ai-coding-2026/index.html
 
 - `--vault <路徑>`：圖片素材所在的 Obsidian vault，預設 `D:/JL_Obsidian_Vault`（也可用環境變數 `JL_VAULT`）
 
+## 首頁
+
+首頁是一本「教育訓練活頁夾」：封面上的分頁籤一場分享一張，點下去翻到那一頁。設計規範在 `DESIGN.md`，換色只改 `index.html` 最上面 `:root` 那一段。
+
+- **輪播照片**：原圖放 `_src/_index/photos/<分享>/`（1.jpg、2.jpg…依檔名排序，最多 3 張，不進 git），跑 `python _src/_index/make_covers.py` 轉成 `assets/talks/<分享>/0N.webp`。沒照片的分享就用純文字頁（標題、重點句、說明、講義目錄）。
+- **網址直連某一場**：`https://talks.iterlab.dev/#<分享資料夾>`。
+- **改首頁設計**：建議走 `/impeccable`（會讀 `PRODUCT.md`、`DESIGN.md`、`.impeccable/surfaces/index-html.md`）。
+
 ## 新增一場分享
 
 1. `_src/<新分享>/` 放 `template.html` 與 `build.py`（複製既有的改）
 2. 改 `build.py` 開頭的 `SITE_URL` / `SITE_TITLE` / `SITE_DESC`、`IMAGES` 圖片清單
 3. 跑 build，輸出到 `<新分享>/index.html`
-4. `index.html` 加一張卡片、`sitemap.xml` 加一筆
+4. `index.html` 加一張分頁籤（`.tabs` 裡的 `<button role="tab">`）與對應的一頁（`.sheet` 裡的 `<section role="tabpanel">`，有照片用 `.panel`、沒照片用 `.panel--text`），`sitemap.xml` 加一筆
 5. commit & push → Cloudflare Pages 自動部署
 
 有 `talks-publish` skill 可以帶著走這個流程。

@@ -1,0 +1,52 @@
+{
+  "hook": {
+    "enabled": true,
+    "limits": {
+      "maxFindings": 5,
+      "maxChars": 8000
+    }
+  },
+  "buildPath": "comp",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/color-picker.html"
+        ],
+        "createdAt": "2026-10-21T01:38:35.534Z",
+        "reason": "Agent: dev-only color picker that mimics a physical binder (label holder, tabs, page); not a shipping surface"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/color-picker.html"
+        ],
+        "createdAt": "2026-10-21T01:38:36.560Z",
+        "reason": "Agent: dev-only color picker that mimics a physical binder (label holder, tabs, page); not a shipping surface"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-21T03:18:31.206Z",
+        "reason": "Agent: .invite__card has clamp() padding that renders 28.8px x 23px at 1440 (measured via getComputedStyle); the detector reads the clamp as zero"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/color-picker.html"
+        ],
+        "createdAt": "2026-10-21T03:30:56.704Z",
+        "reason": "Agent: dev-only colour picker (not shipped, gitignored under .impeccable/mocks); its readout uses Consolas, outside the site's type system by design"
+      }
+    ]
+  }
+}
