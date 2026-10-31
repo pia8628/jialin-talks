@@ -23,6 +23,11 @@ VAULT = os.environ.get("JL_VAULT", r"D:\JL_Obsidian_Vault")
 
 MAX_W = 1500
 QUALITY = 85
+WEBP_QUALITY = 82
+
+# --site 模式：圖片輸出成獨立檔，HTML 只留連結（Googlebot 只讀每檔前 2 MB，內嵌 base64 會撐爆）
+FIG_SUBDIR = "assets/talks/ai-coding-2026/figs"
+FIG_URL_BASE = "/" + FIG_SUBDIR
 
 # --site 模式的網頁 meta（給搜尋引擎與社群分享卡片）
 SITE_URL = "https://talks.iterlab.dev/ai-coding-2026/"
@@ -33,7 +38,7 @@ SITE_AUTHOR = "佳臨"
 ART = "Z. 結案資料/文章作品集/assets"
 JJOY = ART + "/打造家庭娛樂記帳 APP — Vibe Coding 從零到上線的實踐心得"
 DAY1 = ART + "/為什麼你的 AI 比較聰明？關鍵不在模型 ｜Google AI Agents 課程 Day 1 筆記"
-SHOT = "00. Inbox/assets/AI程式開發讀書會分享"
+SHOT = "3. Digest/02 Work/assets/AI程式開發讀書會分享"
 MINE = "_ai_output/assets"
 
 IMAGES = {
@@ -68,6 +73,18 @@ def encode(path):
     img.save(buf, "JPEG", quality=QUALITY, optimize=True, progressive=True)
     data = buf.getvalue()
     return "data:image/jpeg;base64,%s" % base64.b64encode(data).decode("ascii"), len(data)
+
+
+def save_webp(path, out_path):
+    """縮圖 → WebP 檔，回傳 (寬, 高, 檔案大小)"""
+    img = Image.open(path)
+    if img.mode not in ("RGB", "L"):
+        img = img.convert("RGB")
+    if img.width > MAX_W:
+        h = int(img.height * MAX_W / float(img.width))
+        img = img.resize((MAX_W, h), Image.LANCZOS)
+    img.save(out_path, "WEBP", quality=WEBP_QUALITY, method=6)
+    return img.width, img.height, os.path.getsize(out_path)
 
 
 HEAD_TMPL = u"""<!doctype html>
@@ -107,19 +124,54 @@ def main():
     with io.open(os.path.join(BASE, "template.html"), encoding="utf-8") as f:
         html = f.read()
 
+    # --site 模式要先決定圖片輸出目錄（網站根目錄 = 輸出檔的上一層）
+    site_out = None
+    fig_dir = None
+    if "--site" in sys.argv:
+        i = sys.argv.index("--site")
+        if i + 1 >= len(sys.argv):
+            sys.stderr.write("--site 後面要接輸出路徑\n")
+            return 1
+        site_out = sys.argv[i + 1]
+        site_root = os.path.dirname(os.path.dirname(os.path.abspath(site_out)))
+        fig_dir = os.path.join(site_root, FIG_SUBDIR.replace("/", os.sep))
+        if not os.path.isdir(fig_dir):
+            os.makedirs(fig_dir)
+
+    site_html = html
     total = 0
+    web_total = 0
+    fallback_dir = os.path.join(BASE, "fallback-images")
     for key, rel in IMAGES.items():
         path = os.path.join(VAULT, rel.replace("/", os.sep))
         if not os.path.exists(path):
-            sys.stderr.write("找不到圖片：%s\n" % path)
-            return 1
+            # vault 裡找不到時，改用 repo 內保存的備份（從已公開頁面取出的圖）
+            fb = os.path.join(fallback_dir, key.lower().replace("img_", "") + ".jpg")
+            if os.path.exists(fb):
+                sys.stderr.write("vault 找不到 %s，改用備份 %s\n" % (rel, fb))
+                path = fb
+            else:
+                sys.stderr.write("找不到圖片：%s\n" % path)
+                return 1
         token = "{{%s}}" % key
         if token not in html:
             sys.stderr.write("template 裡沒有佔位符：%s\n" % token)
             return 1
         uri, size = encode(path)
         total += size
-        html = html.replace(token, uri)
+        html = html.replace(token, uri)  # artifact 版：維持內嵌 base64
+
+        if fig_dir:
+            name = key.lower().replace("img_", "").replace("_", "-") + ".webp"
+            w, h, wsize = save_webp(path, os.path.join(fig_dir, name))
+            web_total += wsize
+            url = "%s/%s" % (FIG_URL_BASE, name)
+            tag_old = u'<img src="%s"' % token
+            tag_new = u'<img src="%s" width="%d" height="%d" loading="lazy" decoding="async"' % (url, w, h)
+            if tag_old in site_html:
+                site_html = site_html.replace(tag_old, tag_new)
+            else:
+                site_html = site_html.replace(token, url)
 
     out = os.path.join(BASE, "artifact.html")
     with io.open(out, "w", encoding="utf-8") as f:
@@ -129,20 +181,16 @@ def main():
     print("%d 張圖，壓縮後共 %.1f KB；輸出檔 %.1f KB"
           % (len(IMAGES), total / 1024.0, os.path.getsize(out) / 1024.0))
 
-    # --site <路徑>：額外輸出完整 HTML 文件
-    if "--site" in sys.argv:
-        i = sys.argv.index("--site")
-        if i + 1 >= len(sys.argv):
-            sys.stderr.write("--site 後面要接輸出路徑\n")
-            return 1
-        site_out = sys.argv[i + 1]
+    # --site <路徑>：額外輸出完整 HTML 文件（圖片外移成 webp 檔）
+    if site_out:
         d = os.path.dirname(os.path.abspath(site_out))
         if d and not os.path.isdir(d):
             os.makedirs(d)
         with io.open(site_out, "w", encoding="utf-8") as f:
-            f.write(wrap_standalone(html))
-        print("已產出網站版 %s（%.1f KB）"
-              % (site_out, os.path.getsize(site_out) / 1024.0))
+            f.write(wrap_standalone(site_html))
+        print("已產出網站版 %s（%.1f KB）；圖片外移 %d 檔，共 %.1f KB 放在 %s"
+              % (site_out, os.path.getsize(site_out) / 1024.0,
+                 len(IMAGES), web_total / 1024.0, fig_dir))
 
     return 0
 
