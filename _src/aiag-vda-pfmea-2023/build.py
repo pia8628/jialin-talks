@@ -27,7 +27,7 @@ QUALITY = 85
 # --site 模式的網頁 meta（給搜尋引擎與社群分享卡片）
 SITE_URL = "https://talks.iterlab.dev/aiag-vda-pfmea-2023/"
 SITE_TITLE = "AIAG-VDA FMEA 改版：PFMEA 七步驟實作"
-SITE_DESC = "從 FMEA-4 到 AIAG-VDA：七步驟怎麼做、RPN 為什麼換成 AP，附塗膠、壓軸承、沖壓範例。"
+SITE_DESC = "從 FMEA-4 到 AIAG-VDA：七步驟怎麼做、RPN 為什麼換成 AP，附鎖附、壓軸承、沖壓範例。"
 SITE_AUTHOR = "陳佳臨"
 
 IMAGES = {}

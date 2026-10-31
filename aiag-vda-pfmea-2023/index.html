@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="從 FMEA-4 到 AIAG-VDA：七步驟怎麼做、RPN 為什麼換成 AP，附塗膠、壓軸承、沖壓範例。">
+<meta name="description" content="從 FMEA-4 到 AIAG-VDA：七步驟怎麼做、RPN 為什麼換成 AP，附鎖附、壓軸承、沖壓範例。">
 <meta name="author" content="陳佳臨">
 <link rel="canonical" href="https://talks.iterlab.dev/aiag-vda-pfmea-2023/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AIAG-VDA FMEA 改版：PFMEA 七步驟實作">
-<meta property="og:description" content="從 FMEA-4 到 AIAG-VDA：七步驟怎麼做、RPN 為什麼換成 AP，附塗膠、壓軸承、沖壓範例。">
+<meta property="og:description" content="從 FMEA-4 到 AIAG-VDA：七步驟怎麼做、RPN 為什麼換成 AP，附鎖附、壓軸承、沖壓範例。">
 <meta property="og:url" content="https://talks.iterlab.dev/aiag-vda-pfmea-2023/">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary">
@@ -316,6 +316,7 @@ figcaption{margin-top:10px;font-size:15px;color:var(--muted);line-height:1.75}
 /* ---------- footer ---------- */
 .foot{margin-top:80px;padding-top:28px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
 .src-list{margin-top:12px}
+.src-note{font-size:16px;color:var(--muted);margin:8px 0 0;line-height:1.7}
 .card-body .src-line{margin-top:11px;font-size:15.5px;opacity:.92}
 .src-list li{font-size:16.5px}
 
@@ -905,7 +906,7 @@ table.apt .sg td{border-top:2px solid var(--line-strong)}
   <table class="tight">
     <thead><tr><th>製程項目</th><th>製程步驟</th><th>製程工作要素</th></tr></thead>
     <tbody>
-      <tr><td>電子模組組裝</td><td>［工作站 3：塗布黑膠站］<br>將黑膠塗於下蓋板</td><td>操作人員、固定治具、塗膠機、黑膠…</td></tr>
+      <tr><td>支架組裝</td><td>［工作站 3：鎖附站］<br>將螺栓鎖附於支架本體</td><td>操作人員、固定治具、電動起子、螺栓…</td></tr>
       <tr><td>車窗電機組裝線</td><td>［OP30］軸承壓入</td><td>操作人員、壓入設備…</td></tr>
       <tr><td>沖壓</td><td class="blank">練習：自己填</td><td class="blank">練習：自己填</td></tr>
     </tbody>
@@ -980,9 +981,9 @@ table.apt .sg td{border-top:2px solid var(--line-strong)}
     <thead><tr><th>製程項目</th><th>製程步驟</th><th>製程工作要素</th></tr></thead>
     <tbody>
       <tr>
-        <td>在工廠：正確形成引擎指令訊號<br>交運至工廠：引擎順利操作控制<br>最終用戶：安全、順利地操控引擎動力</td>
-        <td>［工作站 3：塗布黑膠站］<br>將黑膠以規定的膠量與範圍，均勻塗佈於下蓋板四周的凹槽內。</td>
-        <td>塗膠機：經由正確的塗膠程式，以氣壓推出黑膠，按規定膠量、路徑與範圍塗佈於工件上。<br><span class="blank">操作人員、固定治具、黑膠：練習</span></td>
+        <td>在工廠：支架在規定扭力下完成鎖附<br>交運至工廠：支架順利裝到客戶設備上<br>最終用戶：設備運轉時支架保持穩固、不鬆脫</td>
+        <td>［工作站 3：鎖附站］<br>將螺栓以規定扭力鎖附於支架本體的螺孔內。</td>
+        <td>電動起子：依設定的扭力與轉速，將螺栓鎖到位。<br><span class="blank">操作人員、固定治具、螺栓：練習</span></td>
       </tr>
       <tr>
         <td>在工廠：規定時間內完成正確組裝<br>交運至工廠：將電機安裝在車門上<br>最終用戶：車窗玻璃能上升、下降</td>
@@ -1118,11 +1119,11 @@ table.apt .sg td{border-top:2px solid var(--line-strong)}
     <thead><tr><th><span class="t-fe">失效影響 FE</span></th><th><span class="t-fm">失效模式 FM</span></th><th><span class="t-fc">失效原因 FC</span></th></tr></thead>
     <tbody>
       <tr>
-        <td rowspan="3">在工廠：退回、生產線中斷、報廢與重工成本<br>交運至工廠：外觀不良、車輛測試 NG、生產線干擾或中斷<br>最終用戶：濕氣進入造成電線短路，引擎不受控或停擺，車主受傷或無法開車</td>
-        <td>［工作站 3］膠量不足</td><td>塗膠機：氣壓不足、氣壓不穩定</td>
+        <td rowspan="3">在工廠：重鎖、螺栓或支架報廢、產線等待<br>交運至工廠：安裝時鎖不緊或滑牙，需要分檢、重工<br>最終用戶：設備震動時支架鬆脫，產生異音或位移</td>
+        <td>［工作站 3］扭力不足</td><td>電動起子：扭力設定錯誤、扭力值漂移</td>
       </tr>
-      <tr><td>塗佈範圍不足</td><td>機械手臂精度不佳</td></tr>
-      <tr><td>塗膠不均…</td><td>氣壓不穩定…</td></tr>
+      <tr><td>漏鎖螺栓</td><td>到位偵測被關閉</td></tr>
+      <tr><td>鎖歪、滑牙…</td><td>轉速過高、批頭磨耗…</td></tr>
       <tr>
         <td>在工廠：間隙太小，無法組裝<br>交運至工廠：電機裝上車門需要額外插入力，有潛在損傷<br>最終用戶：車窗關閉時間過長</td>
         <td>［OP30］壓入時，軸承沒有到達軸向位置</td><td>壓入設備：在到達終止位置前停止</td>
@@ -1387,49 +1388,49 @@ table.apt .sg td{border-top:2px solid var(--line-strong)}
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
       </tr>
-      <tr class="ex-sep"><td colspan="31">範例二：塗布黑膠站（講義範例，練習：從 S 和風險分析開始填）</td></tr>
+      <tr class="ex-sep"><td colspan="31">範例二：鎖附站（示意用的虛構範例，練習：從 S 和風險分析開始填）</td></tr>
       <tr>
         <td>初版</td>
-        <td>電子模組組裝</td>
-        <td>［工作站 3］塗布黑膠站</td>
-        <td>機：塗膠機</td>
-        <td><span class="lb">在工廠</span>正確形成引擎指令訊號<span class="lb">交運至工廠</span>引擎順利操作控制<span class="lb">最終用戶</span>安全、順利地操控引擎動力</td>
-        <td>將黑膠以規定的膠量與範圍，均勻塗佈於下蓋板四周的凹槽內</td>
-        <td>以正確的塗膠程式用氣壓推出黑膠，按規定膠量、路徑與範圍塗佈於工件上</td>
-        <td><span class="lb">在工廠</span>退回、生產線中斷、報廢與重工成本<span class="lb">交運至工廠</span>外觀不良、車輛測試 NG、生產線干擾或中斷<span class="lb">最終用戶</span>濕氣進入造成電線短路，引擎不受控或停擺，車主受傷或無法開車</td>
+        <td>支架組裝</td>
+        <td>［工作站 3］鎖附站</td>
+        <td>機：電動起子</td>
+        <td><span class="lb">在工廠</span>支架在規定扭力下完成鎖附<span class="lb">交運至工廠</span>支架順利裝到客戶設備上<span class="lb">最終用戶</span>設備運轉時支架保持穩固、不鬆脫</td>
+        <td>將螺栓以規定扭力鎖附於支架本體的螺孔內</td>
+        <td>依設定的扭力與轉速，將螺栓鎖到位</td>
+        <td><span class="lb">在工廠</span>重鎖、螺栓或支架報廢、產線等待<span class="lb">交運至工廠</span>安裝時鎖不緊或滑牙，需要分檢、重工<span class="lb">最終用戶</span>設備震動時支架鬆脫，產生異音或位移</td>
         <td class="blank"></td>
-        <td>膠量不足</td>
-        <td>氣壓不足、氣壓不穩定</td>
+        <td>扭力不足</td>
+        <td>扭力設定錯誤、扭力值漂移</td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
       </tr>
       <tr>
         <td></td>
-        <td>電子模組組裝</td>
-        <td>［工作站 3］塗布黑膠站</td>
-        <td>機：塗膠機</td>
+        <td>支架組裝</td>
+        <td>［工作站 3］鎖附站</td>
+        <td>機：電動起子</td>
         <td>同上</td>
         <td>同上</td>
         <td>同上</td>
         <td>同上</td>
         <td class="blank"></td>
-        <td>塗佈範圍不足</td>
-        <td>機械手臂精度不佳</td>
+        <td>漏鎖螺栓</td>
+        <td>到位偵測被關閉</td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
       </tr>
       <tr>
         <td></td>
-        <td>電子模組組裝</td>
-        <td>［工作站 3］塗布黑膠站</td>
-        <td>機：塗膠機</td>
+        <td>支架組裝</td>
+        <td>［工作站 3］鎖附站</td>
+        <td>機：電動起子</td>
         <td>同上</td>
         <td>同上</td>
         <td>同上</td>
         <td>同上</td>
         <td class="blank"></td>
-        <td>塗膠不均</td>
-        <td>氣壓不穩定</td>
+        <td>鎖歪、滑牙</td>
+        <td>轉速過高、批頭磨耗</td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
         <td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td>
       </tr>
@@ -1452,8 +1453,8 @@ table.apt .sg td{border-top:2px solid var(--line-strong)}
       <div class="card-body">
         <ol class="list">
           <li>對照<a href="#s12">嚴重度表</a>，替失效影響打 S。三個對象（在工廠、交運至工廠、最終用戶）都要評，取最高分。</li>
-          <li>想一想現在塗膠站有哪些預防控制（例如氣壓監控、定期保養），對照<a href="#s13">發生率表</a>打 O。</li>
-          <li>現在怎麼檢出膠量不足（目視？秤重？視覺檢測？），對照<a href="#s14">探測度表</a>打 D。</li>
+          <li>想一想現在鎖附站有哪些預防控制（例如扭力定期校正、起子扭力設定上鎖），對照<a href="#s13">發生率表</a>打 O。</li>
+          <li>現在怎麼檢出扭力不足（目視？扭力扳手抽檢？起子的扭力回報？），對照<a href="#s14">探測度表</a>打 D。</li>
           <li>用<a href="#s15">AP 查詢</a>得到 AP，再擬預防措施、探測措施。</li>
         </ol>
       </div>
@@ -1595,8 +1596,9 @@ table.apt .sg td{border-top:2px solid var(--line-strong)}
   </div>
 
   <h3>參考資料</h3>
+  <p class="src-note">本講義的評分表（嚴重度、發生率、探測度）與措施優先級（AP）表，整理自下列手冊第 1 項；原表以手冊為準，實際評分請依手冊與客戶要求。範例一改寫自手冊範例，範例二（鎖附站）為講義自行設計的示意用虛構範例。</p>
   <ul class="src-list list">
-    <li>AIAG &amp; VDA, <em>FMEA Handbook</em>, 1st Edition, 2019</li>
+    <li>AIAG &amp; VDA, <em>FMEA Handbook</em>（AIAG &amp; VDA FMEA 手冊），1st Edition, 2019。出版單位：Automotive Industry Action Group（AIAG）、Verband der Automobilindustrie（VDA）。</li>
     <li><a href="https://fmea-training.com" target="_blank" rel="noopener">fmea-training.com</a> 系列文章</li>
     <li>Nilakantasrinivasan Janakiraman, <em>AIAG-VDA FMEA Training</em>, Udemy</li>
     <li>劉昱廷，《最新圖解 失效模式分析與實務應用》，2021</li>
